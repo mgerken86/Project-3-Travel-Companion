@@ -11,14 +11,14 @@ export default class SignUpForm extends Component {
         error: ''
     };
 
-    handleChange = async (evt) => {
+    handleChange = (evt) => {
         this.setState({
             [evt.target.name]: evt.target.value,
             error: ''
         });
     };
 
-    handleSubmit = (evt) => {
+    handleSubmit = async (evt) => {
         evt.preventDefault()
         try {
             // We don't want to send the 'error' or 'confirm' property,
