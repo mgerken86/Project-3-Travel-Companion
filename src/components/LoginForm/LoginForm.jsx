@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import * as usersService from '../../utilities/users-service';
 
-export default function LoginForm({ setUser }) {
+export default function LoginForm({ setUser, setShowSignUpForm, showSignUpForm }) {
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -39,6 +39,7 @@ export default function LoginForm({ setUser }) {
         </form>
       </div>
       <p className="error-message">&nbsp;{error}</p>
+      <button onClick={() => setShowSignUpForm(!showSignUpForm)}>Not Registered? Sign Up</button>
     </div>
   );
 }
