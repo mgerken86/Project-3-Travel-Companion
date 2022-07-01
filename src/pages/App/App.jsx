@@ -5,6 +5,7 @@ import AuthPage from '../AuthPage/AuthPage'
 import IndexPage from '../IndexPage/IndexPage'
 import HotelsIndexPage from '../HotelsIndexPage/HotelsIndexPage'
 import HotelShowPage from '../HotelShowPage/HotelShowPage';
+import AccountPage from '../AccountPage/AccountPage';
 import NavBar from '../../components/NavBar/NavBar';
 import { getUser } from '../../utilities/users-service'
 
