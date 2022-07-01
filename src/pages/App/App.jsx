@@ -21,6 +21,7 @@ export default function App() {
         {/* Route components in here */}
         <Route path="/search" element={<IndexPage />} />
         <Route path="/hotels" element={<HotelsIndexPage />} />
+        <Route path="/users/myAccount" element={<AccountPage user={user}/>} />
         <Route path="/hotels/:hotelName" element={<HotelShowPage />} />
       </Routes>
       </>
