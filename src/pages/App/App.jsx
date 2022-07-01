@@ -4,6 +4,7 @@ import { useState } from 'react';
 import AuthPage from '../AuthPage/AuthPage'
 import IndexPage from '../IndexPage/IndexPage'
 import HotelsIndexPage from '../HotelsIndexPage/HotelsIndexPage'
+import HotelShowPage from '../HotelShowPage/HotelShowPage';
 import NavBar from '../../components/NavBar/NavBar';
 import { getUser } from '../../utilities/users-service'
 
@@ -20,6 +21,7 @@ export default function App() {
         {/* Route components in here */}
         <Route path="/search" element={<IndexPage />} />
         <Route path="/hotels" element={<HotelsIndexPage />} />
+        <Route path="/hotels/:hotelName" element={<HotelShowPage />} />
       </Routes>
       </>
       :
