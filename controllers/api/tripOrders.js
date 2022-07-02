@@ -13,9 +13,9 @@ module.exports = {
     res.json(cart);
   }
   
-  // Add an item to the cart
+  // Add a hotel to the cart
   async function addToCart(req, res) {
-    const cart = await tripOrder.getCart(req.user._id);
+    const cart = await TripOrder.getCart(req.user._id);
     await cart.addHotelToCart(req.params.id);
     res.json(cart);
   }
