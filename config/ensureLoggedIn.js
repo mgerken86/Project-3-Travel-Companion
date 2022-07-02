@@ -1,4 +1,3 @@
-// config/ensureLoggedIn.js
 
 module.exports = function(req, res, next) {
     // Status code of 401 is Unauthorized
