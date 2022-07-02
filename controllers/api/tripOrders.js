@@ -9,7 +9,7 @@ module.exports = {
   
   // A cart is the unpaid order for a user
   async function cart(req, res) {
-    const cart = await tripOrder.getCart(req.user._id);
+    const cart = await TripOrder.getCart(req.user._id);
     res.json(cart);
   }
   
@@ -31,7 +31,7 @@ async function checkout(req, res) {
   // Return the logged in user's paid order history
 async function history(req, res) {
     // Sort most recent orders first
-    const tripOrders = await tripOrder
+    const tripOrders = await TripOrder
       .find({ user: req.user._id, isPaid: true })
       .sort('-updatedAt').exec();
     res.json(tripOrders);
