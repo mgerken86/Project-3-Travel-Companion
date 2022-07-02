@@ -1,7 +1,7 @@
-export default function HotelShowPage() {
-    return (
-        <>
-        <h1>Hotel Show Page</h1>
-        </>
-    )
+export default function HotelShowPage({ setSearch }) {
+  return (
+    <>
+      <h1>Hotel Show Page</h1>
+    </>
+  );
 }
