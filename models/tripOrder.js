@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const hotelSchema = require('./hotelSchema');
+const hotelSchema = require('./hotel');
 
 
 const tripSchema = new Schema({
@@ -46,4 +46,4 @@ const tripSchema = new Schema({
   };
 
 
-  module.exports = mongoose.model('TripOrder, tripSchema')
+  module.exports = mongoose.model('TripOrder', tripSchema)
