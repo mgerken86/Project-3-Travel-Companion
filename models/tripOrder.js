@@ -19,4 +19,31 @@ const tripSchema = new Schema({
     return this.id.slice(-4).toUpperCase();
   });
 
+  tripSchema.statics.getCart = function(userId) {
+    return this.findOneAndUpdate(
+      { user: userId, isPaid: false },
+      // update
+      { user: userId },
+      // upsert option will create the doc if 
+      // it doesn't exist
+      { upsert: true, new: true }
+    );
+  };
+
+  tripSchema.methods.addHotelToCart = async function(hotelId) {
+    // cart = this means the tripSchema
+    const cart = this;
+    // Check if item already in cart
+    const hotelRoom = cart.hotel.find(hotel => hotel._id.equals(hotelId));
+    if (hotelRoom) {
+      // Prevents user from boooking the same hotel room twice
+      return null
+    } else {
+      const hotel = await mongoose.model('Hotel').findById(hotelId);
+      cart.push({ hotel });
+    }
+    return cart.save();
+  };
+
+
   module.exports = mongoose.model('TripOrder, tripSchema')
