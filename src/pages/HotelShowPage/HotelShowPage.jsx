@@ -8,6 +8,8 @@ export default function HotelShowPage({ setSearch }) {
   const [rooms, setRooms] = useState({})
   const [description, setDescription] = useState({})
   const [photos, setPhotos] = useState([])
+  const [reviews, setReviews] = useState({})
+
   const { hotel_id } = useParams()
 
   //any time page re-renders it will get the hotel data
@@ -36,6 +38,8 @@ export default function HotelShowPage({ setSearch }) {
       await getHotelData('https://booking-com.p.rapidapi.com/v1/hotels/description', setDescription)
       await getHotelData("https://booking-com.p.rapidapi.com/v1/hotels/data", setHotel)
       await getHotelData("https://booking-com.p.rapidapi.com/v1/hotels/photos", setPhotos)
+      // reviews fetch also getting 400 status errors
+      await getHotelData('https://booking-com.p.rapidapi.com/v1/hotels/reviews', setReviews)
     }
     makeFetchCalls()
   }, [])

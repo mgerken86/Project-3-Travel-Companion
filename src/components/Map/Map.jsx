@@ -57,7 +57,7 @@
 //     }
 
 //     return (
-//         <LoadScript googleMapsApiKey='AIzaSyBS8BkW0P00_-CwT3rLvxqcHRhscGKHJGw'>
+//         <LoadScript googleMapsApiKey='SECRET'>
 //             <GoogleMap 
 //                 mapContainerStyle={containerStyle} 
 //                 center={center} 
