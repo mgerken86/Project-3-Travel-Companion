@@ -1,4 +1,4 @@
-import './NavBar'
+import './NavBar.css'
 import { Link } from 'react-router-dom'
 import * as userService from '../../utilities/users-service'
 import SearchBar from '../SearchBar/SearchBar'
@@ -13,15 +13,15 @@ export default function NavBar({ user, setUser, setSearch }) {
   }
 
   return (
-    <>
-    <nav>
-      <span>Where can we take you, {user.name}?</span>
-      &nbsp; | &nbsp;
-      <Link to="/users/myAccount">My Account</Link>
-      &nbsp; | &nbsp;
-      <Link to="" onClick={handleLogOut}>Log Out</Link>
-    </nav>
-    <SearchBar />
-    </>
+    <div className='navBar'>
+      <nav>
+        <span>Where can we take you, {user.name}?</span>
+        &nbsp; | &nbsp;
+        <Link to="/users/myAccount">My Account</Link>
+        &nbsp; | &nbsp;
+        <Link to="" onClick={handleLogOut}>Log Out</Link>
+      </nav>
+      <SearchBar setSearch={setSearch}/>
+    </div>
   )
 }

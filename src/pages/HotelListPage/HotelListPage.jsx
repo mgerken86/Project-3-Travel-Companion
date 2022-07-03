@@ -1,5 +1,4 @@
-// import * as usersService from "../../utilities/users-service";
-import SearchBar from "../../components/SearchBar/SearchBar";
+
 import HotelListCard from "../../components/HotelListCard/HotelListCard";
 import { useLocation } from "react-router-dom";
 

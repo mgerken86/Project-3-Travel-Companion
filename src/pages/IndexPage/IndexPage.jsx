@@ -1,9 +1,10 @@
-import SearchBar from "../../components/SearchBar/SearchBar";
+// import Map from "../../components/Map/Map";
+
 export default function IndexPage({ setSearch }) {
   return (
     <>
-      <SearchBar setSearch={setSearch} />
       <h1>Index Page</h1>
+      {/* <Map /> */}
     </>
   );
 }
