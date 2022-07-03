@@ -18,19 +18,28 @@ export default function HotelShowPage({ setSearch }) {
           "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
         },
       };
-  
+
       const response = await axios.request(options).catch(function (error) {
         console.error(error);
       });
+      console.log(response.data);
       setHotel(response.data)
     };
+    getHotel()
   }, [])
 
 
   return (
     <>
-    <h1>Show Page</h1>
-      <h1>{hotel.hotel_name}</h1>
+      <img src={hotel.main_photo_url} alt="" />
+      <h1>{hotel.name}</h1>
+      {hotel.description &&
+        <span>{hotel.description_translations[0].description}</span>
+      }
+      <h3>Review Score: {hotel.review_score}/10: {hotel.review_score_word}</h3>
+      <h3>Address:</h3>
+      <p>{hotel.address}</p>
+      <p>{hotel.city}, {hotel.zip}</p>
     </>
   );
 }
