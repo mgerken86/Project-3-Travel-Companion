@@ -3,14 +3,13 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import HotelListCard from "../../components/HotelListCard/HotelListCard";
 import { useLocation } from "react-router-dom";
 
-export default function OrderHisotoryPage() {
+export default function HotelsListPage() {
   const { state } = useLocation();
   // console.log(state);
   const { searchResult } = state;
   console.log(searchResult);
   return (
     <>
-      <SearchBar />
       <h1>Hotels List Page</h1>
       <div>
         {searchResult.map((hotel) => {
