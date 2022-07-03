@@ -1,6 +1,6 @@
 import sendRequest from './send-request';
 
-const BASE_URL = '/api/tripOrders';
+const BASE_URL = '/api/trips';
 
 // Retrieve an unpaid order for the logged in user
 export function getCart() {
@@ -10,7 +10,7 @@ export function getCart() {
 // Add an item to the cart
 export function addHotelToCart(hotelId) {
   // Just send hotelId for best security (no pricing)
-  return sendRequest(`${BASE_URL}/cart/hotels/${hotelId}`, 'POST');
+  return sendRequest(`${BASE_URL}/cart/${hotelId}`, 'POST');
 }
 
 // Updates the order's (cart's) isPaid property to true
