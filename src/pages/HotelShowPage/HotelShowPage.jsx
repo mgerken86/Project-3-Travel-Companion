@@ -39,7 +39,7 @@ export default function HotelShowPage({ setSearch }) {
       await getHotelData("https://booking-com.p.rapidapi.com/v1/hotels/data", setHotel)
       await getHotelData("https://booking-com.p.rapidapi.com/v1/hotels/photos", setPhotos)
       // reviews fetch also getting 400 status errors
-      await getHotelData('https://booking-com.p.rapidapi.com/v1/hotels/reviews', setReviews)
+      // await getHotelData('https://booking-com.p.rapidapi.com/v1/hotels/reviews', setReviews)
     }
     makeFetchCalls()
   }, [])
@@ -47,7 +47,7 @@ export default function HotelShowPage({ setSearch }) {
 
   return (
     <>
-      <img src={hotel.main_photo_url} alt="" />
+      <img src={photos[0].url_1440} alt="" />
       <h1>{hotel.name}</h1>
       <span>{description.description}</span>
       <h3>Review Score: {hotel.review_score}/10: {hotel.review_score_word}</h3>
@@ -56,7 +56,7 @@ export default function HotelShowPage({ setSearch }) {
       <p>{hotel.city}, {hotel.zip}</p>
       <div>
         {photos.map(photo => {
-          return <img src={photo.url_square60} />
+          return <img src={photo.url_1440} />
         })}
       </div>
     </>
