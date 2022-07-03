@@ -13,13 +13,14 @@ export default function App() {
   const [user, setUser] = useState(getUser());
   const [search, setSearch] = useState({});
 
-  function componentDidMount() {
+// this gets current location if we want to do a 'hotels near you' on the index page
+  function getCurrentLocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
       console.log("Latitude is :", position.coords.latitude);
       console.log("Longitude is :", position.coords.longitude);
     });
   }
-  componentDidMount()
+  getCurrentLocation()
 
   return (
     <main className="App">
