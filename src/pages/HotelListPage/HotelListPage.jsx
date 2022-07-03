@@ -5,9 +5,8 @@ import { useLocation } from "react-router-dom";
 
 export default function OrderHisotoryPage() {
   const { state } = useLocation();
-  console.log(state);
+  // console.log(state);
   const { searchResult } = state;
-
   console.log(searchResult);
   return (
     <>
