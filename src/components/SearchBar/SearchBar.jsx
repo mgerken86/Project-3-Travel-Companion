@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Autocomplete } from "@react-google-maps/api";
+import './SearchBar.css'
 
 const starterData = {
   destination: "",
@@ -77,34 +78,35 @@ export default function SearchBar() {
   return (
     <>
       <form onSubmit={async (e) => handleSearch(e)} autoComplete="off">
-        <label>Destination</label>
-        <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+        <div className="flex-row">
+          <label>Destination</label>
+          <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+            <input
+              type="text"
+              name="destination"
+              value={data.destination}
+              onChange={changeData}
+              required
+            />
+          </Autocomplete>
+          <label>Check In</label>
           <input
-            type="text"
-            name="destination"
-            value={data.destination}
+            type="date"
+            name="checkIn"
+            value={data.checkIn}
             onChange={changeData}
             required
           />
-        </Autocomplete>
-        <label>Check In</label>
-        <input
-          type="date"
-          name="checkIn"
-          value={data.checkIn}
-          onChange={changeData}
-          required
-        />
-        <label>Check Out</label>
-        <input
-          type="date"
-          name="checkOut"
-          value={data.checkOut}
-          onChange={changeData}
-          required
-        />
-
-        <button type="submit">Search</button>
+          <label>Check Out</label>
+          <input
+            type="date"
+            name="checkOut"
+            value={data.checkOut}
+            onChange={changeData}
+            required
+          />
+          <button type="submit">Search</button>
+        </div>
       </form>
     </>
   );

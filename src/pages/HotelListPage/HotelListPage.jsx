@@ -10,7 +10,6 @@ export default function OrderHisotoryPage() {
   console.log(searchResult);
   return (
     <>
-      <SearchBar />
       <h1>Hotels List Page</h1>
       <div>
         {searchResult.map((hotel) => {

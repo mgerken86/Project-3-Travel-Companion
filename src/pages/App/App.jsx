@@ -16,7 +16,7 @@ export default function App() {
     <main className="App">
       {user ? (
         <>
-          <NavBar user={user} setUser={setUser} />
+          <NavBar user={user} setUser={setUser} setSearch={setSearch} />
           <Routes>
             {/* Route components in here */}
             <Route
