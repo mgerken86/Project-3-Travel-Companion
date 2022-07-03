@@ -29,7 +29,7 @@ export default function App() {
           <Routes>
             {/* Route components in here */}
             <Route
-              path="/search"
+              path="/"
               element={<IndexPage setSearch={setSearch} />}
             />
             <Route path="/hotels" element={<HotelListPage />} />

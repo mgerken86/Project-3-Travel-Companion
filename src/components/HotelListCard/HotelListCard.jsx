@@ -6,7 +6,7 @@ export default function HotelListCard({ hotel }) {
 //Hi Jing! I'm curious why we do another axios fetch for the hotel onClick, when we are already passing all of that data down for each hotel through props
 //If I console.log(hotel) it lists out all of the same info for each hotel that you would get on the onClick
 
-  console.log(hotel)
+  // console.log(hotel)
   // const handleClick = async () => {
   //   const options = {
   //     method: "GET",

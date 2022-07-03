@@ -1,4 +1,4 @@
-/* CSS Custom Properties */
+CSS Custom Properties
 :root {
   --white: #FFFFFF;
   --tan-1: #FBF9F6;
@@ -12,7 +12,7 @@
 
 *, *:before, *:after {
   box-sizing: border-box;
-}
+} 
 
 body {
   margin: 0;
@@ -25,6 +25,7 @@ body {
   padding: 2vmin;
   height: 100vh;
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -109,7 +110,6 @@ input {
   border: .1vmin solid var(--tan-3);
   border-radius: .5vmin;
   color: var(--text-dark);
-  background-image: none !important; /* prevent lastpass */
   outline: none;
 }
 
