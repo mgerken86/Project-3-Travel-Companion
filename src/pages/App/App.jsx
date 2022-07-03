@@ -12,6 +12,15 @@ import { getUser } from "../../utilities/users-service";
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [search, setSearch] = useState({});
+
+  function componentDidMount() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  }
+  componentDidMount()
+
   return (
     <main className="App">
       {user ? (
@@ -29,7 +38,7 @@ export default function App() {
               element={<AccountPage user={user} setSearch={setSearch} />}
             />
             <Route
-              path="/hotels/:id"
+              path="/hotels/:hotel_id"
               element={<HotelShowPage setSearch={setSearch} />}
             />
           </Routes>
