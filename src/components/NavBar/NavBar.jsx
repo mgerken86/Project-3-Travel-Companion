@@ -21,7 +21,7 @@ export default function NavBar({ user, setUser, setSearch }) {
         &nbsp; | &nbsp;
         <Link to="" onClick={handleLogOut}>Log Out</Link>
       </nav>
-      <SearchBar />
+      <SearchBar setSearch={setSearch}/>
     </div>
   )
 }

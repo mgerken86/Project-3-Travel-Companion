@@ -7,6 +7,7 @@ export default function HotelShowPage({ setSearch }) {
   const [hotel, setHotel] = useState({})
   const { hotel_id } = useParams()
 
+  //any time page re-renders it will get the hotel data
   useEffect(() => {
     const getHotel = async () => {
       const options = {
