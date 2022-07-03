@@ -11,7 +11,20 @@ const starterData = {
 
 export default function SearchBar() {
   const [data, setData] = useState(starterData);
+  const [autocomplete, setAutocomplete] = useState(null);
+  const [coordinates, setCoordinates] = useState({});
   const navigate = useNavigate();
+  const onLoad = (autoC) => setAutocomplete(autoC);
+
+  //   convert destination to lat lng
+  const onPlaceChanged = () => {
+    const lat = autocomplete.getPlace().geometry.location.lat();
+    const lng = autocomplete.getPlace().geometry.location.lng();
+    const city = autocomplete.getPlace().formatted_address;
+
+    setData({ ...data, destination: city });
+    setCoordinates({ lat, lng });
+  };
 
   //   function handle change
   const changeData = (e) => {
@@ -19,7 +32,7 @@ export default function SearchBar() {
       ...data,
       [e.target.name]: e.target.value,
     };
-    console.log(newData);
+
     setData(newData);
   };
 
@@ -35,13 +48,13 @@ export default function SearchBar() {
         adults_number: "2",
         units: "metric",
         room_number: "2",
-        checkout_date: "2022-10-01",
+        checkout_date: data.checkOut,
         filter_by_currency: "USD",
         locale: "en-gb",
-        checkin_date: "2022-09-30",
-        latitude: "42.3611",
-        longitude: "-71.057",
-        children_ages: "5,0",
+        checkin_date: data.checkIn,
+        latitude: coordinates.lat,
+        longitude: coordinates.lng,
+        // children_ages: "5,0",
         categories_filter_ids: "class::2,class::4,free_cancellation::1",
         page_number: "0",
         include_adjacency: "true",
@@ -57,6 +70,7 @@ export default function SearchBar() {
     });
     const hotels = response.data.result;
     setData(starterData);
+    // navigate to hotels page and pass state { searchResult: hotels } to HotelListPage
     navigate("/hotels", { state: { searchResult: hotels } });
   };
 
@@ -64,15 +78,15 @@ export default function SearchBar() {
     <>
       <form onSubmit={async (e) => handleSearch(e)} autoComplete="off">
         <label>Destination</label>
-        {/* <Autocomplete onLoad={} onPlaceChanged={}> */}
-        <input
-          type="text"
-          name="destination"
-          value={data.destination}
-          onChange={changeData}
-          required
-        />
-        {/* </Autocomplete> */}
+        <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+          <input
+            type="text"
+            name="destination"
+            value={data.destination}
+            onChange={changeData}
+            required
+          />
+        </Autocomplete>
         <label>Check In</label>
         <input
           type="date"
