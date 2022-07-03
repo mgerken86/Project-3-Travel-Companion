@@ -60,8 +60,8 @@ export default function SearchBar() {
         include_adjacency: "true",
       },
       headers: {
-        "X-RapidAPI-Key": process.env.RAPID_API_KEY,
-        "X-RapidAPI-Host": process.env.X_RapidAPI_Host,
+        "X-RapidAPI-Key": "cd61a9c3fcmsh03b40d2dc69de61p1d57efjsnb4b7e3ec281d",
+        "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
       },
     };
 

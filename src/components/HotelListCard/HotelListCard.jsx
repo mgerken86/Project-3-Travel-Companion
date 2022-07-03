@@ -2,25 +2,21 @@ import "./HotelListCard.css";
 import axios from "axios";
 
 export default function HotelListCard({ hotel }) {
-  const handleClick = () => {
+  const handleClick = async () => {
     const options = {
       method: "GET",
       url: "https://booking-com.p.rapidapi.com/v1/hotels/data",
       params: { hotel_id: hotel.hotel_id, locale: "en-gb" },
       headers: {
-        "X-RapidAPI-Key": process.env.RAPID_API_KEY,
-        "X-RapidAPI-Host": process.env.X_RapidAPI_Host,
+        "X-RapidAPI-Key": "cd61a9c3fcmsh03b40d2dc69de61p1d57efjsnb4b7e3ec281d",
+        "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
       },
     };
 
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    const response = await axios.request(options).catch(function (error) {
+      console.error(error);
+    });
+    console.log(response.data);
   };
 
   return (
