@@ -16,6 +16,8 @@ checkOut = checkOut.toISOString().slice(0, 10)
 
 
 export default function FavoritePlaces() {
+    //each person's place will be randomly selected from ourFavoritePlaces.js
+    // each person's hotel will be randomly selected after the axios fetch
     const [markPlace, setMarkPlace] = useState({})
     const [jingPlace, setJingPlace] = useState({})
     const [tirasPlace, setTirasPlace] = useState({})
@@ -65,12 +67,13 @@ export default function FavoritePlaces() {
             console.error(error);
         });
     }
-
+    //when component renders, each person's place is randomly selected
     useEffect(() => {
         getRandomPlace(markPlacesArr, setMarkPlace)
         getRandomPlace(jingPlacesArr, setJingPlace)
         getRandomPlace(tirasPlacesArr, setTirasPlace)
     }, [])
+    // whenever the state of a person's place changes, a hotel will be randomly chosen
     useEffect(() => {
         getRandomHotels(markPlace, setMarkHotel)
     }, [markPlace])
@@ -95,6 +98,7 @@ export default function FavoritePlaces() {
                     {/* <button onClick={() => getRandomHotels(markPlace, setMarkHotel)}>
                         Click For Random Hotel
                     </button> */}
+                    {/* If there is a hotel ID assigned to a person's hotel state, render the following jsx */}
                     {markHotel.hotel_id && (
                         <div className="hotel-container">
                             <h4>{markHotel.hotel_name}</h4>
