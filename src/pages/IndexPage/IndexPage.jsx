@@ -1,10 +1,11 @@
 // import Map from "../../components/Map/Map";
 
-export default function IndexPage({ setSearch }) {
+export default function IndexPage() {
   return (
-    <>
-      <h1>Index Page</h1>
-      {/* <Map /> */}
-    </>
-  );
+    <div>
+      <h1>Hello</h1>
+      <p>Hello World</p>
+    </div>
+  )
 }
+
