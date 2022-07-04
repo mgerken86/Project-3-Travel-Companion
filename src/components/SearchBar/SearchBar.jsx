@@ -7,7 +7,7 @@ import './SearchBar.css'
 const starterData = {
   destination: "",
   checkIn: Date.now(),
-  checkOut: Date.now(),
+  checkOut: Date.now() + (3600 * 1000 * 24),
 };
 
 export default function SearchBar() {
@@ -22,6 +22,8 @@ export default function SearchBar() {
     const lat = autocomplete.getPlace().geometry.location.lat();
     const lng = autocomplete.getPlace().geometry.location.lng();
     const city = autocomplete.getPlace().formatted_address;
+    console.log('latitude: ', lat)
+    console.log('longitude: ', lng)
 
     setData({ ...data, destination: city });
     setCoordinates({ lat, lng });
