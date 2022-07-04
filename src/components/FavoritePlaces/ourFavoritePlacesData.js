@@ -1,4 +1,4 @@
-export const markPlaces = [
+export const markPlacesArr = [
     {
         place: 'Boulder, Colorado, USA',
         latitude: '40.0149856',
@@ -11,7 +11,7 @@ export const markPlaces = [
     }
 ]
 
-export const jingPlaces = [
+export const jingPlacesArr = [
     {
         place: 'Boston, Massachusets, USA',
         latitude: '40.0149856',
@@ -19,7 +19,7 @@ export const jingPlaces = [
     }
 ]
 
-export const tirasPlaces = [
+export const tirasPlacesArr = [
     {
         place: 'Boston, Massachusets, USA',
         latitude: '40.0149856',

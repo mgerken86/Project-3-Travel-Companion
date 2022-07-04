@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { markPlaces } from './ourFavoritePlacesData'
-import { jingPlaces } from './ourFavoritePlacesData'
-import { tirasPlaces } from './ourFavoritePlacesData'
+import { markPlacesArr } from './ourFavoritePlacesData'
+import { jingPlacesArr } from './ourFavoritePlacesData'
+import { tirasPlacesArr } from './ourFavoritePlacesData'
 const axios = require("axios");
 const API_KEY = process.env.REACT_APP_BOOKING_API_KEY
 
@@ -23,15 +23,17 @@ export default function FavoritePlaces() {
 
     const getRandomPlace = (personArr, setState) => {
         let randomIndex = Math.floor(Math.random() * personArr.length)
-        return randomPlace = personArr[randomIndex]
+        setState(personArr[randomIndex])
     }
     useEffect(() => {
         // console.log('apikey:', API_KEY)
-        getRandomPlace(markPlaces)
+        getRandomPlace(markPlacesArr, setMarkPlace)
+        getRandomPlace(jingPlacesArr, setJingPlace)
+        getRandomPlace(tirasPlacesArr, setTirasPlace)
     }, [])
     
     // This function takes each of our favorite places array, chooses a random place, and then uses the coordinates of that place to find hotels there
-    const getRandomHotels = (personArr, latitude, longitude) => {
+    const getRandomHotels = (personPlace) => {
         getRandomPlace(markPlaces)
         const options = {
             method: 'GET',
@@ -45,8 +47,8 @@ export default function FavoritePlaces() {
                 filter_by_currency: 'AED',
                 locale: 'en-gb',
                 checkin_date: today,
-                latitude: randomPlace.latitude,
-                longitude: randomPlace.longitude,
+                latitude: personPlace.latitude,
+                longitude: personPlace.longitude,
                 children_number: '2',
                 children_ages: '5,0',
                 categories_filter_ids: 'class::2,class::4,free_cancellation::1',
