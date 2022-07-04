@@ -47,7 +47,8 @@ export default function HotelShowPage({ setSearch }) {
 
   return (
     <>
-      <img src={photos[0].url_1440} alt="" />
+    {/* {photos && <img src={photos[0].url_1440} alt="" />}  */}
+      
       <h1>{hotel.name}</h1>
       <span>{description.description}</span>
       <h3>Review Score: {hotel.review_score}/10: {hotel.review_score_word}</h3>
@@ -55,7 +56,7 @@ export default function HotelShowPage({ setSearch }) {
       <p>{hotel.address}</p>
       <p>{hotel.city}, {hotel.zip}</p>
       <div>
-        {photos.map(photo => {
+        {photos && photos.map(photo => {
           return <img src={photo.url_1440} />
         })}
       </div>

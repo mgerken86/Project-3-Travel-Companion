@@ -10,6 +10,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import { getUser } from "../../utilities/users-service";
 
 export default function App() {
+  const [count, setCount] = useState(5)
   const [user, setUser] = useState(getUser());
   const [search, setSearch] = useState({});
 
