@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import { markPlacesArr } from './ourFavoritePlacesData'
-import { jingPlacesArr } from './ourFavoritePlacesData'
-import { tirasPlacesArr } from './ourFavoritePlacesData'
+import { markPlacesArr, jingPlacesArr, tirasPlacesArr } from './ourFavoritePlacesData'
 const axios = require("axios");
 const API_KEY = process.env.REACT_APP_BOOKING_API_KEY
 
@@ -16,15 +14,22 @@ tomorrow = tomorrow.toISOString().slice(0, 10)
 // console.log(tomorrow)
 
 
+
+
 export default function FavoritePlaces() {
     const [markPlace, setMarkPlace] = useState({})
     const [jingPlace, setJingPlace] = useState({})
     const [tirasPlace, setTirasPlace] = useState({})
+    const [markHotel, setMarkHotel] = useState({})
+    const [jingHotel, setJingHotel] = useState({})
+    const [tirasHotel, setTirasHotel] = useState({})
 
     const getRandomPlace = (personArr, setState) => {
         let randomIndex = Math.floor(Math.random() * personArr.length)
-        setState(personArr[randomIndex])
+        let personPlace = personArr[randomIndex]
+        setState(personPlace)
     }
+
     useEffect(() => {
         // console.log('apikey:', API_KEY)
         getRandomPlace(markPlacesArr, setMarkPlace)
@@ -34,7 +39,6 @@ export default function FavoritePlaces() {
     
     // This function takes each of our favorite places array, chooses a random place, and then uses the coordinates of that place to find hotels there
     const getRandomHotels = (personPlace) => {
-        getRandomPlace(markPlaces)
         const options = {
             method: 'GET',
             url: 'https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates',
@@ -72,7 +76,12 @@ export default function FavoritePlaces() {
         <div>
             <h1>Need Help Deciding Where to Go?</h1>
             <h2>Click Here To Get Some of Our Favorite Places in the World</h2>
-            <button onClick={() => getRandomHotels(markPlaces)}>
+            <button onClick={() => {
+            console.log(markPlace)
+            console.log(jingPlace)
+            console.log(tirasPlace)
+            }
+        }>
                 Random Places
             </button>
         </div>
