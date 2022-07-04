@@ -70,11 +70,16 @@ export default function FavoritePlaces() {
         getRandomPlace(markPlacesArr, setMarkPlace)
         getRandomPlace(jingPlacesArr, setJingPlace)
         getRandomPlace(tirasPlacesArr, setTirasPlace)
-        getRandomHotels(markPlace, setMarkHotel)
-        getRandomHotels(jingPlace, setJingHotel)
-        getRandomHotels(tirasPlace, setTirasHotel)
     }, [])
-
+    useEffect(() => {
+        getRandomHotels(markPlace, setMarkHotel)
+    }, [markPlace])
+    useEffect(() => {
+        getRandomHotels(jingPlace, setJingHotel)
+    }, [jingPlace])
+    useEffect(() => {
+        getRandomHotels(tirasPlace, setTirasHotel)
+    }, [tirasPlace])
 
     return (
         <div >
