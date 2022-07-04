@@ -1,27 +1,17 @@
+import { ourFavoritePlaces } from './ourFavoritePlacesData'
 const axios = require("axios");
 
-const ourFavoritePlaces = [
-    {
-        place: 'Boulder, Colorado, USA',
-        latitude: '40.0149856',
-        longitude: '-105.2705456'
-    },
-    {
-        place: 'Tonsai Beach, Ao Nang, Thailand',
-        latitude: '8.0180546',
-        longitude: '98.8322457'
-    }
-]
+
 let randomPlace
 
 let today = new Date()
 let tomorrow = new Date()
 tomorrow.setDate(today.getDate() + 1)
-
+// This makes the format 'yyyy-mm-dd' for the axios fetch
 today = today.toISOString().slice(0, 10)
 tomorrow = tomorrow.toISOString().slice(0, 10)
-console.log(today)
-console.log(tomorrow)
+// console.log(today)
+// console.log(tomorrow)
 
 export default function FavoritePlaces() {
 
