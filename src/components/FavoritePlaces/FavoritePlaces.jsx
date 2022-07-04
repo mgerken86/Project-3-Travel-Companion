@@ -10,25 +10,26 @@ checkOut.setDate(checkIn.getDate() + 1)
 // This makes the format 'yyyy-mm-dd' for the axios fetch
 checkIn = checkIn.toISOString().slice(0, 10)
 checkOut = checkOut.toISOString().slice(0, 10)
-console.log(checkIn)
-console.log(checkOut)
+// console.log(checkIn)
+// console.log(checkOut)
 
 
 export default function FavoritePlaces() {
     const [markPlace, setMarkPlace] = useState({})
     const [jingPlace, setJingPlace] = useState({})
     const [tirasPlace, setTirasPlace] = useState({})
-    const [markHotels, setMarkHotels] = useState([])
-    const [jingHotels, setJingHotels] = useState([])
-    const [tirasHotels, setTirasHotels] = useState([])
+    const [markHotel, setMarkHotel] = useState([])
+    const [jingHotel, setJingHotel] = useState([])
+    const [tirasHotel, setTirasHotel] = useState([])
 
+    // find a place in each person's favorite places array and set that place to their personPlace state
     const getRandomPlace = (personArr, setState) => {
         let randomIndex = Math.floor(Math.random() * personArr.length)
         let personPlace = personArr[randomIndex]
         setState(personPlace)
     }
 
-    // This function takes each of our randomPlace and uses the coordinates of that place to find hotels there
+    // This function takes each person's randomPlace and uses the coordinates of that place to find hotels there
     const getRandomHotels = (personPlace, setHotels) => {
         const options = {
             method: 'GET',
@@ -80,7 +81,7 @@ export default function FavoritePlaces() {
                 <h4>Why He Loves it There:</h4>
                 <span>"{markPlace.testimonial}"</span>
                 <h4>Featured Accomodation:</h4>
-                <button onClick={() => getRandomHotels(markPlace, setMarkHotels)}>
+                <button onClick={() => getRandomHotels(markPlace, setMarkHotel)}>
                     Click For Random Hotel
                 </button>
 
@@ -88,11 +89,15 @@ export default function FavoritePlaces() {
             <div className="favorite-place-container">
                 <h2>Jing's Suggestion:</h2>
                 <h5>{jingPlace.place}</h5>
-                <h4>Why He Loves it There:</h4>
+                <h4>Why She Loves it There:</h4>
                 <span>"{jingPlace.testimonial}"</span>
                 <h4>Featured Accomodation:</h4>
                 <button
-                    onClick={() => getRandomHotels(jingPlace, setJingHotels)}>
+                    onClick={() => {
+                        getRandomHotels(jingPlace, setJingHotel)
+                        console.log(jingHotels)
+                    }
+                    }>
                     Click For Random Hotel
                 </button>
             </div>
@@ -103,7 +108,7 @@ export default function FavoritePlaces() {
                 <span>"{tirasPlace.testimonial}"</span>
                 <h4>Featured Accomodation:</h4>
                 <button
-                    onClick={() => getRandomHotels(tirasPlace, setTirasHotels)}>
+                    onClick={() => getRandomHotels(tirasPlace, setTirasHotel)}>
                     Click For Random Hotel
                 </button>
             </div>

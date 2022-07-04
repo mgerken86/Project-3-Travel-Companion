@@ -16,8 +16,8 @@ export const markPlacesArr = [
 export const jingPlacesArr = [
     {
         place: 'Boston, Massachusets, USA',
-        latitude: '40.0149856',
-        longitude: '-105.2705456',
+        latitude: '42.3600825',
+        longitude: '-71.0588801',
         testimonial: 'Home sweet home!'
     }
 ]
