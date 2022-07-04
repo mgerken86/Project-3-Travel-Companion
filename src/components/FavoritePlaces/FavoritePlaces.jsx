@@ -1,8 +1,10 @@
-import { ourFavoritePlaces } from './ourFavoritePlacesData'
+import { useState, useEffect } from 'react';
+import { markPlaces } from './ourFavoritePlacesData'
+import { jingPlaces } from './ourFavoritePlacesData'
+import { tirasPlaces } from './ourFavoritePlacesData'
 const axios = require("axios");
+const API_KEY = process.env.REACT_APP_BOOKING_API_KEY
 
-
-let randomPlace
 
 let today = new Date()
 let tomorrow = new Date()
@@ -13,16 +15,24 @@ tomorrow = tomorrow.toISOString().slice(0, 10)
 // console.log(today)
 // console.log(tomorrow)
 
+
 export default function FavoritePlaces() {
+    const [markPlace, setMarkPlace] = useState({})
+    const [jingPlace, setJingPlace] = useState({})
+    const [tirasPlace, setTirasPlace] = useState({})
 
-    const getRandomPlace = () => {
-        let randomIndex = Math.floor(Math.random() * ourFavoritePlaces.length)
-        return randomPlace = ourFavoritePlaces[randomIndex]
+    const getRandomPlace = (personArr, setState) => {
+        let randomIndex = Math.floor(Math.random() * personArr.length)
+        return randomPlace = personArr[randomIndex]
     }
-
-    const getRandomHotels = async (checkin, checkout, latitude, longitude) => {
-        await getRandomPlace()
-        console.log(randomPlace)
+    useEffect(() => {
+        // console.log('apikey:', API_KEY)
+        getRandomPlace(markPlaces)
+    }, [])
+    
+    // This function takes each of our favorite places array, chooses a random place, and then uses the coordinates of that place to find hotels there
+    const getRandomHotels = (personArr, latitude, longitude) => {
+        getRandomPlace(markPlaces)
         const options = {
             method: 'GET',
             url: 'https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates',
@@ -44,7 +54,7 @@ export default function FavoritePlaces() {
                 include_adjacency: 'true'
             },
             headers: {
-                'X-RapidAPI-Key': 'cd61a9c3fcmsh03b40d2dc69de61p1d57efjsnb4b7e3ec281d',
+                'X-RapidAPI-Key': API_KEY,
                 'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
             }
         };
@@ -60,7 +70,7 @@ export default function FavoritePlaces() {
         <div>
             <h1>Need Help Deciding Where to Go?</h1>
             <h2>Click Here To Get Some of Our Favorite Places in the World</h2>
-            <button onClick={() => getRandomHotels()}>
+            <button onClick={() => getRandomHotels(markPlaces)}>
                 Random Places
             </button>
         </div>

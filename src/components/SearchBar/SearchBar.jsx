@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Autocomplete } from "@react-google-maps/api";
 import './SearchBar.css'
+const API_KEY = process.env.REACT_APP_BOOKING_API_KEY
 
 const starterData = {
   destination: "",
@@ -63,7 +64,7 @@ export default function SearchBar() {
         include_adjacency: "true",
       },
       headers: {
-        "X-RapidAPI-Key": "cd61a9c3fcmsh03b40d2dc69de61p1d57efjsnb4b7e3ec281d",
+        "X-RapidAPI-Key": API_KEY,
         "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
       },
     };
