@@ -22,6 +22,8 @@ export default function SearchBar() {
     const lat = autocomplete.getPlace().geometry.location.lat();
     const lng = autocomplete.getPlace().geometry.location.lng();
     const city = autocomplete.getPlace().formatted_address;
+    console.log('latitude: ', lat)
+    console.log('longitude: ', lng)
 
     setData({ ...data, destination: city });
     setCoordinates({ lat, lng });
