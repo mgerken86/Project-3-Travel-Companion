@@ -7,7 +7,7 @@ import './SearchBar.css'
 const starterData = {
   destination: "",
   checkIn: Date.now(),
-  checkOut: Date.now(),
+  checkOut: Date.now() + (3600 * 1000 * 24),
 };
 
 export default function SearchBar() {
