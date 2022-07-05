@@ -28,8 +28,8 @@ export const markPlacesArr = [
 export const jingPlacesArr = [
   {
     place: "Sapporo, Hokkaido, Japan",
-    latitude: "43.0618",
-    longitude: "141.3545",
+    latitude: "43.0617713",
+    longitude: "141.3544506",
     testimonial: "Best Seafood and dairy products!",
   },
   {

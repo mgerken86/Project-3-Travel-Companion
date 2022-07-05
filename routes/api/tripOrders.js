@@ -1,14 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const tripOrdersCtrl = require('../../controllers/api/tripOrders');
+const tripOrdersCtrl = require("../../controllers/api/tripOrders");
 
 // GET /api/tripOrders/cart
-router.get('/cart', tripOrdersCtrl.cart);
+router.get("/cart", tripOrdersCtrl.cart);
 // GET /api/tripOrders/history
-router.get('/history', tripOrdersCtrl.history);
+router.get("/history", tripOrdersCtrl.history);
 // POST /api/tripOrders/cart/items/:id
-router.post('/cart/hotels/:id', tripOrdersCtrl.addToCart);
+router.post("/cart/new", tripOrdersCtrl.addToCart);
 // POST /api/tripOrders/cart/checkout
-router.post('/cart/checkout', tripOrdersCtrl.checkout);
+router.post("/cart/checkout", tripOrdersCtrl.checkout);
 
 module.exports = router;

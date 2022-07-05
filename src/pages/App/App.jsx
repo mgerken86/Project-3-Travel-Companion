@@ -6,6 +6,7 @@ import IndexPage from "../IndexPage/IndexPage";
 import HotelListPage from "../HotelListPage/HotelListPage";
 import HotelShowPage from "../HotelShowPage/HotelShowPage";
 import AccountPage from "../AccountPage/AccountPage";
+import TripOrdersPage from "../TripOrdersPage/TripOrdersPage";
 import NavBar from "../../components/NavBar/NavBar";
 import { getUser } from "../../utilities/users-service";
 
@@ -33,6 +34,10 @@ export default function App() {
             <Route
               path="/users/myAccount"
               element={<AccountPage user={user} />}
+            />
+            <Route
+              path="/users/cart/:hotel_id/::room_id"
+              element={<TripOrdersPage user={user} />}
             />
             <Route path="/hotels/:hotel_id" element={<HotelShowPage />} />
           </Routes>
