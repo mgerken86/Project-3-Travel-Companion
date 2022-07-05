@@ -7,6 +7,7 @@ export default function HotelShowPage({ setSearch }) {
   const [rooms, setRooms] = useState([]);
   const [description, setDescription] = useState({});
   const [photos, setPhotos] = useState([]);
+  const [roomPhoto, setRoomPhoto] = useState([]);
   const [reviews, setReviews] = useState({});
 
   const { hotel_id } = useParams();
@@ -84,12 +85,17 @@ export default function HotelShowPage({ setSearch }) {
         console.error(error);
       });
       const rooms = response.data[0].block.slice(0, 6);
+      const room = response.data[0].rooms;
+      setRoomPhoto(room);
 
       console.log("roomInfo", rooms);
       setRooms(rooms);
     };
     getRoomDetails();
   }, []);
+
+  // handle onclick
+  const handleClick = () => {};
 
   return (
     <>
@@ -116,13 +122,16 @@ export default function HotelShowPage({ setSearch }) {
         rooms.map((room) => {
           return (
             <div>
-              <img src />
+              <img
+                src={roomPhoto[room.room_id].photos[0].url_original}
+                alt=""
+              />
               <h4>{room.name}</h4>
               <h4>{room.max_occupancy}</h4>
               <h4>
                 {room.min_price.currency} {room.min_price.price}
               </h4>
-              <button onClick={handleOnclick}>Select</button>
+              <button onClick={handleClick}>Select</button>
             </div>
           );
         })}
