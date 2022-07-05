@@ -19,7 +19,7 @@ export default function HotelShowPage({ setSearch }) {
         url: url,
         params: { hotel_id: hotel_id, locale: "en-gb" },
         headers: {
-          "X-RapidAPI-Key": `${process.env.RAPID_API_KEY}`,
+          "X-RapidAPI-Key": process.env.REACT_APP_BOOKING_API_KEY,
           "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
         },
       };

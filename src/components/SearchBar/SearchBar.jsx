@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Autocomplete } from "@react-google-maps/api";
-<<<<<<< HEAD
 import "./SearchBar.css";
-=======
-import './SearchBar.css'
-const API_KEY = process.env.REACT_APP_BOOKING_API_KEY
->>>>>>> main
+const API_KEY = process.env.REACT_APP_BOOKING_API_KEY;
 
 const starterData = {
   destination: "",
   checkIn: Date.now(),
   checkOut: Date.now() + 3600 * 1000 * 24,
+  numberOfAdult: 1,
 };
 
 export default function SearchBar() {
@@ -53,9 +50,9 @@ export default function SearchBar() {
       url: "https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates",
       params: {
         order_by: "popularity",
-        adults_number: "2",
+        adults_number: data.numberOfAdult,
         units: "metric",
-        room_number: "2",
+        room_number: "1",
         checkout_date: data.checkOut,
         filter_by_currency: "USD",
         locale: "en-gb",
@@ -68,11 +65,7 @@ export default function SearchBar() {
         include_adjacency: "true",
       },
       headers: {
-<<<<<<< HEAD
-        "X-RapidAPI-Key": `${process.env.RAPID_API_KEY}`,
-=======
         "X-RapidAPI-Key": API_KEY,
->>>>>>> main
         "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
       },
     };
@@ -85,6 +78,15 @@ export default function SearchBar() {
     // navigate to hotels page and pass state { searchResult: hotels } to HotelListPage
     navigate("/hotels", { state: { searchResult: hotels } });
   };
+
+  //   button onclick not working yet
+  //   const handleClickMinus = () => {
+  //     data.numberOfAdult--;
+  //     console.log(data.numberOfAdult);
+  //   };
+  //   const handleClickAdd = () => {
+  //     data.numberOfAdult++;
+  //   };
 
   return (
     <>
@@ -121,6 +123,18 @@ export default function SearchBar() {
               onChange={changeData}
               required
             />
+          </div>
+          <div>
+            <label>Number of Person</label>
+            {/* <button onClick={handleClickMinus}>-</button> */}
+            <input
+              type="number"
+              name="numberOfAdult"
+              value={data.numberOfAdult}
+              onChange={changeData}
+              required
+            />
+            {/* <button onClick={handleClickAdd}>+</button> */}
           </div>
           <button type="submit">Search</button>
         </div>
