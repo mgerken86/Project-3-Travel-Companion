@@ -22,13 +22,16 @@ function MapContainer({ lat, lng, markers }) {
     const center = { lat: lat, lng: lng }
     return (
         <GoogleMap
-            zoom={8}
+            zoom={10}
             center={center}
             mapContainerClassName="map-container"
         >
             {/* <Marker position={center} /> */}
-            { markers.map(marker => {
-                return <MarkerF position={{ lat: marker.lat, lng: marker.lng }} />
+            { markers.map((marker, index) => {
+                return <MarkerF 
+                position={{ lat: marker.lat, lng: marker.lng }} 
+                key={index}
+                />
             }) }
         </GoogleMap>
     )

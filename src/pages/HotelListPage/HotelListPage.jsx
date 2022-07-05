@@ -7,24 +7,32 @@ export default function HotelsListPage() {
   const { state } = useLocation();
   // console.log(state);
   const { searchResult, checkIn, checkOut, coordinates } = state;
+
   const [markers, setMarkers] = useState([])
 
+
   useEffect(() => {
-    const getMarkers = () => {
-      searchResult.map(hotel => {
-        setMarkers([...markers, {lat: hotel.latitude, lng: hotel.longitude}])
+    (() => {
+      //When page renders, create an array of all of the lat/lon for each hotel
+      //Then set the state of markers to that new array
+      const filteredMarkers = searchResult.map(hotel => {
+        return { lat: hotel.latitude, lng: hotel.longitude }
       })
-    }
-    getMarkers()
-  }, [searchResult])
-  // useEffect(() => {
-  //   console.log(markers)
-  // }, [markers])
-  
+      setMarkers(filteredMarkers)
+    })()
+  }, [])
+
+  const getMarkers = () => {
+    console.log(searchResult)
+    searchResult.map(hotel =>
+      setMarkers([...markers, { lat: hotel.latitude, lng: hotel.longitude }])
+    )
+  }
+
 
   return (
     <>
-      <h1>Hotels List Page</h1>
+      <h1 onClick={getMarkers}>Hotels List Page</h1>
       <Map
         lat={coordinates.lat}
         lng={coordinates.lng}
