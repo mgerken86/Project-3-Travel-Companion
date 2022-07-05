@@ -1,12 +1,13 @@
 import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 import { useNavigate } from 'react-router-dom'
+import { checkout } from '../../utilities/tripOrders-api';
 import './Map.css'
 
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 
 export default function Map({ lat, lng, markers, checkIn, checkOut }) {
-    console.log(markers)
+    console.log(markers, checkIn, checkOut)
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: GOOGLE_API_KEY,
     });
@@ -15,6 +16,8 @@ export default function Map({ lat, lng, markers, checkIn, checkOut }) {
         lat={lat}
         lng={lng}
         markers={markers}
+        checkIn={checkIn}
+        checkOut={checkOut}
     />
 
 }
