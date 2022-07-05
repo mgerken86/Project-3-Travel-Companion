@@ -25,8 +25,8 @@ const getRandomPlace = (personArr) => {
 };
 
 export default function FavoritePlaces() {
-    //each person's place will be randomly selected from ourFavoritePlaces.js
-    // each person's hotel will be randomly selected after the axios fetch
+    // Each person's place will be randomly selected from ourFavoritePlaces.js
+    // Each person's hotel will be randomly selected after the axios fetch
     const [markPlace, setMarkPlace] = useState(getRandomPlace(markPlacesArr));
     const [jingPlace, setJingPlace] = useState(getRandomPlace(jingPlacesArr));
     const [tirasPlace, setTirasPlace] = useState(getRandomPlace(tirasPlacesArr));
@@ -74,11 +74,13 @@ export default function FavoritePlaces() {
     };
 
     // Choose a random hotel each time component renders
-    useEffect(() => {
-        getRandomHotels(markPlace, setMarkHotel);
-        getRandomHotels(jingPlace, setJingHotel);
-        getRandomHotels(tirasPlace, setTirasHotel);
-    }, []);
+    // useEffect(() => {
+    //     (async () => {
+    //         await getRandomHotels(markPlace, setMarkHotel);
+    //         await getRandomHotels(jingPlace, setJingHotel);
+    //         await getRandomHotels(tirasPlace, setTirasHotel);
+    //     })()
+    // }, []);
 
 
     return (
@@ -108,7 +110,6 @@ export default function FavoritePlaces() {
                     <h5>{jingPlace.place}</h5>
                     <h4>Why She Loves it There:</h4>
                     <span>"{jingPlace.testimonial}" -Jing</span>
-
                     {/* <button onClick={() => { getRandomHotels(jingPlace, setJingHotel) }}>
                         Click For Random Hotel
                     </button> */}
