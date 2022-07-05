@@ -11,7 +11,16 @@ import { getUser } from "../../utilities/users-service";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
-  const [search, setSearch] = useState({});
+
+  // this gets current location if we want to do a 'hotels near you' on the index page
+  function getCurrentLocation() {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  }
+  getCurrentLocation();
+
   return (
     <main className="App">
       {user ? (
@@ -19,19 +28,13 @@ export default function App() {
           <NavBar user={user} setUser={setUser} />
           <Routes>
             {/* Route components in here */}
-            <Route
-              path="/search"
-              element={<IndexPage setSearch={setSearch} />}
-            />
+            <Route path="/" element={<IndexPage />} />
             <Route path="/hotels" element={<HotelListPage />} />
             <Route
               path="/users/myAccount"
-              element={<AccountPage user={user} setSearch={setSearch} />}
+              element={<AccountPage user={user} />}
             />
-            <Route
-              path="/hotels/:id"
-              element={<HotelShowPage setSearch={setSearch} />}
-            />
+            <Route path="/hotels/:hotel_id" element={<HotelShowPage />} />
           </Routes>
         </>
       ) : (

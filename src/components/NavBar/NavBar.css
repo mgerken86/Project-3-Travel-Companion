@@ -1,0 +1,10 @@
+.navBar {
+    width: 100vw;
+    background-color: bisque;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}

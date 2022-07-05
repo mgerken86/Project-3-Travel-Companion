@@ -1,9 +1,11 @@
-import SearchBar from "../../components/SearchBar/SearchBar";
-export default function IndexPage({ setSearch }) {
+// import Map from "../../components/Map/Map";
+
+import FavoritePlaces from "../../components/FavoritePlaces/FavoritePlaces";
+
+export default function IndexPage() {
   return (
-    <>
-      <SearchBar setSearch={setSearch} />
-      <h1>Index Page</h1>
-    </>
+    <div>
+      <FavoritePlaces />
+    </div>
   );
 }
