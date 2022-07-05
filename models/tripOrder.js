@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const hotelSchema = require("./hotel");
+// const hotelSchema = require("./hotel");
 
 const tripSchema = new Schema(
   {
     // An order belongs to a user
     user: { type: Schema.Types.ObjectId, ref: "User" },
-    // Embed an order's hotel details
-    // hotel: [hotelSchema],
     // A user's unpaid order is their "cart"
     isPaid: { type: Boolean, default: false },
     checkIn: { type: Date, required: true },
@@ -15,8 +13,10 @@ const tripSchema = new Schema(
     numberOfPeople: { type: Number, required: true },
     // hotel details
     hotelName: { type: String, required: true },
+    hotelId: { type: String, required: true },
     // description: { type: String, required: true },
     price: { type: Number },
+    totalPrice: { type: Number },
     roomName: { type: String, required: true },
     rating: {
       type: Number,
@@ -48,28 +48,30 @@ tripSchema.statics.getCart = function (userId) {
   );
 };
 
-tripSchema.methods.addHotelToCart = async function (hotel, room) {
+tripSchema.methods.addHotelToCart = async function (
+  hotel,
+  room,
+  checkIn,
+  checkOut,
+  hotel_id
+) {
   // cart = this means the tripSchema
   const currentOrder = this;
 
-  // convert booking.com hotel object to our own hotel model
-  const newHotel = {
-    name: hotel.name,
-    type: hotel.type,
-  };
+  currentOrder.checkIn = checkIn;
+  currentOrder.checkOut = checkOut;
+  currentOrder.numberOfPeople = room.nr_adults;
+  currentOrder.hotelName = hotel.name;
+  currentOrder.hotelId = hotel_id;
+  currentOrder.price =
+    room.product_price_breakdown.gross_amount_per_night.value;
+  currentOrder.totalPrice = room.price_breakdown.gross_price;
+  currentOrder.roomName = room.name;
+  currentOrder.rating = room.review_score;
+  // currentOrder.hotelPhoto = room.name;
+  currentOrder.address = `${hotel.address},${hotel.city}, ${hotel.zip}`;
 
-  const hotelRes = await hotelSchema.create(newHotel);
-
-  // Check if item already in cart
-  const hotelRoom = cart.hotel.find((hotel) => hotel._id.equals(hotelId));
-  if (hotelRoom) {
-    // Prevents user from boooking the same hotel room twice
-    return null;
-  } else {
-    const hotel = await mongoose.model("Hotel").findById(hotelId);
-    cart.push({ hotel });
-  }
-  return cart.save();
+  return currentOrder.save();
 };
 
 module.exports = mongoose.model("TripOrder", tripSchema);

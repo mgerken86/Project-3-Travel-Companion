@@ -15,12 +15,12 @@ async function cart(req, res) {
 
 // Add a hotel to the cart
 async function addToCart(req, res) {
-  const { hotel, room } = req.body;
+  const { hotel, room, checkIn, checkOut, hotel_id } = req.body;
   console.log("hotel", hotel);
   console.log("room", room);
-  // const cart = await TripOrder.getCart(req.user._id);
-  // await cart.addHotelToCart(req.body);
-  // res.json(cart);
+  const cart = await TripOrder.getCart(req.user._id);
+  await cart.addHotelToCart(hotel, room, checkIn, checkOut, hotel_id);
+  res.json(cart);
 }
 
 // Update the cart's isPaid property to true

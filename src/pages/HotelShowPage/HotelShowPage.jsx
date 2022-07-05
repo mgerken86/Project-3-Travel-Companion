@@ -86,8 +86,6 @@ export default function HotelShowPage({ setSearch }) {
       });
       const rooms = response.data[0].block.slice(0, 6);
       const room = response.data[0].rooms;
-      // const checkin = response.data.arrival_date;
-      // const checkout=response.data.departure_date;
 
       setRoomPhoto(room);
 
@@ -103,9 +101,10 @@ export default function HotelShowPage({ setSearch }) {
       hotel,
       room,
       checkIn,
-      checkOut
+      checkOut,
+      hotel_id
     );
-    console.log(updatedCart);
+    console.log("updatedCart", updatedCart);
   };
 
   return (
@@ -140,7 +139,7 @@ export default function HotelShowPage({ setSearch }) {
               <h4>{room.name}</h4>
               <h4>{room.max_occupancy}</h4>
               <h4>
-                {room.min_price.currency} {room.min_price.price}
+                {room.min_price.currency} {room.price_breakdown.gross_price}
               </h4>
               <button onClick={() => handleClick(room)}>Select</button>
             </div>

@@ -8,13 +8,14 @@ export function getCart() {
 }
 
 // Add an item to the cart
-export async function addHotelToCart(hotel, room, checkIn, checkOut) {
+export async function addHotelToCart(hotel, room, checkIn, checkOut, hotel_id) {
   // Just send hotelId for best security (no pricing)
   return sendRequest(`${BASE_URL}/cart/new`, "POST", {
     hotel,
     room,
     checkIn,
     checkOut,
+    hotel_id,
   });
 }
 

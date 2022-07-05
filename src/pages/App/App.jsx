@@ -36,7 +36,7 @@ export default function App() {
               element={<AccountPage user={user} />}
             />
             <Route
-              path="/users/cart/:hotel_id/::room_id"
+              path="/users/cart/:hotel_id/:room_id"
               element={<TripOrdersPage user={user} />}
             />
             <Route path="/hotels/:hotel_id" element={<HotelShowPage />} />
