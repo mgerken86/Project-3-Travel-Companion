@@ -7,7 +7,7 @@ export default function IndexPage() {
   return (
     <div>
       <FavoritePlaces />
-      <Map />
+      {/* <Map /> */}
     </div>
   );
 }
