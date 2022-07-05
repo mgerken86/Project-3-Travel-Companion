@@ -9,6 +9,5 @@ export default function IndexPage() {
       <p>Hello World</p>
       <FavoritePlaces />
     </div>
-  )
+  );
 }
-

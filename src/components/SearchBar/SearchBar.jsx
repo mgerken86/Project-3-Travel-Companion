@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Autocomplete } from "@react-google-maps/api";
-import './SearchBar.css'
+import "./SearchBar.css";
 
 const starterData = {
   destination: "",
   checkIn: Date.now(),
-  checkOut: Date.now() + (3600 * 1000 * 24),
+  checkOut: Date.now() + 3600 * 1000 * 24,
 };
 
 export default function SearchBar() {
@@ -22,8 +22,8 @@ export default function SearchBar() {
     const lat = autocomplete.getPlace().geometry.location.lat();
     const lng = autocomplete.getPlace().geometry.location.lng();
     const city = autocomplete.getPlace().formatted_address;
-    console.log('latitude: ', lat)
-    console.log('longitude: ', lng)
+    console.log("latitude: ", lat);
+    console.log("longitude: ", lng);
 
     setData({ ...data, destination: city });
     setCoordinates({ lat, lng });
@@ -63,7 +63,7 @@ export default function SearchBar() {
         include_adjacency: "true",
       },
       headers: {
-        "X-RapidAPI-Key": "cd61a9c3fcmsh03b40d2dc69de61p1d57efjsnb4b7e3ec281d",
+        "X-RapidAPI-Key": `${process.env.RAPID_API_KEY}`,
         "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
       },
     };
@@ -76,7 +76,6 @@ export default function SearchBar() {
     // navigate to hotels page and pass state { searchResult: hotels } to HotelListPage
     navigate("/hotels", { state: { searchResult: hotels } });
   };
-
 
   return (
     <>
