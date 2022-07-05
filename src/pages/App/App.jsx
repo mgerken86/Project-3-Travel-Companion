@@ -20,7 +20,7 @@ export default function App() {
       console.log("Longitude is :", position.coords.longitude);
     });
   }
-  getCurrentLocation();
+  // getCurrentLocation();
 
   return (
     <main className="App">
