@@ -17,7 +17,7 @@ export default function HotelsListPage() {
     (() => {
       // console.log(searchResult)
       //When page renders, create an array of all of the lat/lon for each hotel
-      //Then set the state of markers to that new array
+      //Then set the state of markers to that new array. Also passing hotel_id to redirect when clicking marker
       const filteredMarkers = searchResult.map(hotel => {
         return {
           name: hotel.hotel_name,
@@ -30,12 +30,11 @@ export default function HotelsListPage() {
     })()
   }, [])
 
-
-
   return (
     <>
       <h1>Hotels List Page</h1>
       <Map
+        // The lat and lng are passed to map to render map centered on city that was searched for
         lat={coordinates.lat}
         lng={coordinates.lng}
         markers={markers}
