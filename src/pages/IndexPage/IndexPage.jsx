@@ -7,6 +7,5 @@ export default function IndexPage() {
     <div>
       <FavoritePlaces />
     </div>
-  )
+  );
 }
-
