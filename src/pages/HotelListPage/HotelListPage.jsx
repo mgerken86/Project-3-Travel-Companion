@@ -2,6 +2,8 @@ import HotelListCard from "../../components/HotelListCard/HotelListCard";
 import Map from "../../components/Map/Map";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom'
+import { checkout } from "../../utilities/tripOrders-api";
 
 export default function HotelsListPage() {
   const { state } = useLocation();
@@ -13,12 +15,13 @@ export default function HotelsListPage() {
 
   useEffect(() => {
     (() => {
-      console.log(searchResult)
+      // console.log(searchResult)
       //When page renders, create an array of all of the lat/lon for each hotel
       //Then set the state of markers to that new array
       const filteredMarkers = searchResult.map(hotel => {
         return {
           name: hotel.hotel_name,
+          hotelId: hotel.hotel_id,
           lat: hotel.latitude,
           lng: hotel.longitude
         }
@@ -36,6 +39,8 @@ export default function HotelsListPage() {
         lat={coordinates.lat}
         lng={coordinates.lng}
         markers={markers}
+        checkIn={checkIn}
+        checkOut={checkOut}
       />
       <div>
         {searchResult.map((hotel) => {
