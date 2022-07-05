@@ -4,17 +4,21 @@ import './Map.css'
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 
-export default function Map({ lat, lng }) {
-
+export default function Map({ lat, lng, markers }) {
+    console.log(markers)
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: GOOGLE_API_KEY,
     });
     if (!isLoaded) return <div>Loading...</div>
-    else return <MapContainer lat={lat} lng={lng} />
+    else return <MapContainer
+        lat={lat}
+        lng={lng}
+        markers={markers}
+    />
 
 }
 
-function MapContainer({ lat, lng }) {
+function MapContainer({ lat, lng, markers }) {
     const center = { lat: lat, lng: lng }
     return (
         <GoogleMap
@@ -23,7 +27,9 @@ function MapContainer({ lat, lng }) {
             mapContainerClassName="map-container"
         >
             {/* <Marker position={center} /> */}
-            <MarkerF position={{ lat: 44, lng: -80 }} />
+            { markers.map(marker => {
+                return <MarkerF position={{ lat: marker.lat, lng: marker.lng }} />
+            }) }
         </GoogleMap>
     )
 }

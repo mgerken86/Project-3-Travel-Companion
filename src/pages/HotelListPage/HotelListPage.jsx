@@ -12,14 +12,14 @@ export default function HotelsListPage() {
   useEffect(() => {
     const getMarkers = () => {
       searchResult.map(hotel => {
-        setMarkers({lat: hotel.latitude, lng: hotel.longitude})
+        setMarkers([...markers, {lat: hotel.latitude, lng: hotel.longitude}])
       })
     }
     getMarkers()
-  }, [])
-  useEffect(() => {
-    console.log(markers)
-  }, [markers])
+  }, [searchResult])
+  // useEffect(() => {
+  //   console.log(markers)
+  // }, [markers])
   
 
   return (
