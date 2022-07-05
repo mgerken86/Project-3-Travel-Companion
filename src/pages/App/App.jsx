@@ -6,7 +6,7 @@ import IndexPage from "../IndexPage/IndexPage";
 import HotelListPage from "../HotelListPage/HotelListPage";
 import HotelShowPage from "../HotelShowPage/HotelShowPage";
 import AccountPage from "../AccountPage/AccountPage";
-import TripOrdersPage from "../TripOrdersPage/TripOrdersPage";
+import TripOrdersPage from "../tripOrdersPage/tripOrdersPage";
 import NavBar from "../../components/NavBar/NavBar";
 import { getUser } from "../../utilities/users-service";
 
