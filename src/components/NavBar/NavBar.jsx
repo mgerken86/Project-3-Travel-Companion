@@ -16,6 +16,8 @@ export default function NavBar({ user, setUser }) {
       <nav>
         <span>Where can we take you, {user.name}?</span>
         &nbsp; | &nbsp;
+        <Link to="/">Home</Link>
+        &nbsp; | &nbsp;
         <Link to="/users/myAccount">My Account</Link>
         &nbsp; | &nbsp;
         <Link to="" onClick={handleLogOut}>
