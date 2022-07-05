@@ -1,0 +1,8 @@
+.main-container {
+    display: flex;
+}
+
+.favorite-place-container {
+    width: 33vw;
+    border: 3px solid black;
+}
