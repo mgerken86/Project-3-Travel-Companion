@@ -74,9 +74,16 @@ export default function SearchBar() {
       console.error(error);
     });
     const hotels = response.data.result;
-    setData(starterData);
+    // console.log(hotels);
+    // setData(starterData);
     // navigate to hotels page and pass state { searchResult: hotels } to HotelListPage
-    navigate("/hotels", { state: { searchResult: hotels } });
+    navigate("/hotels", {
+      state: {
+        searchResult: hotels,
+        checkIn: data.checkIn,
+        checkOut: data.checkOut,
+      },
+    });
   };
 
   //   button onclick not working yet
