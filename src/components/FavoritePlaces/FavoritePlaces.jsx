@@ -83,9 +83,11 @@ export default function FavoritePlaces() {
     useEffect(() => {
         getRandomHotels(markPlace, setMarkHotel);
     }, [markPlace]);
+
     useEffect(() => {
         getRandomHotels(jingPlace, setJingHotel);
     }, [jingPlace]);
+
     useEffect(() => {
         getRandomHotels(tirasPlace, setTirasHotel);
     }, [tirasPlace]);
@@ -104,30 +106,30 @@ export default function FavoritePlaces() {
                         Click For Random Hotel
                     </button> */}
                     {/* If there is a hotel ID assigned to a person's hotel state, render the following jsx */}
-                    {markHotel.hotel_id && (
+                    {markHotel ? (
                         <div className="hotel-container">
                             <h4>Featured Accomodation:</h4>
                             <h4>{markHotel.hotel_name}</h4>
                             <img src={markHotel.max_photo_url} alt="" />
                         </div>
-                    )}
+                    ) : null}
                 </div>
                 <div className="favorite-place-container">
                     <h2>Jing's Suggestion:</h2>
                     <h5>{jingPlace.place}</h5>
                     <h4>Why She Loves it There:</h4>
                     <span>"{jingPlace.testimonial}" -Jing</span>
-                    
+
                     {/* <button onClick={() => { getRandomHotels(jingPlace, setJingHotel) }}>
                         Click For Random Hotel
                     </button> */}
-                    {jingHotel.hotel_id && (
+                    {jingHotel ? (
                         <div className="hotel-container">
                             <h4>Featured Accomodation:</h4>
                             <h4>{jingHotel.hotel_name}</h4>
                             <img src={jingHotel.max_photo_url} alt="" />
                         </div>
-                    )}
+                    ) : null}
                 </div>
                 <div className="favorite-place-container">
                     <h2>Tiras's Suggestion:</h2>
@@ -138,13 +140,13 @@ export default function FavoritePlaces() {
                         onClick={() => getRandomHotels(tirasPlace, setTirasHotel)}>
                         Click For Random Hotel
                     </button> */}
-                    {tirasHotel.hotel_id && (
+                    {tirasHotel ? (
                         <div className="hotel-container">
                             <h4>Featured Accomodation:</h4>
                             <h4>{tirasHotel.hotel_name}</h4>
                             <img src={tirasHotel.max_photo_url} alt="" />
                         </div>
-                    )}
+                    ) : null}
                 </div>
             </div>
         </div>
