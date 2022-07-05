@@ -1,6 +1,6 @@
-import sendRequest from './send-request';
+import sendRequest from "./send-request";
 
-const BASE_URL = '/api/trips';
+const BASE_URL = "/api/tripOrders";
 
 // Retrieve an unpaid order for the logged in user
 export function getCart() {
@@ -8,15 +8,20 @@ export function getCart() {
 }
 
 // Add an item to the cart
-export function addHotelToCart(hotelId) {
+export async function addHotelToCart(hotel, room, checkIn, checkOut) {
   // Just send hotelId for best security (no pricing)
-  return sendRequest(`${BASE_URL}/cart/${hotelId}`, 'POST');
+  return sendRequest(`${BASE_URL}/cart/new`, "POST", {
+    hotel,
+    room,
+    checkIn,
+    checkOut,
+  });
 }
 
 // Updates the order's (cart's) isPaid property to true
 export function checkout() {
   // Changing data on the server, so make it a POST request
-  return sendRequest(`${BASE_URL}/cart/checkout`, 'POST');
+  return sendRequest(`${BASE_URL}/cart/checkout`, "POST");
 }
 
 // Return all paid orders for the logged in user
