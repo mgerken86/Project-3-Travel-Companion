@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import * as ordersAPI from "../../utilities/tripOrders-api";
 
 export default function HotelShowPage({ setSearch }) {
   const [hotel, setHotel] = useState({});
   const [rooms, setRooms] = useState([]);
-  const [description, setDescription] = useState({});
   const [photos, setPhotos] = useState([]);
   const [roomPhoto, setRoomPhoto] = useState([]);
   const [reviews, setReviews] = useState({});
@@ -86,16 +86,27 @@ export default function HotelShowPage({ setSearch }) {
       });
       const rooms = response.data[0].block.slice(0, 6);
       const room = response.data[0].rooms;
+      // const checkin = response.data.arrival_date;
+      // const checkout=response.data.departure_date;
+
       setRoomPhoto(room);
 
-      console.log("roomInfo", rooms);
+      console.log("roomInfo", response.data);
       setRooms(rooms);
     };
     getRoomDetails();
   }, []);
 
   // handle onclick
-  const handleClick = () => {};
+  const handleClick = async (room) => {
+    const updatedCart = await ordersAPI.addHotelToCart(
+      hotel,
+      room,
+      checkIn,
+      checkOut
+    );
+    console.log(updatedCart);
+  };
 
   return (
     <>
@@ -131,7 +142,7 @@ export default function HotelShowPage({ setSearch }) {
               <h4>
                 {room.min_price.currency} {room.min_price.price}
               </h4>
-              <button onClick={handleClick}>Select</button>
+              <button onClick={() => handleClick(room)}>Select</button>
             </div>
           );
         })}
