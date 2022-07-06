@@ -37,7 +37,6 @@ export default function SearchBar() {
       ...data,
       [e.target.name]: e.target.value,
     };
-
     setData(newData);
   };
 
@@ -74,7 +73,7 @@ export default function SearchBar() {
       console.error(error);
     });
     const hotels = response.data.result;
-    // console.log(hotels);
+    // console.log("coordinates state is:", coordinates);
     // setData(starterData);
     // navigate to hotels page and pass state { searchResult: hotels } to HotelListPage
     navigate("/hotels", {
@@ -82,6 +81,8 @@ export default function SearchBar() {
         searchResult: hotels,
         checkIn: data.checkIn,
         checkOut: data.checkOut,
+        coordinates: coordinates,
+        numberOfPerson: data.numberOfAdult,
       },
     });
   };
