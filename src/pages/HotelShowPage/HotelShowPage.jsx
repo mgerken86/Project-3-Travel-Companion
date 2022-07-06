@@ -104,7 +104,6 @@ export default function HotelShowPage() {
 
       setRoomPhoto(room);
 
-      console.log("roomInfo", response.data);
       setRooms(rooms);
     };
     getRoomDetails();
@@ -121,9 +120,8 @@ export default function HotelShowPage() {
       hotel_id,
       hotelPhoto
     );
-    console.log("updatedCart", updatedCart);
-    navigate(`/users/cart/checkout/${updatedCart.id}`, {
 
+    navigate(`/users/cart/checkout/${updatedCart.id}`, {
       state: {
         hotel,
         checkIn,

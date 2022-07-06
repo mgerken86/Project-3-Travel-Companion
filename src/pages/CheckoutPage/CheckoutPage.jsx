@@ -36,7 +36,6 @@ export default function CheckoutPage() {
   const handlePay = async (e) => {
     e.preventDefault();
     const addPaymentInfo = await ordersAPI.checkout(cardinfo);
-    console.log(addPaymentInfo);
     navigate("/users/myAccount");
   };
 
