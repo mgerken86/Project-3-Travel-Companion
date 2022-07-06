@@ -18,7 +18,7 @@ export default function AccountPage({ user }) {
     return (
         <>
             <h3>Greetings, {user.name}</h3>
-            <h1>Your Previous Trips:</h1>
+            <h1>Your Purchased Trips:</h1>
             <TripOrderList tripOrders={tripOrders} />
             <h3>Edit Your Information</h3>
         </>

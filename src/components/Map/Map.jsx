@@ -22,6 +22,7 @@ export default function Map({ lat, lng, markers, checkIn, checkOut }) {
 }
 
 function MapContainer({ lat, lng, markers, checkIn, checkOut }) {
+    // console.log('markers:', markers)
     const center = { lat: lat, lng: lng }
     //useNavigate is a react-router-dom hook that is the only way I could figure out how to re-direct to show page
     const navigate = useNavigate()
@@ -38,7 +39,7 @@ function MapContainer({ lat, lng, markers, checkIn, checkOut }) {
                     key={index}
                     label={marker.name}
                     onClick={() => navigate(
-                        `/hotels/${marker.hotelId}?checkin=${checkIn}&checkout=${checkOut}`,
+                        `/hotels/${marker.hotelId}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${marker.people}`,
                         {
                             state: {
                                 markers: { marker },

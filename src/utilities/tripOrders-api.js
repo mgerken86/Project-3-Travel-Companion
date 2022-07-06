@@ -37,3 +37,8 @@ export function checkout(cardinfo) {
 export function getOrderHistory() {
   return sendRequest(`${BASE_URL}/history`);
 }
+
+export function cancelTrip(orderId) {
+  // console.log('in the triporders api', orderId)
+  return sendRequest(`${BASE_URL}/history/${orderId}`, "DELETE")
+}

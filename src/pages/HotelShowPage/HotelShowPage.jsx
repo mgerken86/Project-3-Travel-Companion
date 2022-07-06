@@ -104,7 +104,6 @@ export default function HotelShowPage() {
 
       setRoomPhoto(room);
 
-      console.log("roomInfo", response.data);
       setRooms(rooms);
     };
     getRoomDetails();
@@ -121,9 +120,8 @@ export default function HotelShowPage() {
       hotel_id,
       hotelPhoto
     );
-    console.log("updatedCart", updatedCart);
-    navigate(`/users/cart/checkout/${updatedCart.id}`, {
 
+    navigate(`/users/cart/checkout/${updatedCart.id}`, {
       state: {
         hotel,
         checkIn,
@@ -180,10 +178,8 @@ export default function HotelShowPage() {
                 alt=""
               />
               <h4>{room.name}</h4>
-
               <h4>Max Occupancy: {room.max_occupancy}</h4>
               <h4>Total Cost: $ {room.price_breakdown.gross_price}</h4>
-
               <button onClick={() => handleClick(room)}>Select</button>
             </div>
           );
