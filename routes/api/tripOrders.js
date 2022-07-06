@@ -13,8 +13,9 @@ router.post("/cart/new", tripOrdersCtrl.addToCart);
 router.post("/cart/checkout", tripOrdersCtrl.checkout);
 // DELETE /api/tripOrders/history
 // router.delete("/api/tripOrders/history", tripOrdersCtrl.cancelTrip)
-router.delete("/api/tripOrders/history", async (req, res) => {
-    await TripOrder.findOneAndDelete({ _id: req.body._id})
+router.delete("/history/:id", (req, res) => {
+    console.log('id in tripOrders routes', req.params.id)
+    TripOrder.findByIdAndDelete(req.params.id)
 })
 
 module.exports = router;
