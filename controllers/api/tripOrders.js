@@ -49,3 +49,8 @@ async function history(req, res) {
     .exec();
   res.json(tripOrders);
 }
+
+// Delete a trip from the order history
+async function cancelTrip(req, res) {
+  await TripOrder.findOneAndDelete({ _id: req._id})
+}

@@ -10,14 +10,11 @@ export default function HotelsListPage() {
   // console.log(state);
   const { searchResult, checkIn, checkOut, coordinates, numberOfPerson } =
     state;
-    console.log(searchResult)
-  console.log(checkIn, checkOut)
   const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
     (() => {
       const people = numberOfPerson
-      console.log('people:' , people)
       // console.log(searchResult)
       //When page renders, create an array of all of the lat/lon for each hotel
       //Then set the state of markers to that new array. Also passing hotel_id to redirect when clicking marker
