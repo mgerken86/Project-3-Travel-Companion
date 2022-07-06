@@ -18,7 +18,8 @@ export default function TripOrder({ trip }) {
             <p>Check-out: {trip.checkOut.slice(0, 10)}</p>
             <button onClick={() => {
                 handleCancelBtn(trip._id)
-                navigate('/')
+                //This re-renders the component through useNavigate
+                navigate(0)
             }}>
                 Cancel This Trip
             </button>

@@ -178,10 +178,8 @@ export default function HotelShowPage() {
                 alt=""
               />
               <h4>{room.name}</h4>
-
               <h4>Max Occupancy: {room.max_occupancy}</h4>
               <h4>Total Cost: $ {room.price_breakdown.gross_price}</h4>
-
               <button onClick={() => handleClick(room)}>Select</button>
             </div>
           );
