@@ -1,8 +1,8 @@
-
+import TripOrder from "../TripOrder/TripOrder"
 
 export default function TripOrderList({ tripOrders }) {
     const trips = tripOrders.map(trip =>
-        <TripOrderListItem
+        <TripOrder
             trip={trip}
             key={trip._id}
         />
