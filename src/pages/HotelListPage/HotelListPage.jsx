@@ -48,6 +48,7 @@ export default function HotelsListPage() {
               key={hotel.hotel_id}
               checkIn={checkIn}
               checkOut={checkOut}
+              markers={markers}
             />
           );
         })}

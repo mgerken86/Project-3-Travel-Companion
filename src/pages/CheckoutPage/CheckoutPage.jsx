@@ -3,7 +3,7 @@ import { useState } from "react";
 import * as ordersAPI from "../../utilities/tripOrders-api";
 import "./CheckoutPage.css";
 
-export default function CeckoutPage() {
+export default function CheckoutPage() {
   const [cardinfo, setCardinfo] = useState({});
   const { state } = useLocation();
   // use navigate
