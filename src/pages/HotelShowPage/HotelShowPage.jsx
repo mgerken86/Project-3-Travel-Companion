@@ -2,6 +2,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as ordersAPI from "../../utilities/tripOrders-api";
+import Map from "../../components/Map/Map";
 
 export default function HotelShowPage({ setSearch }) {
   // hotel data
@@ -12,11 +13,15 @@ export default function HotelShowPage({ setSearch }) {
   const [photos, setPhotos] = useState([]);
   // room info contains photos
   const [roomPhoto, setRoomPhoto] = useState([]);
-
+  const [reviews, setReviews] = useState({});
   // use navigate
   const navigate = useNavigate();
-
   const { hotel_id } = useParams();
+  const { state } = useLocation()
+  let { markers } = state
+  const [marker, setMarkers] = useState([markers.marker])
+  const [lat, setLat] = useState(marker[0].lat)
+  const [lng, setLng] = useState(marker[0].lng)
   // get checkin and checkout date from query
   const queryParams = new URLSearchParams(window.location.search);
   const checkIn = queryParams.get("checkin");
@@ -118,10 +123,17 @@ export default function HotelShowPage({ setSearch }) {
     });
   };
 
+
   return (
     <>
       {/* {photos && <img src={photos[0].url_1440} alt="" />}  */}
-
+      <Map
+        lat={lat}
+        lng={lng}
+        markers={marker}
+        checkIn={checkIn}
+        checkOut={checkOut}
+      />
       <h1>{hotel.name}</h1>
       {/* <span>{description.description}</span> */}
       <h3>
