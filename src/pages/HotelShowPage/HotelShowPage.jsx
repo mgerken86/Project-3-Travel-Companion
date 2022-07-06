@@ -2,8 +2,10 @@ import axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as ordersAPI from "../../utilities/tripOrders-api";
+import Map from "../../components/Map/Map";
 
 export default function HotelShowPage({ setSearch }) {
+  console.log('markers:' , markers)
   const [hotel, setHotel] = useState({});
   const [rooms, setRooms] = useState([]);
   const [photos, setPhotos] = useState([]);
@@ -111,7 +113,13 @@ export default function HotelShowPage({ setSearch }) {
   return (
     <>
       {/* {photos && <img src={photos[0].url_1440} alt="" />}  */}
-
+      {/* <Map 
+        lat={hotel.latitude}
+        lng={hotel.longitude}
+        markers={markers}
+        checkIn={checkIn}
+        checkOut={checkOut}
+      /> */}
       <h1>{hotel.name}</h1>
       {/* <span>{description.description}</span> */}
       <h3>

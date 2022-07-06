@@ -36,7 +36,11 @@ function MapContainer({ lat, lng, markers, checkIn, checkOut }) {
                     position={{ lat: marker.lat, lng: marker.lng }}
                     key={index}
                     label={marker.name}
-                    onClick={() => navigate(`/hotels/${marker.hotelId}?checkin=${checkIn}&checkout=${checkOut}`)}
+                    onClick={() => navigate(`/hotels/${marker.hotelId}?checkin=${checkIn}&checkout=${checkOut}`, {
+                        state: {
+                            markers: {marker}
+                        }
+                    })}
                 />
             })}
         </GoogleMap>
