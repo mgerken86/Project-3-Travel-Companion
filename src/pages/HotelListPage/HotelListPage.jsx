@@ -2,7 +2,6 @@ import HotelListCard from "../../components/HotelListCard/HotelListCard";
 import Map from "../../components/Map/Map";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom'
 import { checkout } from "../../utilities/tripOrders-api";
 
 export default function HotelsListPage() {

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 import { useNavigate } from 'react-router-dom'
 import './Map.css'
@@ -6,7 +7,7 @@ const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 
 export default function Map({ lat, lng, markers, checkIn, checkOut }) {
-
+    // console.log(markers, lat, lng)
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: GOOGLE_API_KEY,
     });
@@ -36,13 +37,17 @@ function MapContainer({ lat, lng, markers, checkIn, checkOut }) {
                     position={{ lat: marker.lat, lng: marker.lng }}
                     key={index}
                     label={marker.name}
-                    onClick={() => navigate(`/hotels/${marker.hotelId}?checkin=${checkIn}&checkout=${checkOut}`, {
-                        state: {
-                            markers: {marker}
+                    onClick={() => navigate(
+                        `/hotels/${marker.hotelId}?checkin=${checkIn}&checkout=${checkOut}`,
+                        {
+                            state: {
+                                markers: { marker },
+                            }
                         }
-                    })}
+                    )}
                 />
-            })}
+            })
+            }
         </GoogleMap>
     )
 }
