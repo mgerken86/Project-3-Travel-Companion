@@ -42,10 +42,10 @@ async function checkout(req, res) {
 }
 
 // Return the logged in user's paid order history
-// async function history(req, res) {
-//   // Sort most recent orders first
-//   const tripOrders = await TripOrder.find({ user: req.user._id, isPaid: true })
-//     .sort("-updatedAt")
-//     .exec();
-//   res.json(tripOrders);
-// }
+async function history(req, res) {
+  // Sort most recent orders first
+  const tripOrders = await TripOrder.find({ user: req.user._id, isPaid: true })
+    .sort("-updatedAt")
+    .exec();
+  res.json(tripOrders);
+}
