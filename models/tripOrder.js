@@ -14,6 +14,7 @@ const tripSchema = new Schema(
     // hotel details
     hotelName: { type: String, required: true },
     hotelId: { type: String, required: true },
+    hotelPhoto: { type: String, required: true },
     // description: { type: String, required: true },
     price: { type: Number },
     totalPrice: { type: Number },
@@ -21,7 +22,7 @@ const tripSchema = new Schema(
     rating: {
       type: Number,
       min: 0,
-      max: 5,
+      max: 10,
     },
     hotelPhoto: { type: String },
     // city: { type: String, required: true },
@@ -53,7 +54,8 @@ tripSchema.methods.addHotelToCart = async function (
   room,
   checkIn,
   checkOut,
-  hotel_id
+  hotel_id,
+  hotelPhoto
 ) {
   // cart = this means the tripSchema
   const currentOrder = this;
@@ -63,11 +65,12 @@ tripSchema.methods.addHotelToCart = async function (
   currentOrder.numberOfPeople = room.nr_adults;
   currentOrder.hotelName = hotel.name;
   currentOrder.hotelId = hotel_id;
+  currentOrder.hotelPhoto = hotelPhoto;
   currentOrder.price =
     room.product_price_breakdown.gross_amount_per_night.value;
   currentOrder.totalPrice = room.price_breakdown.gross_price;
   currentOrder.roomName = room.name;
-  currentOrder.rating = room.review_score;
+  currentOrder.rating = hotel.review_score;
   // currentOrder.hotelPhoto = room.name;
   currentOrder.address = `${hotel.address},${hotel.city}, ${hotel.zip}`;
 
