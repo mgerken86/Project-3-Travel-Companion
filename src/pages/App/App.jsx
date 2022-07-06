@@ -6,7 +6,7 @@ import IndexPage from "../IndexPage/IndexPage";
 import HotelListPage from "../HotelListPage/HotelListPage";
 import HotelShowPage from "../HotelShowPage/HotelShowPage";
 import AccountPage from "../AccountPage/AccountPage";
-import TripOrdersPage from "../tripOrdersPage/tripOrdersPage";
+import CheckoutPage from "../CheckoutPage/CheckoutPage";
 import NavBar from "../../components/NavBar/NavBar";
 import { getUser } from "../../utilities/users-service";
 
@@ -36,8 +36,8 @@ export default function App() {
               element={<AccountPage user={user} />}
             />
             <Route
-              path="/users/cart/:hotel_id/::room_id"
-              element={<TripOrdersPage user={user} />}
+              path="/users/cart/checkout/:orderId"
+              element={<CheckoutPage user={user} />}
             />
             <Route path="/hotels/:hotel_id" element={<HotelShowPage />} />
           </Routes>
