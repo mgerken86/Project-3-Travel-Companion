@@ -2,12 +2,16 @@ import "./HotelListCard.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function HotelListCard({ hotel, checkIn, checkOut, markers }) {
-  
+export default function HotelListCard({
+  hotel,
+  checkIn,
+  checkOut,
+  numberOfPerson,
+}) {
   return (
     <div>
       <Link
-        to={`/hotels/${hotel.hotel_id}?checkin=${checkIn}&checkout=${checkOut}`}
+        to={`/hotels/${hotel.hotel_id}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${numberOfPerson}`}
       >
         <h2>{hotel.hotel_name}</h2>
       </Link>
