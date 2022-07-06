@@ -1,9 +1,10 @@
-import * as ordersAPI from "../../utilities/tripOrders-api";
+import * as ordersAPI from "../../utilities/tripOrders-api"; 
+import { useNavigate } from "react-router-dom";
 
 export default function TripOrder({ trip }) {
-    console.log(trip)
+    // console.log(trip)
     const handleCancelBtn = async (orderId) => {
-        console.log(orderId)
+        // console.log(orderId)
         await ordersAPI.cancelTrip(orderId);
     }
     return (

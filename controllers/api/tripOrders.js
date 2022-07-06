@@ -6,6 +6,7 @@ module.exports = {
   addToCart,
   checkout,
   history,
+  cancelTrip
 };
 
 // A cart is the unpaid order for a user
@@ -52,5 +53,7 @@ async function history(req, res) {
 
 // Delete a trip from the order history
 async function cancelTrip(req, res) {
-  await TripOrder.findOneAndDelete({ _id: req._id})
+  await TripOrder.findOneAndDelete({ id: req.params.id})
+  // const trip = await TripOrder.find({_id: req.params.id})
+  // console.log('trip:', trip)
 }
