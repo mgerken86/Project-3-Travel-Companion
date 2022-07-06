@@ -5,7 +5,7 @@ module.exports = {
   cart,
   addToCart,
   checkout,
-  // history,
+  history,
 };
 
 // A cart is the unpaid order for a user
