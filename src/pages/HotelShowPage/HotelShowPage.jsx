@@ -2,8 +2,11 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as ordersAPI from "../../utilities/tripOrders-api";
+import ShowPageSearchBar from "../../components/ShowPageSearchBar/ShowPageSearchBar";
 
-export default function HotelShowPage({ setSearch }) {
+
+export default function HotelShowPage() {
+
   // hotel data
   const [hotel, setHotel] = useState({});
   // rooms list data
@@ -21,6 +24,7 @@ export default function HotelShowPage({ setSearch }) {
   const queryParams = new URLSearchParams(window.location.search);
   const checkIn = queryParams.get("checkin");
   const checkOut = queryParams.get("checkout");
+  const numberOfPerson = queryParams.get("numberOfPerson");
 
   //any time page re-renders it will get the hotel data
   useEffect(() => {
@@ -77,10 +81,10 @@ export default function HotelShowPage({ setSearch }) {
           checkout_date: checkOut,
           currency: "USD",
           locale: "en-gb",
-          adults_number_by_rooms: "3,1",
+          adults_number_by_rooms: numberOfPerson,
           hotel_id: hotel_id,
-          children_ages: "5,0,9",
-          children_number_by_rooms: "2,1",
+          // children_ages: "",
+          // children_number_by_rooms: "",
         },
         headers: {
           "X-RapidAPI-Key": process.env.REACT_APP_BOOKING_API_KEY,
@@ -114,12 +118,28 @@ export default function HotelShowPage({ setSearch }) {
     );
     console.log("updatedCart", updatedCart);
     navigate(`/users/cart/checkout/${updatedCart.id}`, {
-      state: { hotel, checkIn, checkOut, room, hotelPhoto, hotel_id },
+
+      state: {
+        hotel,
+        checkIn,
+        checkOut,
+        room,
+        hotelPhoto,
+        hotel_id,
+        numberOfPerson,
+      },
+
     });
   };
 
   return (
     <>
+      <ShowPageSearchBar
+        checkIn={checkIn}
+        checkOut={checkOut}
+        numberOfPerson={numberOfPerson}
+        hotel_id={hotel_id}
+      />
       {/* {photos && <img src={photos[0].url_1440} alt="" />}  */}
 
       <h1>{hotel.name}</h1>
@@ -148,8 +168,10 @@ export default function HotelShowPage({ setSearch }) {
                 alt=""
               />
               <h4>{room.name}</h4>
-              <h4>{room.max_occupancy}</h4>
-              <h4>$ {room.price_breakdown.gross_price}</h4>
+
+              <h4>Max Occupancy: {room.max_occupancy}</h4>
+              <h4>Total Cost: $ {room.price_breakdown.gross_price}</h4>
+
               <button onClick={() => handleClick(room)}>Select</button>
             </div>
           );

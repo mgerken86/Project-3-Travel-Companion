@@ -81,7 +81,8 @@ export default function SearchBar() {
         searchResult: hotels,
         checkIn: data.checkIn,
         checkOut: data.checkOut,
-        coordinates: coordinates
+        coordinates: coordinates,
+        numberOfPerson: data.numberOfAdult,
       },
     });
   };
