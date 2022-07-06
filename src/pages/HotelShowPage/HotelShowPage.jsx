@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import * as ordersAPI from "../../utilities/tripOrders-api";
 import ShowPageSearchBar from "../../components/ShowPageSearchBar/ShowPageSearchBar";
 
+
 export default function HotelShowPage() {
+
   // hotel data
   const [hotel, setHotel] = useState({});
   // rooms list data
@@ -116,6 +118,7 @@ export default function HotelShowPage() {
     );
     console.log("updatedCart", updatedCart);
     navigate(`/users/cart/checkout/${updatedCart.id}`, {
+
       state: {
         hotel,
         checkIn,
@@ -125,6 +128,7 @@ export default function HotelShowPage() {
         hotel_id,
         numberOfPerson,
       },
+
     });
   };
 
@@ -164,8 +168,10 @@ export default function HotelShowPage() {
                 alt=""
               />
               <h4>{room.name}</h4>
+
               <h4>Max Occupancy: {room.max_occupancy}</h4>
               <h4>Total Cost: $ {room.price_breakdown.gross_price}</h4>
+
               <button onClick={() => handleClick(room)}>Select</button>
             </div>
           );

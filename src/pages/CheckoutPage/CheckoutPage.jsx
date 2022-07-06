@@ -3,12 +3,15 @@ import { useState } from "react";
 import * as ordersAPI from "../../utilities/tripOrders-api";
 import "./CheckoutPage.css";
 
+
 export default function CheckoutPage() {
   const [cardinfo, setCardinfo] = useState({ cardNumber: "" });
+
   const { state } = useLocation();
   // use navigate
   const navigate = useNavigate();
   // console.log(state);
+  
   const {
     hotel,
     checkIn,
@@ -18,6 +21,7 @@ export default function CheckoutPage() {
     hotel_id,
     numberOfPerson,
   } = state;
+
 
   const handleChange = (e) => {
     const cardData = {
@@ -49,7 +53,9 @@ export default function CheckoutPage() {
           <h5>You selected</h5>
           <p>{room.name}</p>
           <Link
+
             to={`/hotels/${hotel_id}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${numberOfPerson}`}
+
           >
             Change Your Selection
           </Link>
@@ -59,7 +65,9 @@ export default function CheckoutPage() {
           <h3>Your Price Summary</h3>
           <h5>Total</h5>
           <h5> $ {room.price_breakdown.gross_price}</h5>
+
           <p>(for {numberOfPerson} guests)</p>
+
         </div>
       </div>
       <div className="rightContainer">
@@ -75,6 +83,7 @@ export default function CheckoutPage() {
         <form onSubmit={async (e) => handlePay(e)}>
           <div className="flex-column">
             <h2>Payment Info</h2>
+
             <label>Name</label>
             <input type="text" name="name" onChange={handleChange} required />
             <label>Card Number</label>
@@ -82,23 +91,29 @@ export default function CheckoutPage() {
               type="number"
               name="cardNumber"
               placeholder="Please enter 16 digits card number"
+
               onChange={handleChange}
               minLength={16}
               required
             />
+
             <label>Expiration Date</label>
+
+
             <input
               type="text"
               name="expDate"
               onChange={handleChange}
               required
             />
+
             <button
               type="submit"
               disabled={cardinfo.cardNumber.length === 16 ? false : true}
             >
               Make Payment
             </button>
+
           </div>
         </form>
       </div>
