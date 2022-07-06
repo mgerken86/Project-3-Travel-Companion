@@ -1,14 +1,20 @@
 import axios from "axios";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as ordersAPI from "../../utilities/tripOrders-api";
 
 export default function HotelShowPage({ setSearch }) {
+  // hotel data
   const [hotel, setHotel] = useState({});
+  // rooms list data
   const [rooms, setRooms] = useState([]);
+  // hotel photos data
   const [photos, setPhotos] = useState([]);
+  // room info contains photos
   const [roomPhoto, setRoomPhoto] = useState([]);
-  const [reviews, setReviews] = useState({});
+
+  // use navigate
+  const navigate = useNavigate();
 
   const { hotel_id } = useParams();
   // get checkin and checkout date from query
@@ -86,8 +92,6 @@ export default function HotelShowPage({ setSearch }) {
       });
       const rooms = response.data[0].block.slice(0, 6);
       const room = response.data[0].rooms;
-      // const checkin = response.data.arrival_date;
-      // const checkout=response.data.departure_date;
 
       setRoomPhoto(room);
 
@@ -99,13 +103,19 @@ export default function HotelShowPage({ setSearch }) {
 
   // handle onclick
   const handleClick = async (room) => {
+    let hotelPhoto = photos[0].url_1440;
     const updatedCart = await ordersAPI.addHotelToCart(
       hotel,
       room,
       checkIn,
-      checkOut
+      checkOut,
+      hotel_id,
+      hotelPhoto
     );
-    console.log(updatedCart);
+    console.log("updatedCart", updatedCart);
+    navigate(`/users/cart/checkout/${updatedCart.id}`, {
+      state: { hotel, checkIn, checkOut, room, hotelPhoto, hotel_id },
+    });
   };
 
   return (
@@ -124,8 +134,8 @@ export default function HotelShowPage({ setSearch }) {
       </p>
       <div>
         {photos &&
-          photos.map((photo) => {
-            return <img src={photo.url_1440} />;
+          photos.map((photo, index) => {
+            return <img src={photo.url_1440} key={index} alt="" />;
           })}
       </div>
 
@@ -139,9 +149,7 @@ export default function HotelShowPage({ setSearch }) {
               />
               <h4>{room.name}</h4>
               <h4>{room.max_occupancy}</h4>
-              <h4>
-                {room.min_price.currency} {room.min_price.price}
-              </h4>
+              <h4>$ {room.price_breakdown.gross_price}</h4>
               <button onClick={() => handleClick(room)}>Select</button>
             </div>
           );

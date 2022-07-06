@@ -4,29 +4,19 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema(
   {
     name: { type: String, required: true },
-    email: {
-      type: String,
-      unique: true,
+    cardNumber: {
+      type: Number,
       trim: true,
-      lowercase: true,
       required: true,
     },
-    password: {
+    expDate: {
       type: String,
-      trim: true,
-      minLength: 3,
       required: true,
     },
   },
   {
     timestamps: true,
-    toJSON: {
-      transform: function (doc, ret) {
-        delete ret.password;
-        return ret;
-      },
-    },
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Card", userSchema);
