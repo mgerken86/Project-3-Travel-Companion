@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import * as tripOrdersAPI from '../../utilities/tripOrders-api'
-import TripOrderList from 
+import TripOrderList from '../../components/TripOrderList/TripOrderList'
 
 export default function AccountPage({ user }) {
     const [tripOrders, setTripOrders] = useState([])
