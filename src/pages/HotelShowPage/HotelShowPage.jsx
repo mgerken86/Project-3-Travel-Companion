@@ -5,7 +5,7 @@ import * as ordersAPI from "../../utilities/tripOrders-api";
 import ShowPageSearchBar from "../../components/ShowPageSearchBar/ShowPageSearchBar";
 import Map from "../../components/Map/Map";
 
-export default function HotelShowPage() {
+export default function HotelShowPage({ lat, lng, markers }) {
 
   // hotel data
   const [hotel, setHotel] = useState({});
@@ -145,13 +145,14 @@ export default function HotelShowPage() {
         hotel_id={hotel_id}
       />
       {/* {photos && <img src={photos[0].url_1440} alt="" />}  */}
-      {/* <Map
+      <Map
         lat={lat}
         lng={lng}
-        markers={marker}
+        markers={markers}
         checkIn={checkIn}
         checkOut={checkOut}
-      /> */}
+        numberOfPerson={numberOfPerson}
+      />
       <h1>{hotel.name}</h1>
       {/* <span>{description.description}</span> */}
       <h3>

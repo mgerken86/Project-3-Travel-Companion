@@ -2,8 +2,6 @@ import HotelListCard from "../../components/HotelListCard/HotelListCard";
 import Map from "../../components/Map/Map";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { checkout } from "../../utilities/tripOrders-api";
 
 export default function HotelsListPage() {
   const { state } = useLocation();
@@ -47,6 +45,8 @@ export default function HotelsListPage() {
         {searchResult.map((hotel) => {
           return (
             <HotelListCard
+            lat={coordinates.lat}
+            lng={coordinates.lng}
               hotel={hotel}
               key={hotel.hotel_id}
               checkIn={checkIn}
