@@ -65,32 +65,28 @@ export default function HotelShowPage() {
     setCheckOut(checkOut)
   };
 
-  useEffect(() => {
-    const getHotelData = async (url, setState) => {
-      const options = {
-        method: "GET",
-        url: url,
-        params: { hotel_id: hotel_id, locale: "en-gb" },
-        headers: {
-          "X-RapidAPI-Key": process.env.REACT_APP_BOOKING_API_KEY,
-          "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
-        },
-      };
-
-      const response = await axios.request(options).catch(function (error) {
-        console.error(error);
-      });
-      // if (response.data) console.log(response.data);
-      setState(response.data);
+  // Fetch call used a couple of times that sets state for a few different variables
+  const getHotelData = async (url, setState) => {
+    const options = {
+      method: "GET",
+      url: url,
+      params: { hotel_id: hotel_id, locale: "en-gb" },
+      headers: {
+        "X-RapidAPI-Key": process.env.REACT_APP_BOOKING_API_KEY,
+        "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
+      },
     };
+
+    const response = await axios.request(options).catch(function (error) {
+      console.error(error);
+    });
+    // if (response.data) console.log(response.data);
+    setState(response.data);
+  };
+
+  useEffect(() => {
     // This calls a bunch of different axios urls to get different data and sets state accordingly
     const makeFetchCalls = async () => {
-      // the rooms fetch seems deprecated
-      // await getHotelData('https://booking-com.p.rapidapi.com/v1/hotels/room-list', setRooms)
-      // await getHotelData(
-      //   "https://booking-com.p.rapidapi.com/v1/hotels/description",
-      //   setDescription
-      // );
       await getHotelData(
         "https://booking-com.p.rapidapi.com/v1/hotels/data",
         setHotel
@@ -110,7 +106,7 @@ export default function HotelShowPage() {
     getRoomDetails(checkIn, checkOut, numberOfPerson);
   }, []);
 
-  // handle onclick
+  // handle onclick for checking out a room
   const handleClick = async (room) => {
     let hotelPhoto = photos[0].url_1440;
     const updatedCart = await ordersAPI.addHotelToCart(
