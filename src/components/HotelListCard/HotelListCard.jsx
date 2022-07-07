@@ -14,13 +14,17 @@ export default function HotelListCard({
   // console.log(markers)
   const navigate = useNavigate()
 
-  
+  const filterMarker = (marker) => {
+    return marker.name === hotel.hotel_name
+  }
   useEffect(() => {
-    const filterMarker = (marker) => {
-      return marker.name === hotel.hotel_name
+    const setMarkerOnRender = () => {
+    (async () => {
+      const singleMarker = markers.filter(filterMarker)
+      await setMarker(singleMarker[0])
+    })()
     }
-    const singleMarker = markers.filter(filterMarker)
-    setMarker(singleMarker[0])
+    setMarkerOnRender()
   }, [])
   console.log(marker)
   return (
