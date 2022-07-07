@@ -5,8 +5,7 @@ import * as ordersAPI from "../../utilities/tripOrders-api";
 import ShowPageSearchBar from "../../components/ShowPageSearchBar/ShowPageSearchBar";
 import Map from "../../components/Map/Map";
 
-export default function HotelShowPage({ lat, lng, markers }) {
-
+export default function HotelShowPage() {
   // hotel data
   const [hotel, setHotel] = useState({});
   // rooms list data
@@ -20,11 +19,11 @@ export default function HotelShowPage({ lat, lng, markers }) {
   const navigate = useNavigate();
   const { hotel_id } = useParams();
   const { state } = useLocation()
-  // let { markers } = state
-  // const [marker, setMarkers] = useState(
-  //   (markers) ? [markers.marker] : null)
-  // const [lat, setLat] = useState(marker[0].lat)
-  // const [lng, setLng] = useState(marker[0].lng)
+  let { markers } = state
+  console.log(markers)
+  const [marker, setMarkers] = useState([markers.marker])
+  const [lat, setLat] = useState(marker[0].lat)
+  const [lng, setLng] = useState(marker[0].lng) 
   // get checkin and checkout date from query
   const queryParams = new URLSearchParams(window.location.search);
   const checkIn = queryParams.get("checkin");
@@ -148,7 +147,7 @@ export default function HotelShowPage({ lat, lng, markers }) {
       <Map
         lat={lat}
         lng={lng}
-        markers={markers}
+        markers={marker}
         checkIn={checkIn}
         checkOut={checkOut}
         numberOfPerson={numberOfPerson}
