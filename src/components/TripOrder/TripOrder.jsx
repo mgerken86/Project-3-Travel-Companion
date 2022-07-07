@@ -7,17 +7,15 @@ import { useEffect } from "react";
 export default function TripOrder({ trip }) {
     const navigate = useNavigate()
 
-    // let checkInToString = trip.checkIn;
-    // let checkOutToString = trip.checkOut;
-    // useEffect(() => {
-
-    //     // This makes the format 'yyyy-mm-dd' 
-    //     checkInToString = checkInToString.toISOString().slice(0, 10);
-    //     checkOutToString = checkOutToString.toISOString().slice(0, 10);
-    // }, [])
+    let checkInToString = new Date(trip.checkIn);
+    let checkOutToString = new Date(trip.checkOut);
+    // console.log(checkInToString)
+    checkInToString = checkInToString.toISOString().slice(0, 10);
+    checkOutToString = checkOutToString.toISOString().slice(0, 10);
+    console.log(checkInToString, checkOutToString)
 
 
-    console.log(trip)
+    // console.log(trip)
 
     const handleCancelBtn = async (orderId) => {
         // console.log(orderId)
@@ -41,7 +39,7 @@ export default function TripOrder({ trip }) {
             <button onClick={() => {
                 // we have to re-format our checkIn and checkOut dates to re-direct to show page
                 navigate(
-                    // `/hotels/${trip.hotelId}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${trip.numberOfPeople}`
+                    `/hotels/${trip.hotelId}?checkin=${checkInToString}&checkout=${checkOutToString}&numberOfPerson=${trip.numberOfPeople}`
                 )
             }}>
                 Edit Your Stay at {trip.hotelName}
