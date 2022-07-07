@@ -29,6 +29,7 @@ export default function HotelsListPage() {
     })();
   }, []);
 
+
   return (
     <>
       <h1>Hotels List Page</h1>
@@ -43,6 +44,10 @@ export default function HotelsListPage() {
       />
       <div>
         {searchResult.map((hotel) => {
+          const filterMarker = (marker) => {
+            return marker.name === hotel.hotel_name
+          }
+          const marker = markers.filter(filterMarker)
           return (
             <HotelListCard
               // lat={coordinates.lat}
@@ -51,7 +56,7 @@ export default function HotelsListPage() {
               key={hotel.hotel_id}
               // checkIn={checkIn}
               // checkOut={checkOut}
-              markers={markers}
+              marker={marker[0]}
               // numberOfPerson={numberOfPerson}
             />
           );

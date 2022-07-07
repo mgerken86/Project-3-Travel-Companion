@@ -8,25 +8,10 @@ export default function HotelListCard({
   checkIn,
   checkOut,
   numberOfPerson,
-  markers
+  marker
 }) {
-  const [marker, setMarker] = useState({})
-  // console.log(markers)
   const navigate = useNavigate()
 
-  const filterMarker = (marker) => {
-    return marker.name === hotel.hotel_name
-  }
-  useEffect(() => {
-    const setMarkerOnRender = () => {
-    (async () => {
-      const singleMarker = markers.filter(filterMarker)
-      await setMarker(singleMarker[0])
-    })()
-    }
-    setMarkerOnRender()
-  }, [])
-  console.log(marker)
   return (
     <div onClick={() => {
       navigate(`/hotels/${hotel.hotel_id}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${numberOfPerson}`,
@@ -37,8 +22,6 @@ export default function HotelListCard({
         }
       )
     }}>
-
-
       <h2>{hotel.hotel_name}</h2>
       <h3>Review Score: {hotel.review_score}</h3>
       <img src={hotel.max_photo_url} alt="" />
