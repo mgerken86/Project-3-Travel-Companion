@@ -12,7 +12,7 @@ export default function HotelsListPage() {
 
   useEffect(() => {
     (() => {
-      const people = numberOfPerson
+      const people = numberOfPerson;
       // console.log(searchResult)
       //When page renders, create an array of all of the lat/lon for each hotel
       //Then set the state of markers to that new array. Also passing hotel_id to redirect when clicking marker
@@ -22,13 +22,12 @@ export default function HotelsListPage() {
           hotelId: hotel.hotel_id,
           lat: hotel.latitude,
           lng: hotel.longitude,
-          people: people
+          people: people,
         };
       });
       setMarkers(filteredMarkers);
     })();
   }, []);
-
 
   return (
     <>
@@ -45,9 +44,9 @@ export default function HotelsListPage() {
       <div>
         {searchResult.map((hotel) => {
           const filterMarker = (marker) => {
-            return marker.name === hotel.hotel_name
-          }
-          const marker = markers.filter(filterMarker)
+            return marker.name === hotel.hotel_name;
+          };
+          const marker = markers.filter(filterMarker);
           return (
             <HotelListCard
               // lat={coordinates.lat}
