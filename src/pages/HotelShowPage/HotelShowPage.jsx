@@ -1,12 +1,11 @@
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as ordersAPI from "../../utilities/tripOrders-api";
 import ShowPageSearchBar from "../../components/ShowPageSearchBar/ShowPageSearchBar";
 import Map from "../../components/Map/Map";
 
 export default function HotelShowPage() {
-
   // hotel data
   const [hotel, setHotel] = useState({});
   // rooms list data
@@ -19,11 +18,12 @@ export default function HotelShowPage() {
   // use navigate
   const navigate = useNavigate();
   const { hotel_id } = useParams();
-  const { state } = useLocation()
-  let { markers } = state
-  const [marker, setMarkers] = useState([markers.marker])
-  const [lat, setLat] = useState(marker[0].lat)
-  const [lng, setLng] = useState(marker[0].lng)
+  const { state } = useLocation();
+  // let { markers } = state
+  // const [marker, setMarkers] = useState(
+  //   (markers) ? [markers.marker] : null)
+  // const [lat, setLat] = useState(marker[0].lat)
+  // const [lng, setLng] = useState(marker[0].lng)
   // get checkin and checkout date from query
   const queryParams = new URLSearchParams(window.location.search);
   const checkIn = queryParams.get("checkin");
@@ -122,7 +122,6 @@ export default function HotelShowPage() {
     );
     console.log("updatedCart", updatedCart);
     navigate(`/users/cart/checkout/${updatedCart.id}`, {
-
       state: {
         hotel,
         checkIn,
@@ -132,10 +131,8 @@ export default function HotelShowPage() {
         hotel_id,
         numberOfPerson,
       },
-
     });
   };
-
 
   return (
     <>
@@ -146,13 +143,13 @@ export default function HotelShowPage() {
         hotel_id={hotel_id}
       />
       {/* {photos && <img src={photos[0].url_1440} alt="" />}  */}
-      <Map
+      {/* <Map
         lat={lat}
         lng={lng}
         markers={marker}
         checkIn={checkIn}
         checkOut={checkOut}
-      />
+      /> */}
       <h1>{hotel.name}</h1>
       {/* <span>{description.description}</span> */}
       <h3>
@@ -171,9 +168,9 @@ export default function HotelShowPage() {
       </div>
 
       {rooms &&
-        rooms.map((room) => {
+        rooms.map((room, index) => {
           return (
-            <div>
+            <div key={index}>
               <img
                 src={roomPhoto[room.room_id].photos[0].url_original}
                 alt=""

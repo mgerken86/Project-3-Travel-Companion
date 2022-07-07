@@ -5,10 +5,17 @@ import { Autocomplete } from "@react-google-maps/api";
 import "./SearchBar.css";
 const API_KEY = process.env.REACT_APP_BOOKING_API_KEY;
 
+let checkIn = new Date();
+let checkOut = new Date();
+checkOut.setDate(checkIn.getDate() + 1);
+// This makes the format 'yyyy-mm-dd' for the axios fetch
+checkIn = checkIn.toISOString().slice(0, 10);
+checkOut = checkOut.toISOString().slice(0, 10);
+
 const starterData = {
   destination: "",
-  checkIn: Date.now(),
-  checkOut: Date.now() + 3600 * 1000 * 24,
+  checkIn: checkIn,
+  checkOut: checkOut,
   numberOfAdult: 1,
 };
 
