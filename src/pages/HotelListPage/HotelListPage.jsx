@@ -45,14 +45,14 @@ export default function HotelsListPage() {
         {searchResult.map((hotel) => {
           return (
             <HotelListCard
-            lat={coordinates.lat}
-            lng={coordinates.lng}
+              // lat={coordinates.lat}
+              // lng={coordinates.lng}
               hotel={hotel}
               key={hotel.hotel_id}
-              checkIn={checkIn}
-              checkOut={checkOut}
+              // checkIn={checkIn}
+              // checkOut={checkOut}
               markers={markers}
-              numberOfPerson={numberOfPerson}
+              // numberOfPerson={numberOfPerson}
             />
           );
         })}
