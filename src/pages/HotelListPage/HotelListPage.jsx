@@ -54,10 +54,10 @@ export default function HotelsListPage() {
               // lng={coordinates.lng}
               hotel={hotel}
               key={hotel.hotel_id}
-              // checkIn={checkIn}
-              // checkOut={checkOut}
+              checkIn={checkIn}
+              checkOut={checkOut}
               marker={marker[0]}
-              // numberOfPerson={numberOfPerson}
+              numberOfPerson={numberOfPerson}
             />
           );
         })}

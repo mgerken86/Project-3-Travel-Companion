@@ -1,5 +1,4 @@
 import "./ShowPageSearchBar.css";
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function ShowPageSearchBar({
@@ -7,7 +6,9 @@ export default function ShowPageSearchBar({
   checkOut,
   numberOfPerson,
   hotel_id,
+  getRoomDetails
 }) {
+  // console.log(searchMarkers)
   const starterData = {
     destination: "",
     checkIn: checkIn,
@@ -15,9 +16,7 @@ export default function ShowPageSearchBar({
     numberOfAdult: numberOfPerson,
   };
   const [data, setData] = useState(starterData);
-  const navigate = useNavigate();
 
-  //   function handle change
   const changeData = (e) => {
     const newData = {
       ...data,
@@ -26,14 +25,6 @@ export default function ShowPageSearchBar({
     setData(newData);
   };
 
-  //   function handle search
-  // const handleSearch = async (e) => {
-  //   e.preventDefault();
-  //   navigate(
-  //     `/hotels/${hotel_id}?checkin=${data.checkIn}&checkout=${data.checkOut}&numberOfPerson=${data.numberOfAdult}`,
-  //     { replace: true }
-  //   );
-  // };
   return (
     <>
       <div className="flex-row">
@@ -68,12 +59,9 @@ export default function ShowPageSearchBar({
             required
           />
         </div>
-        <Link
-          to={`/hotels/${hotel_id}?checkin=${data.checkIn}&checkout=${data.checkOut}&numberOfPerson=${data.numberOfAdult}`}
-          reloadDocument
-        >
-          <button>Modify Your Search</button>
-        </Link>
+        {/* onClick function sets the state of the rooms to the new input arguments */}
+        <button onClick={() => getRoomDetails(data.checkIn, data.checkOut, data.numberOfAdult)}>
+          Modify Your Search</button>
       </div>
     </>
   );
