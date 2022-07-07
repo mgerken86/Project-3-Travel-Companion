@@ -139,6 +139,7 @@ export default function HotelShowPage() {
         checkOut={checkOut}
         numberOfPerson={numberOfPerson}
         hotel_id={hotel_id}
+        searchMarkers={marker}
       />
       {/* {photos && <img src={photos[0].url_1440} alt="" />}  */}
       <Map

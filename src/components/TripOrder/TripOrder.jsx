@@ -1,10 +1,11 @@
 import * as ordersAPI from "../../utilities/tripOrders-api";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 
 export default function TripOrder({ trip }) {
+    const [showh1, setShowh1] = useState(false)
     const navigate = useNavigate()
 
     let checkInToString = new Date(trip.checkIn);
@@ -37,13 +38,15 @@ export default function TripOrder({ trip }) {
                 Cancel This Trip
             </button>
             <button onClick={() => {
+                setShowh1(true)
                 // we have to re-format our checkIn and checkOut dates to re-direct to show page
-                navigate(
-                    `/hotels/${trip.hotelId}?checkin=${checkInToString}&checkout=${checkOutToString}&numberOfPerson=${trip.numberOfPeople}`
-                )
+                // navigate(
+                //     `/hotels/${trip.hotelId}?checkin=${checkInToString}&checkout=${checkOutToString}&numberOfPerson=${trip.numberOfPeople}`
+                // )
             }}>
                 Edit Your Stay at {trip.hotelName}
             </button>
+            {showh1 && <h1>Hello</h1>}
         </>
     )
 }

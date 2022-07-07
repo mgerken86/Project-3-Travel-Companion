@@ -7,7 +7,9 @@ export default function ShowPageSearchBar({
   checkOut,
   numberOfPerson,
   hotel_id,
+  searchMarkers
 }) {
+  console.log(searchMarkers)
   const starterData = {
     destination: "",
     checkIn: checkIn,
@@ -15,8 +17,10 @@ export default function ShowPageSearchBar({
     numberOfAdult: numberOfPerson,
   };
   const [data, setData] = useState(starterData);
+  // Had to peel apart searchMarkers a couple of times to get the marker object
+  const [marker, setMarker] = useState(searchMarkers[0][0])
   const navigate = useNavigate();
-
+  console.log(marker)
   //   function handle change
   const changeData = (e) => {
     const newData = {
@@ -27,13 +31,11 @@ export default function ShowPageSearchBar({
   };
 
   //   function handle search
-  // const handleSearch = async (e) => {
-  //   e.preventDefault();
-  //   navigate(
-  //     `/hotels/${hotel_id}?checkin=${data.checkIn}&checkout=${data.checkOut}&numberOfPerson=${data.numberOfAdult}`,
-  //     { replace: true }
-  //   );
-  // };
+  const handleSearch = () => {
+    // e.preventDefault();
+    // 
+    navigate(0)
+  };
   return (
     <>
       <div className="flex-row">
@@ -68,12 +70,20 @@ export default function ShowPageSearchBar({
             required
           />
         </div>
-        <Link
+        {/* <Link
           to={`/hotels/${hotel_id}?checkin=${data.checkIn}&checkout=${data.checkOut}&numberOfPerson=${data.numberOfAdult}`}
           reloadDocument
-        >
-          <button>Modify Your Search</button>
-        </Link>
+        > */}
+          <button onClick={() => {
+            navigate(`/hotels/${hotel_id}?checkin=${data.checkIn}&checkout=${data.checkOut}&numberOfPerson=${data.numberOfAdult}`,
+            {
+              state: {
+                markers: { marker },
+              }
+            }
+            )
+          }}>Modify Your Search</button>
+        {/* </Link> */}
       </div>
     </>
   );
