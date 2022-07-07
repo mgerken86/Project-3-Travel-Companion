@@ -1,12 +1,14 @@
 import "./ShowPageSearchBar.css";
 import { useState } from "react";
+import fetchApi from "../../utilities/fetchApi";
 
 export default function ShowPageSearchBar({
   checkIn,
   checkOut,
   numberOfPerson,
   hotel_id,
-  getRoomDetails
+  setRoomPhoto,
+  setRooms,
 }) {
   // console.log(searchMarkers)
   const starterData = {
@@ -60,8 +62,20 @@ export default function ShowPageSearchBar({
           />
         </div>
         {/* onClick function sets the state of the rooms to the new input arguments */}
-        <button onClick={() => getRoomDetails(data.checkIn, data.checkOut, data.numberOfAdult)}>
-          Modify Your Search</button>
+        <button
+          onClick={() =>
+            fetchApi.getRoomDetails(
+              data.checkIn,
+              data.checkOut,
+              data.numberOfAdult,
+              hotel_id,
+              setRoomPhoto,
+              setRooms
+            )
+          }
+        >
+          Modify Your Search
+        </button>
       </div>
     </>
   );
