@@ -1,20 +1,54 @@
 import * as ordersAPI from "../../utilities/tripOrders-api";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from 'axios';
 
-
+const getDateString = (date) => {
+    let dateString = new Date(date);
+    return dateString = dateString.toISOString().slice(0, 10);
+}
 
 export default function TripOrder({ trip }) {
-    const [showh1, setShowh1] = useState(false)
+    const [rooms, setRooms] = useState([])
+    const [roomPhoto, setRoomPhoto] = useState([])
+    const [checkIn, setCheckIn] = useState(getDateString(trip.checkIn))
+    const [checkOut, setCheckOut] = useState(getDateString(trip.checkOut))
+    const [showRooms, setShowRooms] = useState(false)
     const navigate = useNavigate()
 
-    let checkInToString = new Date(trip.checkIn);
-    let checkOutToString = new Date(trip.checkOut);
-    // console.log(checkInToString)
-    checkInToString = checkInToString.toISOString().slice(0, 10);
-    checkOutToString = checkOutToString.toISOString().slice(0, 10);
-    console.log(checkInToString, checkOutToString)
+    
 
+    const getRoomDetails = async (checkIn, checkOut, people, hotelId) => {
+        const options = {
+          method: "GET",
+          url: "https://booking-com.p.rapidapi.com/v1/hotels/room-list",
+          params: {
+            checkin_date: checkIn,
+            units: "metric",
+            checkout_date: checkOut,
+            currency: "USD",
+            locale: "en-gb",
+            adults_number_by_rooms: people,
+            hotel_id: hotel_id,
+            // children_ages: "",
+            // children_number_by_rooms: "",
+          },
+          headers: {
+            "X-RapidAPI-Key": process.env.REACT_APP_BOOKING_API_KEY,
+            "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
+          },
+        };
+        const response = await axios.request(options).catch(function (error) {
+          console.error(error);
+        });
+        const rooms = response.data[0].block.slice(0, 6);
+        const room = response.data[0].rooms;
+    
+        setRoomPhoto(room);
+        setRooms(rooms);
+        setCheckIn(checkIn)
+        setCheckOut(checkOut)
+      };
 
     // console.log(trip)
 
@@ -38,15 +72,13 @@ export default function TripOrder({ trip }) {
                 Cancel This Trip
             </button>
             <button onClick={() => {
-                setShowh1(true)
-                // we have to re-format our checkIn and checkOut dates to re-direct to show page
-                // navigate(
-                //     `/hotels/${trip.hotelId}?checkin=${checkInToString}&checkout=${checkOutToString}&numberOfPerson=${trip.numberOfPeople}`
-                // )
+                setShowRooms(true)
+                
             }}>
                 Edit Your Stay at {trip.hotelName}
             </button>
-            {showh1 && <h1>Hello</h1>}
+            {showRooms && <h3>Select a New Room For Your Reservation</h3>}
+            
         </>
     )
 }
