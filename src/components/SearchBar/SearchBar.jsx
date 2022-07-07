@@ -45,6 +45,7 @@ export default function SearchBar() {
       [e.target.name]: e.target.value,
     };
     setData(newData);
+    console.log(newData);
   };
 
   //   function handle search
