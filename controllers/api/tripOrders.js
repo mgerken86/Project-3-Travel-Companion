@@ -6,7 +6,8 @@ module.exports = {
   addToCart,
   checkout,
   history,
-  cancelTrip
+  cancelTrip,
+  updateTrip
 };
 
 // A cart is the unpaid order for a user
@@ -32,8 +33,9 @@ async function addToCart(req, res) {
 }
 
 async function updateTrip(req, res) {
-  const { room, checkIn, checkOut, hotel_id } = req.body
-  const trip = await TripOrder.updateTrip(req.body.id)
+  console.log('in the controller')
+  const { room, checkIn, checkOut, id } = req.body
+  // const trip = await TripOrder.updateTrip(req.body)
 }
 
 // Update the cart's isPaid property to true

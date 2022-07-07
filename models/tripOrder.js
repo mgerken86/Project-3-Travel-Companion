@@ -83,4 +83,13 @@ tripSchema.methods.addHotelToCart = async function (
   return currentOrder.save();
 };
 
+tripSchema.methods.updateTrip = async function (
+  id,
+  room,
+  checkIn,
+  checkOut
+) {
+
+}
+
 module.exports = mongoose.model("TripOrder", tripSchema);

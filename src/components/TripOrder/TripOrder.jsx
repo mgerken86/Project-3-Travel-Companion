@@ -49,7 +49,7 @@ export default function TripOrder({ trip }) {
         setCheckOut(checkOut)
     };
 
-    console.log(trip)
+    // console.log(trip)
 
     const handleCancelBtn = async (orderId) => {
         // console.log(orderId)
@@ -57,10 +57,10 @@ export default function TripOrder({ trip }) {
     }
     const handleEdit = async(room) => {
         const updateTrip = await ordersAPI.updateTrip(
+            trip.id,
             room,
             checkIn,
             checkOut,
-            hotel_id,
         )
     }
     return (

@@ -33,7 +33,7 @@ export async function updateTrip(
   checkIn,
   checkOut,
 ) {
-  return sendRequest(`${BASE_URL}/history/${orderId}`, "POST", {
+  return sendRequest(`${BASE_URL}/history/update/${id}`, "PUT", {
     id,
     room,
     checkIn,
