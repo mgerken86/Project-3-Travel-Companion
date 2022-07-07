@@ -7,9 +7,10 @@ export default function ShowPageSearchBar({
   checkOut,
   numberOfPerson,
   hotel_id,
-  searchMarkers
+  searchMarkers,
+  getRoomDetails
 }) {
-  console.log(searchMarkers)
+  // console.log(searchMarkers)
   const starterData = {
     destination: "",
     checkIn: checkIn,
@@ -18,9 +19,9 @@ export default function ShowPageSearchBar({
   };
   const [data, setData] = useState(starterData);
   // Had to peel apart searchMarkers a couple of times to get the marker object
-  const [marker, setMarker] = useState(searchMarkers[0][0])
+  const [marker, setMarker] = useState(searchMarkers[0])
   const navigate = useNavigate();
-  console.log(marker)
+  // console.log(marker)
   //   function handle change
   const changeData = (e) => {
     const newData = {
@@ -31,11 +32,11 @@ export default function ShowPageSearchBar({
   };
 
   //   function handle search
-  const handleSearch = () => {
+  // const handleSearch = () => {
     // e.preventDefault();
     // 
-    navigate(0)
-  };
+  //   navigate(0)
+  // };
   return (
     <>
       <div className="flex-row">
@@ -74,15 +75,15 @@ export default function ShowPageSearchBar({
           to={`/hotels/${hotel_id}?checkin=${data.checkIn}&checkout=${data.checkOut}&numberOfPerson=${data.numberOfAdult}`}
           reloadDocument
         > */}
-          <button onClick={() => {
-            navigate(`/hotels/${hotel_id}?checkin=${data.checkIn}&checkout=${data.checkOut}&numberOfPerson=${data.numberOfAdult}`,
-            {
-              state: {
-                markers: { marker },
-              }
-            }
-            )
-          }}>Modify Your Search</button>
+          <button onClick={() => getRoomDetails(data.checkIn, data.checkOut, data.numberOfAdult)}
+            // navigate(`/hotels/${hotel_id}?checkin=${data.checkIn}&checkout=${data.checkOut}&numberOfPerson=${data.numberOfAdult}`,
+            // {
+            //   state: {
+            //     markers: { marker }
+            //   }, 
+            // }
+            // )
+          >Modify Your Search</button>
         {/* </Link> */}
       </div>
     </>

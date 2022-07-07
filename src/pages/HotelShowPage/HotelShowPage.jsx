@@ -30,6 +30,41 @@ export default function HotelShowPage() {
   const checkOut = queryParams.get("checkout");
   const numberOfPerson = queryParams.get("numberOfPerson");
 
+  // get room details
+  const getRoomDetails = async (checkIn, checkOut, people) => {
+    const options = {
+      method: "GET",
+      url: "https://booking-com.p.rapidapi.com/v1/hotels/room-list",
+      params: {
+        checkin_date: checkIn,
+        units: "metric",
+        checkout_date: checkOut,
+        currency: "USD",
+        locale: "en-gb",
+        adults_number_by_rooms: numberOfPerson,
+        hotel_id: hotel_id,
+        // children_ages: "",
+        // children_number_by_rooms: "",
+      },
+      headers: {
+        "X-RapidAPI-Key": process.env.REACT_APP_BOOKING_API_KEY,
+        "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
+      },
+    };
+    const response = await axios.request(options).catch(function (error) {
+      console.error(error);
+    });
+    const rooms = response.data[0].block.slice(0, 6);
+    const room = response.data[0].rooms;
+
+    setRoomPhoto(room);
+
+    setRooms(rooms);
+  };
+
+  // useEffect(()=>{
+  //   console.log(rooms)
+  // }, [rooms])
   //any time page re-renders it will get the hotel data
   useEffect(() => {
     const getHotelData = async (url, setState) => {
@@ -73,39 +108,7 @@ export default function HotelShowPage() {
       // await getHotelData('https://booking-com.p.rapidapi.com/v1/hotels/reviews', setReviews)
     };
     makeFetchCalls();
-
-    // get room details
-    const getRoomDetails = async () => {
-      const options = {
-        method: "GET",
-        url: "https://booking-com.p.rapidapi.com/v1/hotels/room-list",
-        params: {
-          checkin_date: checkIn,
-          units: "metric",
-          checkout_date: checkOut,
-          currency: "USD",
-          locale: "en-gb",
-          adults_number_by_rooms: numberOfPerson,
-          hotel_id: hotel_id,
-          // children_ages: "",
-          // children_number_by_rooms: "",
-        },
-        headers: {
-          "X-RapidAPI-Key": process.env.REACT_APP_BOOKING_API_KEY,
-          "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
-        },
-      };
-      const response = await axios.request(options).catch(function (error) {
-        console.error(error);
-      });
-      const rooms = response.data[0].block.slice(0, 6);
-      const room = response.data[0].rooms;
-
-      setRoomPhoto(room);
-
-      setRooms(rooms);
-    };
-    getRoomDetails();
+    getRoomDetails(checkIn, checkOut, numberOfPerson);
   }, []);
 
   // handle onclick
@@ -140,6 +143,7 @@ export default function HotelShowPage() {
         numberOfPerson={numberOfPerson}
         hotel_id={hotel_id}
         searchMarkers={marker}
+        getRoomDetails={getRoomDetails}
       />
       {/* {photos && <img src={photos[0].url_1440} alt="" />}  */}
       <Map
