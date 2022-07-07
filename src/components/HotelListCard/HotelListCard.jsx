@@ -14,15 +14,15 @@ export default function HotelListCard({
   // console.log(markers)
   const navigate = useNavigate()
 
-  const filterMarker = (marker) => {
-    return marker.name === hotel.hotel_name
-  }
-  const singleMarker = markers.filter(filterMarker)
-  // console.log(singleMarker[0])
+  
   useEffect(() => {
+    const filterMarker = (marker) => {
+      return marker.name === hotel.hotel_name
+    }
+    const singleMarker = markers.filter(filterMarker)
     setMarker(singleMarker[0])
   }, [])
-
+  console.log(marker)
   return (
     <div onClick={() => {
       navigate(`/hotels/${hotel.hotel_id}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${numberOfPerson}`,
