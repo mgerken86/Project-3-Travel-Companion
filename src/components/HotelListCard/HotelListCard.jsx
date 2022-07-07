@@ -18,9 +18,9 @@ export default function HotelListCard({
     return marker.name === hotel.hotel_name
   }
   const singleMarker = markers.filter(filterMarker)
-
+  // console.log(singleMarker[0])
   useEffect(() => {
-    setMarker({...singleMarker})
+    setMarker(singleMarker[0])
   }, [])
 
   return (
