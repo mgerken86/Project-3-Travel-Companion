@@ -26,8 +26,10 @@ export default function HotelShowPage() {
   const [lng, setLng] = useState(marker[0].lng);
   // get checkin and checkout date from query
   const queryParams = new URLSearchParams(window.location.search);
-  const checkIn = queryParams.get("checkin");
-  const checkOut = queryParams.get("checkout");
+  // State of checkIn + checkOut changes after we fetch rooms
+  //This allows us to take the argument passed in from ShowPageSearchBar to update the dates when checking out
+  const [checkIn, setCheckIn] = useState(queryParams.get("checkin"));
+  const [checkOut, setCheckOut] = useState(queryParams.get("checkout"));
   const numberOfPerson = queryParams.get("numberOfPerson");
 
   // get room details
@@ -58,14 +60,11 @@ export default function HotelShowPage() {
     const room = response.data[0].rooms;
 
     setRoomPhoto(room);
-
     setRooms(rooms);
+    setCheckIn(checkIn)
+    setCheckOut(checkOut)
   };
 
-  // useEffect(()=>{
-  //   console.log(rooms)
-  // }, [rooms])
-  //any time page re-renders it will get the hotel data
   useEffect(() => {
     const getHotelData = async (url, setState) => {
       const options = {
@@ -142,7 +141,6 @@ export default function HotelShowPage() {
         checkOut={checkOut}
         numberOfPerson={numberOfPerson}
         hotel_id={hotel_id}
-        searchMarkers={marker}
         getRoomDetails={getRoomDetails}
       />
       {/* {photos && <img src={photos[0].url_1440} alt="" />}  */}

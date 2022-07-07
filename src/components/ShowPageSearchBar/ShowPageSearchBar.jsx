@@ -1,5 +1,4 @@
 import "./ShowPageSearchBar.css";
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function ShowPageSearchBar({
@@ -7,7 +6,6 @@ export default function ShowPageSearchBar({
   checkOut,
   numberOfPerson,
   hotel_id,
-  searchMarkers,
   getRoomDetails
 }) {
   // console.log(searchMarkers)
@@ -18,11 +16,7 @@ export default function ShowPageSearchBar({
     numberOfAdult: numberOfPerson,
   };
   const [data, setData] = useState(starterData);
-  // Had to peel apart searchMarkers a couple of times to get the marker object
-  const [marker, setMarker] = useState(searchMarkers[0])
-  const navigate = useNavigate();
-  // console.log(marker)
-  //   function handle change
+
   const changeData = (e) => {
     const newData = {
       ...data,
@@ -31,12 +25,6 @@ export default function ShowPageSearchBar({
     setData(newData);
   };
 
-  //   function handle search
-  // const handleSearch = () => {
-    // e.preventDefault();
-    // 
-  //   navigate(0)
-  // };
   return (
     <>
       <div className="flex-row">
@@ -71,20 +59,9 @@ export default function ShowPageSearchBar({
             required
           />
         </div>
-        {/* <Link
-          to={`/hotels/${hotel_id}?checkin=${data.checkIn}&checkout=${data.checkOut}&numberOfPerson=${data.numberOfAdult}`}
-          reloadDocument
-        > */}
-          <button onClick={() => getRoomDetails(data.checkIn, data.checkOut, data.numberOfAdult)}
-            // navigate(`/hotels/${hotel_id}?checkin=${data.checkIn}&checkout=${data.checkOut}&numberOfPerson=${data.numberOfAdult}`,
-            // {
-            //   state: {
-            //     markers: { marker }
-            //   }, 
-            // }
-            // )
-          >Modify Your Search</button>
-        {/* </Link> */}
+        {/* onClick function sets the state of the rooms to the new input arguments */}
+        <button onClick={() => getRoomDetails(data.checkIn, data.checkOut, data.numberOfAdult)}>
+          Modify Your Search</button>
       </div>
     </>
   );
