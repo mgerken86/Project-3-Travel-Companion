@@ -21,7 +21,7 @@ async function addToCart(req, res) {
   const { hotel, room, checkIn, checkOut, hotel_id, hotelPhoto } = req.body;
   const cart = await TripOrder.getCart(req.user._id);
   await cart.addHotelToCart(
-    hotel,
+    id,
     room,
     checkIn,
     checkOut,
@@ -29,6 +29,11 @@ async function addToCart(req, res) {
     hotelPhoto
   );
   res.json(cart);
+}
+
+async function updateTrip(req, res) {
+  const { room, checkIn, checkOut, hotel_id } = req.body
+  const trip = await TripOrder.updateTrip(req.body.id)
 }
 
 // Update the cart's isPaid property to true

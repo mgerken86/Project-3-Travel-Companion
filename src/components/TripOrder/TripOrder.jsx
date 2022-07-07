@@ -55,6 +55,14 @@ export default function TripOrder({ trip }) {
         // console.log(orderId)
         await ordersAPI.cancelTrip(orderId);
     }
+    const handleEdit = async(room) => {
+        const updateTrip = await ordersAPI.updateTrip(
+            room,
+            checkIn,
+            checkOut,
+            hotel_id,
+        )
+    }
     return (
         <>
             <h2>{trip.hotelName}</h2>
@@ -90,12 +98,11 @@ export default function TripOrder({ trip }) {
                             <h4>{room.name}</h4>
                             <h4>Max Occupancy: {room.max_occupancy}</h4>
                             <h4>Total Cost: $ {room.price_breakdown.gross_price}</h4>
-                            <button>Change to This Room</button>
+                            <button onClick={() => handleEdit(room)}>Change to This Room</button>
                         </div>
                     );
                 })}
             </>}
-
         </>
     )
 }

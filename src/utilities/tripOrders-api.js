@@ -27,6 +27,20 @@ export async function addHotelToCart(
   });
 }
 
+export async function updateTrip(
+  id,
+  room,
+  checkIn,
+  checkOut,
+) {
+  return sendRequest(`${BASE_URL}/history/${orderId}`, "POST", {
+    id,
+    room,
+    checkIn,
+    checkOut,
+  })
+}
+
 // Updates the order's (cart's) isPaid property to true
 export function checkout(cardinfo) {
   // Changing data on the server, so make it a POST request
