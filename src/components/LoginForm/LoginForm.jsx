@@ -22,6 +22,7 @@ export default function LoginForm({
       userObject.name,
       userObject.email
     );
+    setUser(user);
   }
 
   useEffect(() => {
@@ -83,6 +84,7 @@ export default function LoginForm({
       <button onClick={() => setShowSignUpForm(!showSignUpForm)}>
         Not Registered? Sign Up
       </button>
+
       <div id="signInDiv"></div>
     </div>
   );
