@@ -1,4 +1,4 @@
-import axios from "axios";
+import fetchApi from "../../utilities/fetchApi";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as ordersAPI from "../../utilities/tripOrders-api";
@@ -26,87 +26,24 @@ export default function HotelShowPage() {
   const [lng, setLng] = useState(marker[0].lng);
   // get checkin and checkout date from query
   const queryParams = new URLSearchParams(window.location.search);
-  // State of checkIn + checkOut changes after we fetch rooms
-  //This allows us to take the argument passed in from ShowPageSearchBar to update the dates when checking out
-  const [checkIn, setCheckIn] = useState(queryParams.get("checkin"));
-  const [checkOut, setCheckOut] = useState(queryParams.get("checkout"));
+  const checkIn = queryParams.get("checkin");
+  const checkOut = queryParams.get("checkout");
   const numberOfPerson = queryParams.get("numberOfPerson");
 
-  // get room details
-  const getRoomDetails = async (checkIn, checkOut, people) => {
-    const options = {
-      method: "GET",
-      url: "https://booking-com.p.rapidapi.com/v1/hotels/room-list",
-      params: {
-        checkin_date: checkIn,
-        units: "metric",
-        checkout_date: checkOut,
-        currency: "USD",
-        locale: "en-gb",
-        adults_number_by_rooms: numberOfPerson,
-        hotel_id: hotel_id,
-        // children_ages: "",
-        // children_number_by_rooms: "",
-      },
-      headers: {
-        "X-RapidAPI-Key": process.env.REACT_APP_BOOKING_API_KEY,
-        "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
-      },
-    };
-    const response = await axios.request(options).catch(function (error) {
-      console.error(error);
-    });
-    const rooms = response.data[0].block.slice(0, 6);
-    const room = response.data[0].rooms;
-
-    setRoomPhoto(room);
-    setRooms(rooms);
-    setCheckIn(checkIn)
-    setCheckOut(checkOut)
-  };
-
-  // Fetch call used a couple of times that sets state for a few different variables
-  const getHotelData = async (url, setState) => {
-    const options = {
-      method: "GET",
-      url: url,
-      params: { hotel_id: hotel_id, locale: "en-gb" },
-      headers: {
-        "X-RapidAPI-Key": process.env.REACT_APP_BOOKING_API_KEY,
-        "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
-      },
-    };
-
-    const response = await axios.request(options).catch(function (error) {
-      console.error(error);
-    });
-    // if (response.data) console.log(response.data);
-    setState(response.data);
-  };
-
+  //any time page re-renders it will get the hotel data
   useEffect(() => {
-    // This calls a bunch of different axios urls to get different data and sets state accordingly
-    const makeFetchCalls = async () => {
-      await getHotelData(
-        "https://booking-com.p.rapidapi.com/v1/hotels/data",
-        setHotel
-      );
-      await getHotelData(
-        "https://booking-com.p.rapidapi.com/v1/hotels/photos",
-        (data) => {
-          // only take first 6 photos
-          data = data.slice(0, 6);
-          setPhotos(data);
-        }
-      );
-      // reviews fetch also getting 400 status errors
-      // await getHotelData('https://booking-com.p.rapidapi.com/v1/hotels/reviews', setReviews)
-    };
-    makeFetchCalls();
-    getRoomDetails(checkIn, checkOut, numberOfPerson);
+    fetchApi.getHotelDatas(hotel_id, setHotel, setPhotos);
+    fetchApi.getRoomDetails(
+      checkIn,
+      checkOut,
+      numberOfPerson,
+      hotel_id,
+      setRoomPhoto,
+      setRooms
+    );
   }, []);
 
-  // handle onclick for checking out a room
+  // handle onclick
   const handleClick = async (room) => {
     let hotelPhoto = photos[0].url_1440;
     const updatedCart = await ordersAPI.addHotelToCart(
@@ -137,7 +74,8 @@ export default function HotelShowPage() {
         checkOut={checkOut}
         numberOfPerson={numberOfPerson}
         hotel_id={hotel_id}
-        getRoomDetails={getRoomDetails}
+        setRoomPhoto={setRoomPhoto}
+        setRooms={setRooms}
       />
       {/* {photos && <img src={photos[0].url_1440} alt="" />}  */}
       <Map
