@@ -6,7 +6,6 @@ import ShowPageSearchBar from "../../components/ShowPageSearchBar/ShowPageSearch
 import Map from "../../components/Map/Map";
 
 export default function HotelShowPage() {
-
   // hotel data
   const [hotel, setHotel] = useState({});
   // rooms list data
@@ -19,7 +18,7 @@ export default function HotelShowPage() {
   // use navigate
   const navigate = useNavigate();
   const { hotel_id } = useParams();
-  const { state } = useLocation()
+  const { state } = useLocation();
   // let { markers } = state
   // const [marker, setMarkers] = useState(
   //   (markers) ? [markers.marker] : null)
@@ -123,7 +122,6 @@ export default function HotelShowPage() {
     );
     console.log("updatedCart", updatedCart);
     navigate(`/users/cart/checkout/${updatedCart.id}`, {
-
       state: {
         hotel,
         checkIn,
@@ -133,10 +131,8 @@ export default function HotelShowPage() {
         hotel_id,
         numberOfPerson,
       },
-
     });
   };
-
 
   return (
     <>
@@ -172,9 +168,9 @@ export default function HotelShowPage() {
       </div>
 
       {rooms &&
-        rooms.map((room) => {
+        rooms.map((room, index) => {
           return (
-            <div>
+            <div key={index}>
               <img
                 src={roomPhoto[room.room_id].photos[0].url_original}
                 alt=""
