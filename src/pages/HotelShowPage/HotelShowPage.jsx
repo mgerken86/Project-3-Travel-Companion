@@ -19,11 +19,11 @@ export default function HotelShowPage() {
   const navigate = useNavigate();
   const { hotel_id } = useParams();
   const { state } = useLocation();
-  // let { markers } = state
-  // const [marker, setMarkers] = useState(
-  //   (markers) ? [markers.marker] : null)
-  // const [lat, setLat] = useState(marker[0].lat)
-  // const [lng, setLng] = useState(marker[0].lng)
+  let { markers } = state;
+  console.log(markers);
+  const [marker, setMarkers] = useState([markers.marker]);
+  const [lat, setLat] = useState(marker[0].lat);
+  const [lng, setLng] = useState(marker[0].lng);
   // get checkin and checkout date from query
   const queryParams = new URLSearchParams(window.location.search);
   const checkIn = queryParams.get("checkin");
@@ -103,7 +103,6 @@ export default function HotelShowPage() {
 
       setRoomPhoto(room);
 
-      console.log("roomInfo", response.data);
       setRooms(rooms);
     };
     getRoomDetails();
@@ -120,7 +119,6 @@ export default function HotelShowPage() {
       hotel_id,
       hotelPhoto
     );
-    console.log("updatedCart", updatedCart);
     navigate(`/users/cart/checkout/${updatedCart.id}`, {
       state: {
         hotel,
@@ -143,13 +141,14 @@ export default function HotelShowPage() {
         hotel_id={hotel_id}
       />
       {/* {photos && <img src={photos[0].url_1440} alt="" />}  */}
-      {/* <Map
+      <Map
         lat={lat}
         lng={lng}
         markers={marker}
         checkIn={checkIn}
         checkOut={checkOut}
-      /> */}
+        numberOfPerson={numberOfPerson}
+      />
       <h1>{hotel.name}</h1>
       {/* <span>{description.description}</span> */}
       <h3>
@@ -176,10 +175,8 @@ export default function HotelShowPage() {
                 alt=""
               />
               <h4>{room.name}</h4>
-
               <h4>Max Occupancy: {room.max_occupancy}</h4>
               <h4>Total Cost: $ {room.price_breakdown.gross_price}</h4>
-
               <button onClick={() => handleClick(room)}>Select</button>
             </div>
           );

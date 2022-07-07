@@ -2,19 +2,17 @@ import HotelListCard from "../../components/HotelListCard/HotelListCard";
 import Map from "../../components/Map/Map";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { checkout } from "../../utilities/tripOrders-api";
 
 export default function HotelsListPage() {
   const { state } = useLocation();
   // console.log(state);
   const { searchResult, checkIn, checkOut, coordinates, numberOfPerson } =
     state;
-
   const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
     (() => {
+      const people = numberOfPerson
       // console.log(searchResult)
       //When page renders, create an array of all of the lat/lon for each hotel
       //Then set the state of markers to that new array. Also passing hotel_id to redirect when clicking marker
@@ -24,11 +22,13 @@ export default function HotelsListPage() {
           hotelId: hotel.hotel_id,
           lat: hotel.latitude,
           lng: hotel.longitude,
+          people: people
         };
       });
       setMarkers(filteredMarkers);
     })();
   }, []);
+
 
   return (
     <>
@@ -44,14 +44,20 @@ export default function HotelsListPage() {
       />
       <div>
         {searchResult.map((hotel) => {
+          const filterMarker = (marker) => {
+            return marker.name === hotel.hotel_name
+          }
+          const marker = markers.filter(filterMarker)
           return (
             <HotelListCard
+              // lat={coordinates.lat}
+              // lng={coordinates.lng}
               hotel={hotel}
               key={hotel.hotel_id}
-              checkIn={checkIn}
-              checkOut={checkOut}
-              markers={markers}
-              numberOfPerson={numberOfPerson}
+              // checkIn={checkIn}
+              // checkOut={checkOut}
+              marker={marker[0]}
+              // numberOfPerson={numberOfPerson}
             />
           );
         })}

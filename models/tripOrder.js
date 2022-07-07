@@ -49,6 +49,12 @@ tripSchema.statics.getCart = function (userId) {
   );
 };
 
+// tripSchema.statics.cancelOrder = function (tripId) {
+//   return this.findOneAndDelete(
+//     { _id: tripId}
+//   )
+// }
+
 tripSchema.methods.addHotelToCart = async function (
   hotel,
   room,
