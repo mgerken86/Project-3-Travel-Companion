@@ -17,7 +17,7 @@ export default function TripOrder({ trip }) {
     const [showRooms, setShowRooms] = useState(false)
     const navigate = useNavigate()
 
-    // console.log('trip id in jsx component', trip.id)
+    // console.log('trip in jsx component', trip)
 
     const getRoomDetails = async (checkIn, checkOut, people, hotelId) => {
         const options = {
@@ -57,13 +57,16 @@ export default function TripOrder({ trip }) {
         // console.log(orderId)
         await ordersAPI.cancelTrip(orderId);
     }
-    const handleEdit = async(room) => {
-        const updateTrip = await ordersAPI.updateTrip(
+    const handleEdit = async (room) => {
+        await setShowRooms(false)
+        navigate(0)
+        await ordersAPI.updateTrip(
             trip.id,
             room,
             checkIn,
-            checkOut,
+            checkOut
         )
+        
     }
     return (
         <>
@@ -71,8 +74,8 @@ export default function TripOrder({ trip }) {
             <h3>{trip.roomName}</h3>
             <img src={trip.hotelPhoto} alt="" />
             <p></p>
-            <p>Check-in: {trip.checkIn.slice(0, 10)} </p>
-            <p>Check-out: {trip.checkOut.slice(0, 10)}</p>
+            <p>Check-in: {trip.checkIn.slice(0, 10)} Check-out: {trip.checkOut.slice(0, 10)}</p>
+            <p>Total Price: {trip.totalPrice}</p>
             <button onClick={() => {
                 handleCancelBtn(trip._id)
                 //This re-renders the component through useNavigate
@@ -88,22 +91,24 @@ export default function TripOrder({ trip }) {
                 Edit Your Stay at {trip.hotelName}
             </button>
             {showRooms && <>
-            <h3>Select a New Room For Your Reservation</h3>
-            {rooms &&
-                rooms.map((room, index) => {
-                    return (
-                        <div key={index}>
-                            <img
-                                src={roomPhoto[room.room_id].photos[0].url_original}
-                                alt=""
-                            />
-                            <h4>{room.name}</h4>
-                            <h4>Max Occupancy: {room.max_occupancy}</h4>
-                            <h4>Total Cost: $ {room.price_breakdown.gross_price}</h4>
-                            <button onClick={() => handleEdit(room)}>Change to This Room</button>
-                        </div>
-                    );
-                })}
+                <h3>Select a New Room For Your Reservation</h3>
+                {rooms &&
+                    rooms.map((room, index) => {
+                        return (
+                            <div key={index}>
+                                <img
+                                    src={roomPhoto[room.room_id].photos[0].url_original}
+                                    alt=""
+                                />
+                                <h4>{room.name}</h4>
+                                <h4>Max Occupancy: {room.max_occupancy}</h4>
+                                <h4>Total Cost: $ {room.price_breakdown.gross_price}</h4>
+                                <button onClick={() => {handleEdit(room)}}>
+                                    Change to This Room
+                                </button>
+                            </div>
+                        );
+                    })}
             </>}
         </>
     )
