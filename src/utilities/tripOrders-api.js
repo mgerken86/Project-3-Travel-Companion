@@ -33,6 +33,7 @@ export async function updateTrip(
   checkIn,
   checkOut,
 ) {
+  console.log('ID in api', id)
   return sendRequest(`${BASE_URL}/history/update/${id}`, "PUT", {
     id,
     room,

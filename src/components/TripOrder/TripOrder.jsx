@@ -17,6 +17,8 @@ export default function TripOrder({ trip }) {
     const [showRooms, setShowRooms] = useState(false)
     const navigate = useNavigate()
 
+    // console.log('trip id in jsx component', trip.id)
+
     const getRoomDetails = async (checkIn, checkOut, people, hotelId) => {
         const options = {
             method: "GET",

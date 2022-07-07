@@ -34,8 +34,10 @@ async function addToCart(req, res) {
 
 async function updateTrip(req, res) {
   console.log('in the controller')
-  const { room, checkIn, checkOut, id } = req.body
-  // const trip = await TripOrder.updateTrip(req.body)
+  const { id, room, checkIn, checkOut } = req.body
+  console.log("req.body of new hotel room", req.body)
+  const currentTripOrder = await TripOrder.findByIdAndUpdate({_id: id})
+  console.log("triporder.findbyid: ", currentTripOrder)
 }
 
 // Update the cart's isPaid property to true
