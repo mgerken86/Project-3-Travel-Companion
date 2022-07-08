@@ -70,8 +70,6 @@ export default function SearchBar() {
     } else {
       setDisabled(false);
     }
-
-    console.log(newData);
   };
 
   //   function handle search
