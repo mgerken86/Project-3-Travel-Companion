@@ -11,7 +11,9 @@ router.get("/history", tripOrdersCtrl.history);
 router.post("/cart/new", tripOrdersCtrl.addToCart);
 // POST /api/tripOrders/cart/checkout
 router.post("/cart/checkout", tripOrdersCtrl.checkout);
-// DELETE /api/tripOrders/history
+// DELETE /api/tripOrders/history/update/:id
+router.put("/history/update/:id", tripOrdersCtrl.updateTrip)
+// DELETE /api/tripOrders/history/:id
 router.delete("/history/:id", tripOrdersCtrl.cancelTrip)
 
 

@@ -6,7 +6,8 @@ module.exports = {
   addToCart,
   checkout,
   history,
-  cancelTrip
+  cancelTrip,
+  updateTrip
 };
 
 // A cart is the unpaid order for a user
@@ -21,7 +22,7 @@ async function addToCart(req, res) {
   const { hotel, room, checkIn, checkOut, hotel_id, hotelPhoto } = req.body;
   const cart = await TripOrder.getCart(req.user._id);
   await cart.addHotelToCart(
-    hotel,
+    id,
     room,
     checkIn,
     checkOut,
@@ -29,6 +30,22 @@ async function addToCart(req, res) {
     hotelPhoto
   );
   res.json(cart);
+}
+
+// PUT route function to update existing order
+async function updateTrip(req, res) {
+  // console.log('in the controller')
+  const { id, room, checkIn, checkOut, people } = req.body
+  console.log("req.body of new hotel room", req.body)
+  const currentTripOrder = await TripOrder.findByIdAndUpdate(id, {
+    checkIn: req.body.checkIn,
+    checkOut: req.body.checkOut,
+    roomName: req.body.room.room_name,
+    price: req.body.room.price_breakdown.gross_price,
+    totalPrice: req.body.room.price_breakdown.all_inclusive_price,
+    numberOfPeople: req.body.people
+  })
+  console.log("triporder.findbyid: ", currentTripOrder)
 }
 
 // Update the cart's isPaid property to true

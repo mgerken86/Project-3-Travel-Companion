@@ -49,11 +49,6 @@ tripSchema.statics.getCart = function (userId) {
   );
 };
 
-// tripSchema.statics.cancelOrder = function (tripId) {
-//   return this.findOneAndDelete(
-//     { _id: tripId}
-//   )
-// }
 
 tripSchema.methods.addHotelToCart = async function (
   hotel,
@@ -82,5 +77,16 @@ tripSchema.methods.addHotelToCart = async function (
 
   return currentOrder.save();
 };
+
+tripSchema.methods.updateTrip = function (
+  id,
+  room,
+  checkIn,
+  checkOut
+) {
+  const currentTrip = this;
+  return console.log('in the model. currentTrip:', currentTrip)
+
+}
 
 module.exports = mongoose.model("TripOrder", tripSchema);
