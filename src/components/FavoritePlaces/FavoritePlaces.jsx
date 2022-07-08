@@ -70,7 +70,7 @@ export default function FavoritePlaces() {
   }, []);
 
   return (
-    <div>
+    <div className="outerContainer">
       <h1>Need Help Deciding Where to Go?</h1>
       <h2>Here Are Some of Our Favorite Places in the World</h2>
       <div className="main-container">
