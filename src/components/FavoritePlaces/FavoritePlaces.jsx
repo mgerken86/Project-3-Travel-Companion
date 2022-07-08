@@ -25,14 +25,14 @@ const getRandomPlace = (personArr) => {
 };
 
 export default function FavoritePlaces() {
-    // Each person's place will be randomly selected from ourFavoritePlaces.js
-    // Each person's hotel will be randomly selected after the axios fetch
-    const [markPlace, setMarkPlace] = useState(getRandomPlace(markPlacesArr));
-    const [jingPlace, setJingPlace] = useState(getRandomPlace(jingPlacesArr));
-    const [tirasPlace, setTirasPlace] = useState(getRandomPlace(tirasPlacesArr));
-    const [markHotel, setMarkHotel] = useState([]);
-    const [jingHotel, setJingHotel] = useState([]);
-    const [tirasHotel, setTirasHotel] = useState([]);
+  // Each person's place will be randomly selected from ourFavoritePlaces.js
+  // Each person's hotel will be randomly selected after the axios fetch
+  const [markPlace, setMarkPlace] = useState(getRandomPlace(markPlacesArr));
+  const [jingPlace, setJingPlace] = useState(getRandomPlace(jingPlacesArr));
+  const [tirasPlace, setTirasPlace] = useState(getRandomPlace(tirasPlacesArr));
+  const [markHotel, setMarkHotel] = useState([]);
+  const [jingHotel, setJingHotel] = useState([]);
+  const [tirasHotel, setTirasHotel] = useState([]);
 
   // This function takes each person's randomPlace and uses the coordinates of that place to find hotels there
   const getRandomHotels = (personPlace, setHotel) => {
@@ -59,16 +59,15 @@ export default function FavoritePlaces() {
         "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
       },
     };
-  }
-    // Choose a random hotel each time component renders
-    // useEffect(() => {
-    //     (async () => {
-    //         await getRandomHotels(markPlace, setMarkHotel);
-    //         await getRandomHotels(jingPlace, setJingHotel);
-    //         await getRandomHotels(tirasPlace, setTirasHotel);
-    //     })()
-    // }, []);
-
+  };
+  // Choose a random hotel each time component renders
+  useEffect(() => {
+    (async () => {
+      await getRandomHotels(markPlace, setMarkHotel);
+      await getRandomHotels(jingPlace, setJingHotel);
+      await getRandomHotels(tirasPlace, setTirasHotel);
+    })();
+  }, []);
 
   return (
     <div>
@@ -80,24 +79,24 @@ export default function FavoritePlaces() {
           <h5>{markPlace.place}</h5>
           <h4>Why He Loves it There:</h4>
           <span>"{markPlace.testimonial}" -Mark</span>
-          {/* <button onClick={() => getRandomHotels(markPlace, setMarkHotel)}>
-                        Click For Random Hotel
-                    </button> */}
-                    {/* If there is a hotel ID assigned to a person's hotel state, render the following jsx */}
-                    {markHotel ? (
-                        <div className="hotel-container">
-                            <h4>Featured Accomodation:</h4>
-                            <h4>{markHotel.hotel_name}</h4>
-                            <img src={markHotel.max_photo_url} alt="" />
-                        </div>
-                    ) : null}
-                </div>
-                <div className="favorite-place-container">
-                    <h2>Jing's Suggestion:</h2>
-                    <h5>{jingPlace.place}</h5>
-                    <h4>Why She Loves it There:</h4>
-                    <span>"{jingPlace.testimonial}" -Jing</span>
-                    {/* <button onClick={() => { getRandomHotels(jingPlace, setJingHotel) }}>
+          <button onClick={() => getRandomHotels(markPlace, setMarkHotel)}>
+            Click For Random Hotel
+          </button>
+          {/* If there is a hotel ID assigned to a person's hotel state, render the following jsx */}
+          {markHotel ? (
+            <div className="hotel-container">
+              <h4>Featured Accomodation:</h4>
+              <h4>{markHotel.hotel_name}</h4>
+              <img src={markHotel.max_photo_url} alt="" />
+            </div>
+          ) : null}
+        </div>
+        <div className="favorite-place-container">
+          <h2>Jing's Suggestion:</h2>
+          <h5>{jingPlace.place}</h5>
+          <h4>Why She Loves it There:</h4>
+          <span>"{jingPlace.testimonial}" -Jing</span>
+          {/* <button onClick={() => { getRandomHotels(jingPlace, setJingHotel) }}>
                         Click For Random Hotel
                     </button> */}
           {jingHotel ? (

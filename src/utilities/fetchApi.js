@@ -20,12 +20,6 @@ const getHotelDatas = async (hotel_id, setHotel, setPhotos) => {
   };
   // This calls a bunch of different axios urls to get different data and sets state accordingly
   const makeFetchCalls = async () => {
-    // the rooms fetch seems deprecated
-    // await getHotelData('https://booking-com.p.rapidapi.com/v1/hotels/room-list', setRooms)
-    // await getHotelData(
-    //   "https://booking-com.p.rapidapi.com/v1/hotels/description",
-    //   setDescription
-    // );
     await getHotelData(
       "https://booking-com.p.rapidapi.com/v1/hotels/data",
       setHotel

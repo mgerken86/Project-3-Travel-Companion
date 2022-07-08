@@ -23,6 +23,7 @@ export default function SearchBar() {
   const [data, setData] = useState(starterData);
   const [autocomplete, setAutocomplete] = useState(null);
   const [coordinates, setCoordinates] = useState({});
+  const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
   const onLoad = (autoC) => setAutocomplete(autoC);
 
@@ -45,6 +46,31 @@ export default function SearchBar() {
       [e.target.name]: e.target.value,
     };
     setData(newData);
+
+    // conditons for checkin checkout date
+
+    const today = new Date();
+    const yesterday = new Date(today);
+
+    yesterday.setDate(today.getDate() - 1);
+    const convertedYst = new Date(yesterday.toUTCString());
+
+    const yesterdayTime = convertedYst.getTime();
+    const checkinDate = Date.parse(newData.checkIn);
+    // const localTime = new Date(checkinDate.toLocaleString());
+    const checkoutDate = Date.parse(newData.checkOut);
+    console.log("today", today.getTime());
+    console.log("yesterday date", convertedYst);
+    console.log("yesterday time", yesterdayTime);
+    // console.log("yesterday", yesterday);
+    console.log("checkinDate", checkinDate);
+    console.log("checkoutDate", checkoutDate);
+    if (checkinDate < yesterdayTime || checkoutDate < checkinDate) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+
     console.log(newData);
   };
 
@@ -152,7 +178,9 @@ export default function SearchBar() {
             />
             {/* <button onClick={handleClickAdd}>+</button> */}
           </div>
-          <button type="submit">Search</button>
+          <button type="submit" disabled={disabled}>
+            Search
+          </button>
         </div>
       </form>
     </>
