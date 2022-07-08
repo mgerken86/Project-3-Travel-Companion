@@ -18,6 +18,7 @@ export default function ShowPageSearchBar({
     numberOfAdult: numberOfPerson,
   };
   const [data, setData] = useState(starterData);
+  const [disabled, setDisabled] = useState(false);
 
   const changeData = (e) => {
     const newData = {
@@ -25,6 +26,23 @@ export default function ShowPageSearchBar({
       [e.target.name]: e.target.value,
     };
     setData(newData);
+    // conditons for checkin checkout date
+
+    const today = new Date();
+    const yesterday = new Date(today);
+
+    yesterday.setDate(today.getDate() - 1);
+    const convertedYst = new Date(yesterday.toUTCString());
+
+    const yesterdayTime = convertedYst.getTime();
+    const checkinDate = Date.parse(newData.checkIn);
+    // const localTime = new Date(checkinDate.toLocaleString());
+    const checkoutDate = Date.parse(newData.checkOut);
+    if (checkinDate < yesterdayTime || checkoutDate < checkinDate) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
   };
 
   return (
@@ -51,7 +69,7 @@ export default function ShowPageSearchBar({
           />
         </div>
         <div>
-          <label>Number of Person</label>
+          <label>Number of People</label>
 
           <input
             type="number"
@@ -63,6 +81,7 @@ export default function ShowPageSearchBar({
         </div>
         {/* onClick function sets the state of the rooms to the new input arguments */}
         <button
+          disabled={disabled}
           onClick={() =>
             fetchApi.getRoomDetails(
               data.checkIn,

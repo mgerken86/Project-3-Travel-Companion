@@ -59,12 +59,6 @@ export default function SearchBar() {
     const checkinDate = Date.parse(newData.checkIn);
     // const localTime = new Date(checkinDate.toLocaleString());
     const checkoutDate = Date.parse(newData.checkOut);
-    console.log("today", today.getTime());
-    console.log("yesterday date", convertedYst);
-    console.log("yesterday time", yesterdayTime);
-    // console.log("yesterday", yesterday);
-    console.log("checkinDate", checkinDate);
-    console.log("checkoutDate", checkoutDate);
     if (checkinDate < yesterdayTime || checkoutDate < checkinDate) {
       setDisabled(true);
     } else {
