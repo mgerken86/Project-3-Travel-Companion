@@ -24,7 +24,7 @@ export default function TripOrder({ trip }) {
         people: people
     })
 
-    console.log('trip in jsx component', trip)
+    // console.log('trip in jsx component', trip)
 
     const getRoomDetails = async (checkIn, checkOut, people, hotelId) => {
         const options = {

@@ -59,14 +59,24 @@ export default function FavoritePlaces() {
         "X-RapidAPI-Host": "booking-com.p.rapidapi.com",
       },
     };
+    axios.request(options).then(function (response) {
+      const hotels = response.data.result
+      console.log(hotels)
+      setHotel(hotels)
+      // console.log(hotels)
+      const randomHotel = hotels[Math.floor(Math.random() * hotels.length)]
+      setHotel(randomHotel)
+    }).catch(function (error) {
+      console.error(error);
+    });
   };
   // Choose a random hotel each time component renders
   useEffect(() => {
-    // (async () => {
-    //   await getRandomHotels(markPlace, setMarkHotel);
-    //   await getRandomHotels(jingPlace, setJingHotel);
-    //   await getRandomHotels(tirasPlace, setTirasHotel);
-    // })();
+    (async () => {
+      await getRandomHotels(markPlace, setMarkHotel);
+      await getRandomHotels(jingPlace, setJingHotel);
+      await getRandomHotels(tirasPlace, setTirasHotel);
+    })();
   }, []);
 
   return (
@@ -79,9 +89,9 @@ export default function FavoritePlaces() {
           <h5>{markPlace.place}</h5>
           <h4>Why He Loves it There:</h4>
           <span>"{markPlace.testimonial}" -Mark</span>
-          <button onClick={() => getRandomHotels(markPlace, setMarkHotel)}>
+          {/* <button onClick={() => getRandomHotels(markPlace, setMarkHotel)}>
             Click For Random Hotel
-          </button>
+          </button> */}
           {/* If there is a hotel ID assigned to a person's hotel state, render the following jsx */}
           {markHotel ? (
             <div className="hotel-container">
@@ -89,7 +99,13 @@ export default function FavoritePlaces() {
               <h4>{markHotel.hotel_name}</h4>
               <img src={markHotel.max_photo_url} alt="" />
             </div>
-          ) : null}
+          ) : (
+            <div className="hotelcontainer">
+            <h5>Sorry, there are no available hotels at {markPlace.place} tonight.</h5>
+            <h6>Please use the search bar to choose other dates</h6>
+            </div>
+          )
+            }
         </div>
         <div className="favorite-place-container">
           <h2>Jing's Suggestion:</h2>
