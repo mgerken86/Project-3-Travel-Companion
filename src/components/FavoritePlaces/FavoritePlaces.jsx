@@ -61,13 +61,13 @@ export default function FavoritePlaces() {
     };
   }
     // Choose a random hotel each time component renders
-    // useEffect(() => {
-    //     (async () => {
-    //         await getRandomHotels(markPlace, setMarkHotel);
-    //         await getRandomHotels(jingPlace, setJingHotel);
-    //         await getRandomHotels(tirasPlace, setTirasHotel);
-    //     })()
-    // }, []);
+    useEffect(() => {
+        (async () => {
+            await getRandomHotels(markPlace, setMarkHotel);
+            await getRandomHotels(jingPlace, setJingHotel);
+            await getRandomHotels(tirasPlace, setTirasHotel);
+        })()
+    }, []);
 
 
   return (
@@ -80,9 +80,9 @@ export default function FavoritePlaces() {
           <h5>{markPlace.place}</h5>
           <h4>Why He Loves it There:</h4>
           <span>"{markPlace.testimonial}" -Mark</span>
-          {/* <button onClick={() => getRandomHotels(markPlace, setMarkHotel)}>
+          <button onClick={() => getRandomHotels(markPlace, setMarkHotel)}>
                         Click For Random Hotel
-                    </button> */}
+                    </button>
                     {/* If there is a hotel ID assigned to a person's hotel state, render the following jsx */}
                     {markHotel ? (
                         <div className="hotel-container">

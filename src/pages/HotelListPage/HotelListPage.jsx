@@ -1,7 +1,9 @@
+import fetchApi from "../../utilities/fetchApi";
 import HotelListCard from "../../components/HotelListCard/HotelListCard";
 import Map from "../../components/Map/Map";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 
 export default function HotelsListPage() {
   const { state } = useLocation();
@@ -11,6 +13,7 @@ export default function HotelsListPage() {
   const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
+
     (() => {
       const people = numberOfPerson;
       // console.log(searchResult)

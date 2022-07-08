@@ -1,3 +1,4 @@
+import './TripOrder.css'
 import * as ordersAPI from "../../utilities/tripOrders-api";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -15,9 +16,15 @@ export default function TripOrder({ trip }) {
     const [checkIn, setCheckIn] = useState(getDateString(trip.checkIn))
     const [checkOut, setCheckOut] = useState(getDateString(trip.checkOut))
     const [showRooms, setShowRooms] = useState(false)
+    const [people, setPeople] = useState(trip.numberOfPeople)
     const navigate = useNavigate()
+    const [data, setData] = useState({
+        checkIn: checkIn,
+        checkOut: checkOut,
+        people: people
+    })
 
-    // console.log('trip in jsx component', trip)
+    console.log('trip in jsx component', trip)
 
     const getRoomDetails = async (checkIn, checkOut, people, hotelId) => {
         const options = {
@@ -64,12 +71,21 @@ export default function TripOrder({ trip }) {
             trip.id,
             room,
             checkIn,
-            checkOut
+            checkOut,
+            people
         )
-        
     }
+    const changeData = (e) => {
+        const newData = {
+          ...data,
+          [e.target.name]: e.target.value,
+        };
+        setData(newData);
+      };
+
+
     return (
-        <>
+        <div className="tripOrder-container">
             <h2>{trip.hotelName}</h2>
             <h3>{trip.roomName}</h3>
             <img src={trip.hotelPhoto} alt="" />
@@ -83,6 +99,39 @@ export default function TripOrder({ trip }) {
             }}>
                 Cancel This Trip
             </button>
+            <h3>Want to Choose a New Room at the Same Hotel?</h3>
+            <div className="flex-row">
+                <div>
+                    <label>Check In</label>
+                    <input
+                        type="date"
+                        name="checkIn"
+                        value={data.checkIn}
+                        onChange={changeData}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Check Out</label>
+                    <input
+                        type="date"
+                        name="checkOut"
+                        value={data.checkOut}
+                        onChange={changeData}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Number of People</label>
+                    <input
+                        type="number"
+                        name="people"
+                        value={data.people}
+                        onChange={changeData}
+                        required
+                    />
+                </div>
+            </div>
             <button onClick={() => {
                 getRoomDetails(checkIn, checkOut, trip.numberOfPeople, trip.hotelId)
                 setShowRooms(!showRooms)
@@ -103,13 +152,13 @@ export default function TripOrder({ trip }) {
                                 <h4>{room.name}</h4>
                                 <h4>Max Occupancy: {room.max_occupancy}</h4>
                                 <h4>Total Cost: $ {room.price_breakdown.gross_price}</h4>
-                                <button onClick={() => {handleEdit(room)}}>
+                                <button onClick={() => { handleEdit(room) }}>
                                     Change to This Room
                                 </button>
                             </div>
                         );
                     })}
             </>}
-        </>
+        </div>
     )
 }
