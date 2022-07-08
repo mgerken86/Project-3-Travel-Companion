@@ -62,11 +62,11 @@ export default function FavoritePlaces() {
   };
   // Choose a random hotel each time component renders
   useEffect(() => {
-    (async () => {
-      await getRandomHotels(markPlace, setMarkHotel);
-      await getRandomHotels(jingPlace, setJingHotel);
-      await getRandomHotels(tirasPlace, setTirasHotel);
-    })();
+    // (async () => {
+    //   await getRandomHotels(markPlace, setMarkHotel);
+    //   await getRandomHotels(jingPlace, setJingHotel);
+    //   await getRandomHotels(tirasPlace, setTirasHotel);
+    // })();
   }, []);
 
   return (

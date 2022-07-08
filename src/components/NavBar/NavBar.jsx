@@ -13,16 +13,23 @@ export default function NavBar({ user, setUser }) {
 
   return (
     <div className="navBar">
-      <nav>
-        <span>Where can we take you, {user.name}?</span>
-        &nbsp; | &nbsp;
-        <Link to="/">Home</Link>
-        &nbsp; | &nbsp;
-        <Link to="/users/myAccount">My Account</Link>
-        &nbsp; | &nbsp;
-        <Link to="" onClick={handleLogOut}>
-          Log Out
-        </Link>
+      <nav className="navContainer">
+        <span className="logo">Travel Companions</span>
+        <div className="navItems">
+          <span>Where can we take you, {user.name}?</span>
+          &nbsp; &nbsp;
+          <Link className="navButton" to="/">
+            Home
+          </Link>
+          &nbsp; | &nbsp;
+          <Link className="navButton" to="/users/myAccount">
+            My Account
+          </Link>
+          &nbsp; | &nbsp;
+          <Link className="navButton" to="" onClick={handleLogOut}>
+            Log Out
+          </Link>
+        </div>
       </nav>
       <SearchBar />
     </div>

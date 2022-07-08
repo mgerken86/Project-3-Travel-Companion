@@ -38,7 +38,11 @@ export default function ShowPageSearchBar({
     const checkinDate = Date.parse(newData.checkIn);
     // const localTime = new Date(checkinDate.toLocaleString());
     const checkoutDate = Date.parse(newData.checkOut);
-    if (checkinDate < yesterdayTime || checkoutDate < checkinDate) {
+    if (
+      checkinDate < yesterdayTime ||
+      checkoutDate <= checkinDate ||
+      newData.numberOfAdult < 1
+    ) {
       setDisabled(true);
     } else {
       setDisabled(false);

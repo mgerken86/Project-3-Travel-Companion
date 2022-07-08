@@ -7,7 +7,7 @@ module.exports = {
   checkout,
   history,
   cancelTrip,
-  updateTrip
+  updateTrip,
 };
 
 // A cart is the unpaid order for a user
@@ -22,7 +22,7 @@ async function addToCart(req, res) {
   const { hotel, room, checkIn, checkOut, hotel_id, hotelPhoto } = req.body;
   const cart = await TripOrder.getCart(req.user._id);
   await cart.addHotelToCart(
-    id,
+    hotel,
     room,
     checkIn,
     checkOut,
@@ -35,17 +35,17 @@ async function addToCart(req, res) {
 // PUT route function to update existing order
 async function updateTrip(req, res) {
   // console.log('in the controller')
-  const { id, room, checkIn, checkOut, people } = req.body
-  console.log("req.body of new hotel room", req.body)
+  const { id, room, checkIn, checkOut, people } = req.body;
+  console.log("req.body of new hotel room", req.body);
   const currentTripOrder = await TripOrder.findByIdAndUpdate(id, {
     checkIn: req.body.checkIn,
     checkOut: req.body.checkOut,
     roomName: req.body.room.room_name,
     price: req.body.room.price_breakdown.gross_price,
     totalPrice: req.body.room.price_breakdown.all_inclusive_price,
-    numberOfPeople: req.body.people
-  })
-  console.log("triporder.findbyid: ", currentTripOrder)
+    numberOfPeople: req.body.people,
+  });
+  console.log("triporder.findbyid: ", currentTripOrder);
 }
 
 // Update the cart's isPaid property to true
@@ -70,7 +70,7 @@ async function history(req, res) {
 
 // Delete a trip from the order history
 async function cancelTrip(req, res) {
-  await TripOrder.findOneAndDelete({ id: req.params.id})
+  await TripOrder.findOneAndDelete({ id: req.params.id });
   // const trip = await TripOrder.find({_id: req.params.id})
   // console.log('trip:', trip)
 }
