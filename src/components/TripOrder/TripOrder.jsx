@@ -20,16 +20,6 @@ yesterday.setDate(today.getDate() - 1);
 const convertedYst = new Date(yesterday.toUTCString());
 const yesterdayTime = convertedYst.getTime();
 
-// if (
-//   checkinDate < yesterdayTime ||
-//   checkoutDate <= checkinDate ||
-//   newData.numberOfAdult < 1
-// ) {
-//   setDisabled(true);
-// } else {
-//   setDisabled(false);
-// }
-
 
 export default function TripOrder({ trip }) {
     const [rooms, setRooms] = useState([])
@@ -47,8 +37,7 @@ export default function TripOrder({ trip }) {
     const navigate = useNavigate()
 
     const checkinDate = Date.parse(checkIn);
-    console.log(checkinDate, yesterdayTime)
-    // checkinDate <= yesterdayTime setDisabled(true) : setDisabled(false)
+
 
     useEffect(() => {
         setDisabled(checkinDate <= yesterdayTime ? true : false)
