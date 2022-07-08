@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faLocationDot } from "@fontawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { Autocomplete } from "@react-google-maps/api";
 import "./SearchBar.css";
@@ -59,7 +61,11 @@ export default function SearchBar() {
     const checkinDate = Date.parse(newData.checkIn);
     // const localTime = new Date(checkinDate.toLocaleString());
     const checkoutDate = Date.parse(newData.checkOut);
-    if (checkinDate < yesterdayTime || checkoutDate < checkinDate) {
+    if (
+      checkinDate < yesterdayTime ||
+      checkoutDate <= checkinDate ||
+      newData.numberOfAdult < 1
+    ) {
       setDisabled(true);
     } else {
       setDisabled(false);
@@ -130,6 +136,7 @@ export default function SearchBar() {
         <div className="flex-row">
           <div>
             <label>Destination</label>
+            {/* <FontAwesomeIcon icon={faLocationDot} /> */}
             <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
               <input
                 type="text"

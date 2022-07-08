@@ -1,8 +1,18 @@
+
+.outerContainer{
+    display: flex;
+    flex-direction: column;
+}
 .main-container {
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .favorite-place-container {
-    width: 33vw;
-    border: 3px solid black;
-}
+        border: none;
+        margin: 5px;
+        width: 30%;  
+        height: 100px;  
+    }

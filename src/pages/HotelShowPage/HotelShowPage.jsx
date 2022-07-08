@@ -15,6 +15,7 @@ export default function HotelShowPage() {
   // room info contains photos
   const [roomPhoto, setRoomPhoto] = useState([]);
   const [reviews, setReviews] = useState({});
+
   // use navigate
   const navigate = useNavigate();
   const { hotel_id } = useParams();
@@ -46,6 +47,7 @@ export default function HotelShowPage() {
   // handle onclick
   const handleClick = async (room) => {
     let hotelPhoto = photos[0].url_1440;
+    console.log(room);
     const updatedCart = await ordersAPI.addHotelToCart(
       hotel,
       room,
