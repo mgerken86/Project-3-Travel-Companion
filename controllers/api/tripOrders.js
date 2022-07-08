@@ -35,14 +35,15 @@ async function addToCart(req, res) {
 // PUT route function to update existing order
 async function updateTrip(req, res) {
   // console.log('in the controller')
-  const { id, room, checkIn, checkOut } = req.body
+  const { id, room, checkIn, checkOut, people } = req.body
   console.log("req.body of new hotel room", req.body)
   const currentTripOrder = await TripOrder.findByIdAndUpdate(id, {
     checkIn: req.body.checkIn,
     checkOut: req.body.checkOut,
     roomName: req.body.room.room_name,
     price: req.body.room.price_breakdown.gross_price,
-    totalPrice: req.body.room.price_breakdown.all_inclusive_price
+    totalPrice: req.body.room.price_breakdown.all_inclusive_price,
+    numberOfPeople: req.body.people
   })
   console.log("triporder.findbyid: ", currentTripOrder)
 }

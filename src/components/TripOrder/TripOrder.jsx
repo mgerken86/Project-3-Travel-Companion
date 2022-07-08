@@ -56,6 +56,7 @@ export default function TripOrder({ trip }) {
         setRooms(rooms);
         setCheckIn(checkIn)
         setCheckOut(checkOut)
+        setPeople(people)
     };
 
     // console.log(trip)
@@ -92,6 +93,7 @@ export default function TripOrder({ trip }) {
             <p></p>
             <p>Check-in: {trip.checkIn.slice(0, 10)} Check-out: {trip.checkOut.slice(0, 10)}</p>
             <p>Total Price: {trip.totalPrice}</p>
+            <p>Number of Guests: {trip.numberOfPeople}</p>
             <button onClick={() => {
                 handleCancelBtn(trip._id)
                 //This re-renders the component through useNavigate
@@ -133,7 +135,7 @@ export default function TripOrder({ trip }) {
                 </div>
             </div>
             <button onClick={() => {
-                getRoomDetails(checkIn, checkOut, trip.numberOfPeople, trip.hotelId)
+                getRoomDetails(data.checkIn, data.checkOut, data.people, trip.hotelId)
                 setShowRooms(!showRooms)
 
             }}>
