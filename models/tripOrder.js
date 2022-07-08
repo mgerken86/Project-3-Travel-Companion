@@ -14,7 +14,7 @@ const tripSchema = new Schema(
     // hotel details
     hotelName: { type: String, required: true },
     hotelId: { type: String, required: true },
-    hotelPhoto: { type: String, required: true },
+    // hotelPhoto: { type: String, required: true },
     // description: { type: String, required: true },
     price: { type: Number },
     totalPrice: { type: Number },
@@ -49,7 +49,6 @@ tripSchema.statics.getCart = function (userId) {
   );
 };
 
-
 tripSchema.methods.addHotelToCart = async function (
   hotel,
   room,
@@ -78,15 +77,9 @@ tripSchema.methods.addHotelToCart = async function (
   return currentOrder.save();
 };
 
-tripSchema.methods.updateTrip = function (
-  id,
-  room,
-  checkIn,
-  checkOut
-) {
+tripSchema.methods.updateTrip = function (id, room, checkIn, checkOut) {
   const currentTrip = this;
-  return console.log('in the model. currentTrip:', currentTrip)
-
-}
+  return console.log("in the model. currentTrip:", currentTrip);
+};
 
 module.exports = mongoose.model("TripOrder", tripSchema);

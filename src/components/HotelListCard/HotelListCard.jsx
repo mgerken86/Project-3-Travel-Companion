@@ -8,23 +8,36 @@ export default function HotelListCard({
   checkIn,
   checkOut,
   numberOfPerson,
-  marker
+  marker,
 }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
-    <div onClick={() => {
-      navigate(`/hotels/${hotel.hotel_id}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${numberOfPerson}`,
-        {
-          state: {
-            markers: { marker },
-          }
-        }
-      )
-    }}>
+    <div>
+      <img src={hotel.max_photo_url} alt="" />
       <h2>{hotel.hotel_name}</h2>
       <h3>Review Score: {hotel.review_score}</h3>
-      <img src={hotel.max_photo_url} alt="" />
+      <p>{hotel.is_free_cancellable ? "Free cancellation" : ""}</p>
+      <h2>
+        ${" "}
+        {hotel.composite_price_breakdown.gross_amount_per_night.value.toFixed(
+          0
+        )}
+      </h2>
+      <button
+        onClick={() => {
+          navigate(
+            `/hotels/${hotel.hotel_id}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${numberOfPerson}`,
+            {
+              state: {
+                markers: { marker },
+              },
+            }
+          );
+        }}
+      >
+        Check Availability
+      </button>
     </div>
   );
 }
