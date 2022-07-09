@@ -134,7 +134,7 @@ export default function SearchBar() {
   //   };
 
   return (
-    <Fragment className="searchBar">
+    <div className="searchBar">
       <form onSubmit={async (e) => handleSearch(e)} autoComplete="off">
         <div className="headerSearch">
           <div className="searchItem">
@@ -196,6 +196,6 @@ export default function SearchBar() {
           </div>
         </div>
       </form>
-    </Fragment>
+    </div>
   );
 }

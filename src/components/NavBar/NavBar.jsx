@@ -14,7 +14,7 @@ export default function NavBar({ user, setUser }) {
   return (
     <div className="navBar">
       <nav className="navContainer">
-        <h2 className="logo">Travel Companions</h2>
+        <h1 className="logo">Travel Companions</h1>
         <div className="navItems">
           <span>Where can we take you, {user.name}?</span>
           <Link to="/">
