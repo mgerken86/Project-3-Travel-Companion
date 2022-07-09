@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import axios from "axios";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faLocationDot } from "@fontawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendarDays,
+  faPerson,
+  faBed,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { Autocomplete } from "@react-google-maps/api";
 import "./SearchBar.css";
@@ -130,57 +134,66 @@ export default function SearchBar() {
   //   };
 
   return (
-    <div className="searchBar-container">
+    <div className="searchBar">
       <form onSubmit={async (e) => handleSearch(e)} autoComplete="off">
-        <div className="flex-row">
-          <div>
-            <label>Destination</label>
-            {/* <FontAwesomeIcon icon={faLocationDot} /> */}
+        <div className="headerSearch">
+          <div className="searchItem">
+            <FontAwesomeIcon icon={faBed} className="headerIcon" />
             <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
               <input
+                className="headerSearchInput"
                 type="text"
                 name="destination"
                 value={data.destination}
                 onChange={changeData}
+                placeholder="Where are you going?"
                 required
               />
             </Autocomplete>
           </div>
-          <div>
-            <label>Check In</label>
+          <div className="searchItem">
+            <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
             <input
+              className="headerSearchInput"
               type="date"
               name="checkIn"
               value={data.checkIn}
               onChange={changeData}
+              placeholder="Checkin Date"
               required
             />
           </div>
-          <div>
-            <label>Check Out</label>
+          <div className="searchItem">
+            <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
             <input
+              className="headerSearchInput"
               type="date"
               name="checkOut"
               value={data.checkOut}
               onChange={changeData}
+              placeholder="Checkout Date"
               required
             />
           </div>
-          <div>
-            <label>Number of Person</label>
+          <div className="searchItem">
+            <FontAwesomeIcon icon={faPerson} className="headerIcon" />
             {/* <button onClick={handleClickMinus}>-</button> */}
             <input
+              className="headerSearchInput"
               type="number"
               name="numberOfAdult"
               value={data.numberOfAdult}
               onChange={changeData}
+              placeholder="Number of people"
               required
             />
             {/* <button onClick={handleClickAdd}>+</button> */}
           </div>
-          <button type="submit" disabled={disabled}>
-            Search
-          </button>
+          <div className="searchItem">
+            <button className="headerBtn" type="submit" disabled={disabled}>
+              Search
+            </button>
+          </div>
         </div>
       </form>
     </div>

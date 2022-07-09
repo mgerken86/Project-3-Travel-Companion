@@ -46,6 +46,7 @@ export default function HotelShowPage() {
 
   // handle onclick
   const handleClick = async (room) => {
+    console.log(room);
     let hotelPhoto = photos[0].url_1440;
     console.log(room);
     const updatedCart = await ordersAPI.addHotelToCart(
@@ -115,6 +116,12 @@ export default function HotelShowPage() {
               />
               <h4>{room.name}</h4>
               <h4>Max Occupancy: {room.max_occupancy}</h4>
+              <h3>
+                per night $
+                {room.product_price_breakdown.gross_amount_per_night.value.toFixed(
+                  2
+                )}
+              </h3>
               <h4>Total Cost: $ {room.price_breakdown.gross_price}</h4>
               <button onClick={() => handleClick(room)}>Select</button>
             </div>
