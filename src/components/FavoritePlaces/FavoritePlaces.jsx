@@ -81,6 +81,7 @@ export default function FavoritePlaces() {
   return (
     <main>
       <div className="favorite-place-container">
+        <h1>Test</h1>
         <h2>Mark's Suggestion:</h2>
         <h5>{markPlace.place}</h5>
         <h4>Why He Loves it There:</h4>
