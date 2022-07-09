@@ -14,23 +14,20 @@ export default function NavBar({ user, setUser }) {
   return (
     <div className="navBar">
       <nav className="navContainer">
-        <h1 className="logo">Travel Companions</h1>
+        <span className="logo">Travel Companions</span>
         <div className="navItems">
           <span>Where can we take you, {user.name}?</span>
-          <Link to="/">
-            <button className="navButton" style={{ color: "#003580" }}>
-              Home
-            </button>
+          &nbsp; &nbsp;
+          <Link className="navButton" to="/">
+            Home
           </Link>
-          <Link to="/users/myAccount">
-            <button className="navButton" style={{ color: "#003580" }}>
-              My Account
-            </button>
+          &nbsp; | &nbsp;
+          <Link className="navButton" to="/users/myAccount">
+            My Account
           </Link>
-          <Link to="" onClick={handleLogOut}>
-            <button className="navButton" style={{ color: "#003580" }}>
-              Log Out
-            </button>
+          &nbsp; | &nbsp;
+          <Link className="navButton" to="" onClick={handleLogOut}>
+            Log Out
           </Link>
         </div>
       </nav>
