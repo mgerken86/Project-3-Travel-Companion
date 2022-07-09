@@ -19,7 +19,7 @@ export default function HotelListCard({
       <h3>Review Score: {hotel.review_score}</h3>
       <p>{hotel.is_free_cancellable ? "Free cancellation" : ""}</p>
       <h2>
-        {hotel.currency_code}{" "}
+        ${" "}
         {hotel.composite_price_breakdown.gross_amount_per_night.value.toFixed(
           0
         )}
