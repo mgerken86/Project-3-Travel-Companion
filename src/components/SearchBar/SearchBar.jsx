@@ -130,7 +130,7 @@ export default function SearchBar() {
   //   };
 
   return (
-    <>
+    <div className="searchBar-container">
       <form onSubmit={async (e) => handleSearch(e)} autoComplete="off">
         <div className="flex-row">
           <div>
@@ -183,6 +183,6 @@ export default function SearchBar() {
           </button>
         </div>
       </form>
-    </>
+    </div>
   );
 }

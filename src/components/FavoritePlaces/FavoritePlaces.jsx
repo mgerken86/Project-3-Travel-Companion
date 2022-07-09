@@ -61,7 +61,6 @@ export default function FavoritePlaces() {
     };
     axios.request(options).then(function (response) {
       const hotels = response.data.result
-      console.log(hotels)
       setHotel(hotels)
       // console.log(hotels)
       const randomHotel = hotels[Math.floor(Math.random() * hotels.length)]
@@ -80,67 +79,63 @@ export default function FavoritePlaces() {
   }, []);
 
   return (
-    <div className="outerContainer">
-      <h1>Need Help Deciding Where to Go?</h1>
-      <h2>Here Are Some of Our Favorite Places in the World</h2>
-      <div className="main-container">
-        <div className="favorite-place-container">
-          <h2>Mark's Suggestion:</h2>
-          <h5>{markPlace.place}</h5>
-          <h4>Why He Loves it There:</h4>
-          <span>"{markPlace.testimonial}" -Mark</span>
-          {/* <button onClick={() => getRandomHotels(markPlace, setMarkHotel)}>
+    <main>
+      <div className="favorite-place-container">
+        <h2>Mark's Suggestion:</h2>
+        <h5>{markPlace.place}</h5>
+        <h4>Why He Loves it There:</h4>
+        <span>"{markPlace.testimonial}" -Mark</span>
+        {/* <button onClick={() => getRandomHotels(markPlace, setMarkHotel)}>
             Click For Random Hotel
           </button> */}
-          {/* If there is a hotel ID assigned to a person's hotel state, render the following jsx */}
-          {markHotel ? (
-            <div className="hotel-container">
-              <h4>Featured Accomodation:</h4>
-              <h4>{markHotel.hotel_name}</h4>
-              <img src={markHotel.max_photo_url} alt="" />
-            </div>
-          ) : (
-            <div className="hotelcontainer">
+        {/* If there is a hotel ID assigned to a person's hotel state, render the following jsx */}
+        {markHotel ? (
+          <div className="hotel-container">
+            <h4>Featured Accomodation:</h4>
+            <h4>{markHotel.hotel_name}</h4>
+            <img src={markHotel.max_photo_url} alt="" />
+          </div>
+        ) : (
+          <div className="hotelcontainer">
             <h5>Sorry, there are no available hotels at {markPlace.place} tonight.</h5>
             <h6>Please use the search bar to choose other dates</h6>
-            </div>
-          )
-            }
-        </div>
-        <div className="favorite-place-container">
-          <h2>Jing's Suggestion:</h2>
-          <h5>{jingPlace.place}</h5>
-          <h4>Why She Loves it There:</h4>
-          <span>"{jingPlace.testimonial}" -Jing</span>
-          {/* <button onClick={() => { getRandomHotels(jingPlace, setJingHotel) }}>
+          </div>
+        )
+        }
+      </div>
+      <div className="favorite-place-container">
+        <h2>Jing's Suggestion:</h2>
+        <h5>{jingPlace.place}</h5>
+        <h4>Why She Loves it There:</h4>
+        <span>"{jingPlace.testimonial}" -Jing</span>
+        {/* <button onClick={() => { getRandomHotels(jingPlace, setJingHotel) }}>
                         Click For Random Hotel
                     </button> */}
-          {jingHotel ? (
-            <div className="hotel-container">
-              <h4>Featured Accomodation:</h4>
-              <h4>{jingHotel.hotel_name}</h4>
-              <img src={jingHotel.max_photo_url} alt="" />
-            </div>
-          ) : null}
-        </div>
-        <div className="favorite-place-container">
-          <h2>Tiras's Suggestion:</h2>
-          <h5>{tirasPlace.place}</h5>
-          <h4>Why He Loves it There:</h4>
-          <span>"{tirasPlace.testimonial}" -Tiras</span>
-          {/* <button
+        {jingHotel ? (
+          <div className="hotel-container">
+            <h4>Featured Accomodation:</h4>
+            <h4>{jingHotel.hotel_name}</h4>
+            <img src={jingHotel.max_photo_url} alt="" />
+          </div>
+        ) : null}
+      </div>
+      <div className="favorite-place-container">
+        <h2>Tiras's Suggestion:</h2>
+        <h5>{tirasPlace.place}</h5>
+        <h4>Why He Loves it There:</h4>
+        <span>"{tirasPlace.testimonial}" -Tiras</span>
+        {/* <button
                         onClick={() => getRandomHotels(tirasPlace, setTirasHotel)}>
                         Click For Random Hotel
                     </button> */}
-          {tirasHotel ? (
-            <div className="hotel-container">
-              <h4>Featured Accomodation:</h4>
-              <h4>{tirasHotel.hotel_name}</h4>
-              <img src={tirasHotel.max_photo_url} alt="" />
-            </div>
-          ) : null}
-        </div>
+        {tirasHotel ? (
+          <div className="hotel-container">
+            <h4>Featured Accomodation:</h4>
+            <h4>{tirasHotel.hotel_name}</h4>
+            <img src={tirasHotel.max_photo_url} alt="" />
+          </div>
+        ) : null}
       </div>
-    </div>
+    </main >
   );
 }
