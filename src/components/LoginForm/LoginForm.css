@@ -5,8 +5,10 @@
     justify-content: flex-start;
     background-color: white;
     border: 3px solid #febb02;
+    border: 3px solid #003580;
     padding: 1em 3em;
     width: 22em;
+    margin-bottom: 2em;
 }
 
 .form-btn {
@@ -21,11 +23,13 @@
     align-items: center;
     margin: 1em auto;
     gap: 1em;
-    background-color: white;
+    color: white;
     border: 1px solid #0071c2;
     width: 12em;
     padding: .5em 2em;
     border-radius: 10px;
+    background-color: #003580;
+    background-color: #febb02;
 }
 
 .loginBtn-container2 {
@@ -40,4 +44,5 @@
     width: 16em;
     background-color: #f8f5f4;
     padding: .4em;
+    border: 2px solid #003580;
 }

@@ -23,7 +23,7 @@ export default function LoginForm({
       userObject.name,
       userObject.email
     );
-    setUser(user);
+    await setUser(user);
   }
 
   useEffect(() => {
@@ -82,7 +82,11 @@ export default function LoginForm({
           />
           <br />
           <div className="form-btn">
-            <button className="searchBtn" type="submit">Sign In</button>
+            <button 
+            className="searchBtn" 
+            type="submit">
+              Sign In
+              </button>
           </div>
         </form>
 

@@ -21,3 +21,15 @@
     color: #0071c2;
     margin-bottom: 1em;
 }
+
+.btnToggle {
+    background-color: #003580;
+    color: white;
+    font-weight: 700;
+    border:none;
+    padding: 12px;
+    cursor:pointer;
+    width: 80%;
+    margin-top: 10px;
+    border-radius: 5px;
+}

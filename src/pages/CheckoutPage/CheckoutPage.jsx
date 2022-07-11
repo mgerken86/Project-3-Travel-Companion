@@ -19,6 +19,7 @@ export default function CheckoutPage() {
     hotelPhoto,
     hotel_id,
     numberOfPerson,
+    markers
   } = state;
 
   const handleChange = (e) => {
@@ -57,6 +58,22 @@ export default function CheckoutPage() {
                 Change Your Selection
               </button>
             </Link> */}
+            <button
+              className="link"
+              style={{ fontWeight: "500" }}
+              onClick={() => {
+                navigate(
+                  `/hotels/${hotel.hotel_id}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${numberOfPerson}`,
+                  {
+                    state: {
+                      markers,
+                    },
+                  }
+                );
+              }}
+            >
+              Change Your Selection
+            </button>
           </div>
 
           <div className="priceDetail">
