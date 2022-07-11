@@ -191,7 +191,11 @@ export default function SearchBar() {
             {/* <button onClick={handleClickAdd}>+</button> */}
           </div>
           <div className="searchItem">
-            <button className="headerBtn" type="submit" disabled={disabled}>
+            <button className="headerBtn" type="submit" disabled={disabled} style={
+                disabled
+                  ? { backgroundColor: "gray" }
+                  : { backgroundColor: "#0071c2" }
+              }>
               Search
             </button>
           </div>
