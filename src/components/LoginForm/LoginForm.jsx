@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import * as usersService from "../../utilities/users-service";
 import jwt_decode from "jwt-decode";
+import "./LoginForm.css"
 
 export default function LoginForm({
   setUser,
   setShowSignUpForm,
   showSignUpForm,
 }) {
+  const [error, setError] = useState("");
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
 
-  const [error, setError] = useState("");
   // google login response
   async function handleCallbackResponse(response) {
     console.log("Encoded jwt ID token", response.credential);
@@ -58,8 +59,8 @@ export default function LoginForm({
   }
 
   return (
-    <div>
       <div className="form-container" onSubmit={handleSubmit}>
+        <h3>Log In</h3>
         <form autoComplete="off">
           <label>Email</label>
           <input
@@ -68,6 +69,7 @@ export default function LoginForm({
             value={credentials.email}
             onChange={handleChange}
             required
+            placeholder="email@email.com"
           />
           <label>Password</label>
           <input
@@ -76,16 +78,19 @@ export default function LoginForm({
             value={credentials.password}
             onChange={handleChange}
             required
+            placeholder="Password"
           />
-          <button type="submit">LOG IN</button>
+          <br />
+          <div className="form-btn">
+            <button className="searchBtn" type="submit">Sign In</button>
+          </div>
         </form>
-      </div>
-      <p className="error-message">&nbsp;{error}</p>
-      <button onClick={() => setShowSignUpForm(!showSignUpForm)}>
-        Not Registered? Sign Up
-      </button>
 
-      <div id="signInDiv"></div>
-    </div>
+        <p className="error-message">&nbsp;{error}</p>
+        <div className="loginBtn-container">
+        <h5>Sign In or Sign Up with Gmail</h5>
+        <div id="signInDiv"></div>
+      </div>
+      </div>
   );
 }
