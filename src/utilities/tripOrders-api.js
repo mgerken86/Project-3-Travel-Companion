@@ -55,6 +55,6 @@ export function getOrderHistory() {
 }
 
 export function cancelTrip(orderId) {
-  // console.log('in the triporders api', orderId)
+  console.log('in the triporders api', orderId)
   return sendRequest(`${BASE_URL}/history/${orderId}`, "DELETE")
 }

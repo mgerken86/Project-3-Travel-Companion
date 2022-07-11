@@ -36,7 +36,7 @@ async function addToCart(req, res) {
 async function updateTrip(req, res) {
   // console.log('in the controller')
   const { id, room, checkIn, checkOut, people } = req.body;
-  console.log("req.body of new hotel room", req.body);
+  // console.log("req.body of new hotel room", req.body);
   const currentTripOrder = await TripOrder.findByIdAndUpdate(id, {
     checkIn: req.body.checkIn,
     checkOut: req.body.checkOut,
@@ -51,7 +51,7 @@ async function updateTrip(req, res) {
 // Update the cart's isPaid property to true
 async function checkout(req, res) {
   const { cardinfo } = req.body;
-  console.log(cardinfo);
+  // console.log(cardinfo);
   const cart = await TripOrder.getCart(req.user._id);
   cart.isPaid = true;
   await cart.save();
@@ -70,7 +70,8 @@ async function history(req, res) {
 
 // Delete a trip from the order history
 async function cancelTrip(req, res) {
-  await TripOrder.findOneAndDelete({ id: req.params.id });
+  console.log("delete hotel id:", req.params.id)
+  await TripOrder.findByIdAndRemove({ _id: req.params.id });
   // const trip = await TripOrder.find({_id: req.params.id})
   // console.log('trip:', trip)
 }
