@@ -66,6 +66,7 @@ export default function HotelShowPage() {
         hotelPhoto,
         hotel_id,
         numberOfPerson,
+        markers
       },
     });
   };
