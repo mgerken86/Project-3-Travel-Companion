@@ -5,6 +5,7 @@ import "./CheckoutPage.css";
 
 export default function CheckoutPage() {
   const [cardinfo, setCardinfo] = useState({ cardNumber: "" });
+  const [disabled, setDisabled] = useState(true);
 
   const { state } = useLocation();
   // use navigate
@@ -23,6 +24,8 @@ export default function CheckoutPage() {
   } = state;
 
   const handleChange = (e) => {
+    if (cardinfo.cardNumber.length === 16) setDisabled(false)
+
     const cardData = {
       ...cardinfo,
       [e.target.name]: e.target.value,
@@ -135,7 +138,12 @@ export default function CheckoutPage() {
               <button
                 className="payBtn"
                 type="submit"
-                disabled={cardinfo.cardNumber.length === 16 ? false : true}
+                style={
+                  disabled
+                    ? { backgroundColor: "gray" }
+                    : { backgroundColor: "#0071c2" }
+                }
+                disabled={disabled}
               >
                 Make Payment
               </button>
