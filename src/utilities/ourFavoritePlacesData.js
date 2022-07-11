@@ -18,10 +18,10 @@ export const markPlacesArr = [
     testimonial: "Whale-watching, surfing, boat tours of the Marieta Islands, and mountain biking are just a few of the things that will keep you coming back to Sayulita over and over again!",
   },
   {
-    place: "El Chaltén, Santa Cruz Province, Argentina",
-    latitude: "-49.3314941",
-    longitude: "-72.886325",
-    testimonial: "Located inside the Glaciers National Park in Patagonia, you'll find mountain sports in a natural scenery like no other!",
+    place: "Buenos Aires, Argentina",
+    latitude: "-34.6036844",
+    longitude: "-58.3815591",
+    testimonial: "Referred to by some as the 'Paris of the Americas,' BA's rich culture and arts will leave you in awe. For the more adventurous travelers, Patagonia is a hop, skip, and a jump away.",
   }
 ];
 
@@ -42,9 +42,21 @@ export const jingPlacesArr = [
 
 export const tirasPlacesArr = [
   {
+    place: "Donceles, Cancun, Mexico",
+    latitude: "19.4360663",
+    longitude: "-99.13431190000001",
+    testimonial: "Cancun availed life changing experiences for me, cavern swimming, Mayan Ruins, and authentic cuisine. Cancun is a must see, for everyone.",
+  },
+  {
+    place: "Annapolis, Maryland, USA",
+    latitude: "38.9729",
+    longitude: "-76.5012",
+    testimonial: "The culture, history, and American Heritage that Annapolis offers is exceptional. The Graduate Hotel is such a cool Place to stay.",
+  },
+  {
     place: "Cumberland, Maryland, USA",
     latitude: "39.6528654",
     longitude: "-78.7625185",
-    testimonial: "Home sweet home!",
+    testimonial: "There's no place quite like Western Maryland. The Outdoors Attractions here are endless, the people here, the culture here, and the views are a treasure.  ",
   },
 ];

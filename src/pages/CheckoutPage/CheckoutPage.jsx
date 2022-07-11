@@ -3,7 +3,6 @@ import { useState } from "react";
 import * as ordersAPI from "../../utilities/tripOrders-api";
 import "./CheckoutPage.css";
 
-
 export default function CheckoutPage() {
   const [cardinfo, setCardinfo] = useState({ cardNumber: "" });
 
@@ -11,7 +10,7 @@ export default function CheckoutPage() {
   // use navigate
   const navigate = useNavigate();
   // console.log(state);
-  
+
   const {
     hotel,
     checkIn,
@@ -21,7 +20,6 @@ export default function CheckoutPage() {
     hotel_id,
     numberOfPerson,
   } = state;
-
 
   const handleChange = (e) => {
     const cardData = {
@@ -40,82 +38,94 @@ export default function CheckoutPage() {
   };
 
   return (
-    <>
-      <h1>Check Out Page</h1>
-      <div>
+    <div className="checkoutMainContainer">
+      <h1 style={{ color: "#0071c2" }}>Check Out Page</h1>
+      <div className="checkoutContainer">
         <div className="leftContainer">
-          <h3>Your Booking Details</h3>
-          <h5>Check-in</h5>
-          <h4>{checkIn}</h4>
-          <h5>Check-out</h5>
-          <h4>{checkOut}</h4>
-          <h5>You selected</h5>
-          <p>{room.name}</p>
-          <Link
-
-            to={`/hotels/${hotel_id}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${numberOfPerson}`}
-
-          >
-            Change Your Selection
-          </Link>
-        </div>
-
-        <div>
-          <h3>Your Price Summary</h3>
-          <h5>Total</h5>
-          <h5> $ {room.price_breakdown.gross_price}</h5>
-
-          <p>(for {numberOfPerson} guests)</p>
-
-        </div>
-      </div>
-      <div className="rightContainer">
-        <div>
-          <h2>{hotel.name}</h2>
-          <img src={hotelPhoto} alt="" />
-          <h5>
-            {hotel.address}, {hotel.city}, {hotel.zip}
-          </h5>
-          <h5>{hotel.review_score}/10 </h5>
-          <h5>{hotel.review_score_word}</h5>
-        </div>
-        <form onSubmit={async (e) => handlePay(e)}>
-          <div className="flex-column">
-            <h2>Payment Info</h2>
-
-            <label>Name</label>
-            <input type="text" name="name" onChange={handleChange} required />
-            <label>Card Number</label>
-            <input
-              type="number"
-              name="cardNumber"
-              placeholder="Please enter 16 digits card number"
-
-              onChange={handleChange}
-              minLength={16}
-              required
-            />
-
-            <label>Expiration Date</label>
-
-
-            <input
-              type="text"
-              name="expDate"
-              onChange={handleChange}
-              required
-            />
-
-            <button
-              type="submit"
-              disabled={cardinfo.cardNumber.length === 16 ? false : true}
+          <div className="bookingDetail">
+            <h3>Your Booking Details</h3>
+            <p>Check-in</p>
+            <h4>{checkIn}</h4>
+            <p>Check-out</p>
+            <h4>{checkOut}</h4>
+            <p>You selected</p>
+            <h4>{room.name}</h4>
+            <Link
+              to={`/hotels/${hotel_id}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${numberOfPerson}`}
             >
-              Make Payment
-            </button>
-
+              <button className="link" style={{ fontWeight: "500" }}>
+                Change Your Selection
+              </button>
+            </Link>
           </div>
-        </form>
+
+          <div className="priceDetail">
+            <h4>Your Price Summary</h4>
+            <h5>Total $ {room.price_breakdown.gross_price}</h5>
+
+            <p>(for {numberOfPerson} guests)</p>
+          </div>
+        </div>
+        <div className="rightContainer">
+          <div className="hotelInfoContainer">
+            <div className="checkoutHotelImg">
+              <img 
+              className="list-page-img"
+              src={hotelPhoto} alt="" />
+            </div>
+            <div>
+              <h2>{hotel.name}</h2>
+              <p style={{ color: "#008009" }}>
+                {hotel.address}, {hotel.city}, {hotel.zip}
+              </p>
+              <button className="reviewBtn">{hotel.review_score}/10 </button>
+              <h5>{hotel.review_score_word}</h5>
+            </div>
+          </div>
+          <form onSubmit={async (e) => handlePay(e)}>
+            <div className="cardContainer">
+              <h2>Payment Info</h2>
+
+              <label>Name</label>
+              <input
+                className="cardInput"
+                type="text"
+                name="name"
+                onChange={handleChange}
+                required
+              />
+              <label>Card Number</label>
+              <input
+                className="cardInput"
+                type="number"
+                name="cardNumber"
+                placeholder="Please enter 16 digits card number"
+                onChange={handleChange}
+                minLength={16}
+                required
+              />
+
+              <label>Expiration Date</label>
+
+              <input
+                className="cardInput"
+                type="text"
+                name="expDate"
+                onChange={handleChange}
+                required
+              />
+
+              <button
+                className="payBtn"
+                type="submit"
+                disabled={cardinfo.cardNumber.length === 16 ? false : true}
+              >
+                Make Payment
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

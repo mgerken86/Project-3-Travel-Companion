@@ -1,13 +1,35 @@
-.flex-row {
-    width: 100vw;
+.listSearch {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    gap: 2em;
-    margin-top: 1em;
+    background-color: #febb02;
+    width: 30vh;
+    border-radius: 5px;
+    padding: 20px 5px;
+    margin-bottom: 10px;
+}
+
+.SearchInput{
+    border: none;
+    padding: 0.5em;
+    width: 12em;
+    margin: 0.5em;
+}
+
+.searchBtn{
+    background-color: #0071c2;
+    color: white;
+    font-weight: 500;
+    border:none;
+    padding: 12px;
+    cursor:pointer;
+    width: 80%;
+    margin-top: 10px;
+    border-radius: 5px;
 }
 
 label {
     display: block;
     text-align: center;
+    margin-top: 0.5em;
 }
