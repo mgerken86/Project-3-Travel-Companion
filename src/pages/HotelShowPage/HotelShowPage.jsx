@@ -1,5 +1,3 @@
-
-
 import fetchApi from "../../utilities/fetchApi";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -8,6 +6,7 @@ import ShowPageSearchBar from "../../components/ShowPageSearchBar/ShowPageSearch
 import Map from "../../components/Map/Map";
 import "./HotelShowPage.css";
 export default function HotelShowPage() {
+  const queryParams = new URLSearchParams(window.location.search);
   // hotel data
   const [hotel, setHotel] = useState({});
   // rooms list data
@@ -16,21 +15,18 @@ export default function HotelShowPage() {
   const [photos, setPhotos] = useState([]);
   // room info contains photos
   const [roomPhoto, setRoomPhoto] = useState([]);
-  const [reviews, setReviews] = useState({});
+  // get checkin and checkout date from query
+  const [checkIn, setCheckIn] = useState(queryParams.get("checkin"));
+  const [checkOut, setCheckOut] = useState(queryParams.get("checkout"));
 
   // use navigate
   const navigate = useNavigate();
   const { hotel_id } = useParams();
   const { state } = useLocation();
   let { markers } = state;
-  // console.log(markers);
   const [marker, setMarkers] = useState([markers.marker]);
   const [lat, setLat] = useState(marker[0].lat);
   const [lng, setLng] = useState(marker[0].lng);
-  // get checkin and checkout date from query
-  const queryParams = new URLSearchParams(window.location.search);
-  const checkIn = queryParams.get("checkin");
-  const checkOut = queryParams.get("checkout");
   const numberOfPerson = queryParams.get("numberOfPerson");
 
   //any time page re-renders it will get the hotel data
@@ -44,13 +40,13 @@ export default function HotelShowPage() {
       setRoomPhoto,
       setRooms
     );
+    console.log(marker);
   }, []);
 
   // handle onclick
   const handleClick = async (room) => {
-    // console.log(room);
     let hotelPhoto = photos[0].url_1440;
-    // console.log(room);
+    console.log(room);
     const updatedCart = await ordersAPI.addHotelToCart(
       hotel,
       room,
@@ -68,7 +64,7 @@ export default function HotelShowPage() {
         hotelPhoto,
         hotel_id,
         numberOfPerson,
-        markers
+        markers,
       },
     });
   };
@@ -79,6 +75,8 @@ export default function HotelShowPage() {
         <ShowPageSearchBar
           checkIn={checkIn}
           checkOut={checkOut}
+          setCheckIn={setCheckIn}
+          setCheckOut={setCheckOut}
           numberOfPerson={numberOfPerson}
           hotel_id={hotel_id}
           setRoomPhoto={setRoomPhoto}
@@ -132,8 +130,10 @@ export default function HotelShowPage() {
                   />
                 </div>
                 <div className="roomDetail">
-                  <h3 style={{color: '#0071c2'}}>{room.name}</h3>
-                  <p style={{color: '#008009'}}>Max Occupancy: {room.max_occupancy}</p>
+                  <h3 style={{ color: "#0071c2" }}>{room.name}</h3>
+                  <p style={{ color: "#008009" }}>
+                    Max Occupancy: {room.max_occupancy}
+                  </p>
                 </div>
                 <div className="roomPriceInfo">
                   <p>
@@ -143,7 +143,12 @@ export default function HotelShowPage() {
                     )}
                   </p>
                   <h4>Total Cost: $ {room.price_breakdown.gross_price}</h4>
-                  <button className="selectRoomBtn" onClick={() => handleClick(room)}>Select</button>
+                  <button
+                    className="selectRoomBtn"
+                    onClick={() => handleClick(room)}
+                  >
+                    Select
+                  </button>
                 </div>
               </div>
             );
