@@ -50,13 +50,13 @@ export default function CheckoutPage() {
             <h4>{checkOut}</h4>
             <p>You selected</p>
             <h4>{room.name}</h4>
-            <Link
+            {/* <Link
               to={`/hotels/${hotel_id}?checkin=${checkIn}&checkout=${checkOut}&numberOfPerson=${numberOfPerson}`}
             >
               <button className="link" style={{ fontWeight: "500" }}>
                 Change Your Selection
               </button>
-            </Link>
+            </Link> */}
           </div>
 
           <div className="priceDetail">
