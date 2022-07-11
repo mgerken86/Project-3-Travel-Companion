@@ -1,9 +1,9 @@
 ![Screen Shot 2022-07-10 at 11 27 46 PM](https://user-images.githubusercontent.com/105219025/178183184-60d46e12-224d-4a98-be2b-4d852781cbef.png)
 
-## TRAVEL COMPANION
-# Deployed at https://travel-companion-app-seir.herokuapp.com/
+# TRAVEL COMPANION
+## Deployed at https://travel-companion-app-seir.herokuapp.com/
 
-This Application is a provider of hotel accommodation worldwide, allowing users to search by dates/location and view/"purchase" current available rooms at hotels. . The company offers a one-stop shopping source for hotel pricing, amenities and availability.
+This Application is a provider of hotel accommodation worldwide, allowing users to search by dates/location and "purchase" current available rooms at hotels. The company offers a one-stop shopping source for hotel pricing, amenities and availability.
 
 ## MERN Stack | Technologies Used
 ![image](https://user-images.githubusercontent.com/105219025/177025448-327b43e9-5800-4aea-8d25-223730f89267.png)
